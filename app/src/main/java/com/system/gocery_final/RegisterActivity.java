@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -47,7 +48,13 @@ public class RegisterActivity extends AppCompatActivity {
         inputConfirmPassword = (EditText) findViewById(R.id.confirm_password);
         inputAddress = (EditText) findViewById(R.id.address);
         inputContactNumber = (EditText) findViewById(R.id.contactNumber);
+        TextView signIn = findViewById(R.id.signIn);
 
+
+        signIn.setOnClickListener(v -> {
+            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+            startActivity(intent);
+        });
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
