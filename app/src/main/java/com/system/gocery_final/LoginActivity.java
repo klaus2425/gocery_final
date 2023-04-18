@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             allowAccessToAccount();
                         } else {
-                            Toast.makeText(LoginActivity.this, "Error: " + task.getException(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
 
                         }
                     }
