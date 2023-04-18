@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,11 +30,13 @@ public class RegisterActivity extends AppCompatActivity {
 
     private Button signUpButton;
     private EditText inputFirstName, inputLastName, inputEmail, inputPassword, inputConfirmPassword, inputAddress, inputContactNumber;
-    private ProgressBar loadingbar;
+    private FirebaseAuth auth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        auth = FirebaseAuth.getInstance();
         signUpButton = (Button) findViewById(R.id.signUpButton);
         inputFirstName = (EditText) findViewById(R.id.firstName);
         inputLastName = (EditText) findViewById(R.id.lastName);
@@ -63,7 +67,18 @@ public class RegisterActivity extends AppCompatActivity {
         if(TextUtils.isEmpty(firstName) || TextUtils.isEmpty(lastName) || TextUtils.isEmpty(contact) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword) || TextUtils.isEmpty(address) || TextUtils.isEmpty(email) ){
             Toast.makeText(RegisterActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
         } else{
-            ValidateEmail(firstName, lastName, contact, password, address, email);
+            auth.signInWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()){
+                                        ValidateEmail(firstName, lastName, contact, password, address, email);
+                                    } else {
+                                        Toast.makeText(RegisterActivity.this, "Email already in use!", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+
         }
 
     }
@@ -73,9 +88,8 @@ public class RegisterActivity extends AppCompatActivity {
         Rootref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(!(snapshot.child("Users").child(email).exists())){
+                if(!(snapshot.child("Users").child(contact).exists())){
                     HashMap<String, Object> userdataMap = new HashMap<>();
-                    userdataMap.put("email", email);
                     userdataMap.put("password", password);
                     userdataMap.put("firstName", firstName);
                     userdataMap.put("lastName", lastName);
