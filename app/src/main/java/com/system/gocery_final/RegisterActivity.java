@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,12 +32,13 @@ public class RegisterActivity extends AppCompatActivity {
     private Button signUpButton;
     private EditText inputFirstName, inputLastName, inputEmail, inputPassword, inputConfirmPassword, inputAddress, inputContactNumber;
     private FirebaseAuth auth;
-
+    private FirebaseUser user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
         signUpButton = (Button) findViewById(R.id.signUpButton);
         inputFirstName = (EditText) findViewById(R.id.firstName);
         inputLastName = (EditText) findViewById(R.id.lastName);
@@ -67,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
         if(TextUtils.isEmpty(firstName) || TextUtils.isEmpty(lastName) || TextUtils.isEmpty(contact) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword) || TextUtils.isEmpty(address) || TextUtils.isEmpty(email) ){
             Toast.makeText(RegisterActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
         } else{
-            auth.signInWithEmailAndPassword(email, password)
+            auth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -88,14 +90,15 @@ public class RegisterActivity extends AppCompatActivity {
         Rootref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(!(snapshot.child("Users").child(contact).exists())){
+                if(!(snapshot.child("Users").child(user.getUid()).exists())){
                     HashMap<String, Object> userdataMap = new HashMap<>();
+                    userdataMap.put("email", email);
                     userdataMap.put("password", password);
                     userdataMap.put("firstName", firstName);
                     userdataMap.put("lastName", lastName);
                     userdataMap.put("address", address);
                     userdataMap.put("contact", contact);
-                    Rootref.child("Users").child(email).updateChildren(userdataMap)
+                    Rootref.child("Users").child(user.getUid()).updateChildren(userdataMap)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
