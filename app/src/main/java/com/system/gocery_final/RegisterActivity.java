@@ -85,9 +85,9 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
     private void ValidateEmail(String firstName, String lastName, String contact, String password, String address, String email){
-        final DatabaseReference Rootref;
-        Rootref = FirebaseDatabase.getInstance().getReference();
-        Rootref.addListenerForSingleValueEvent(new ValueEventListener() {
+        final DatabaseReference RootRef;
+        RootRef = FirebaseDatabase.getInstance().getReference();
+        RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(!(snapshot.child("Users").child(user.getUid()).exists())){
@@ -98,7 +98,7 @@ public class RegisterActivity extends AppCompatActivity {
                     userdataMap.put("lastName", lastName);
                     userdataMap.put("address", address);
                     userdataMap.put("contact", contact);
-                    Rootref.child("Users").child(user.getUid()).updateChildren(userdataMap)
+                    RootRef.child("Users").child(user.getUid()).updateChildren(userdataMap)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
