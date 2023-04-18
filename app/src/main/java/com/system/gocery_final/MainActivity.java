@@ -3,7 +3,6 @@ package com.system.gocery_final;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -20,12 +19,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.system.gocery_final.Model.Users;
 import com.system.gocery_final.Prevalent.Prevalent;
-
 import io.paperdb.Paper;
 
 
 public class MainActivity extends AppCompatActivity {
-    private ProgressDialog loadingBar;
     private String parentDbName = "Users";
     private Button registerButton, loginButton;
     private FirebaseUser user;
@@ -34,10 +31,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Paper.init(this);
-        loadingBar = new ProgressDialog(this);
+
         registerButton = (Button) findViewById(R.id.main_register_btn);
         loginButton = (Button) findViewById(R.id.main_login_btn);
+
+
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -63,10 +63,7 @@ public class MainActivity extends AppCompatActivity {
         if(UserEmailKey != "" && UserPasswordKey != ""){
             if(!TextUtils.isEmpty(UserEmailKey) && !TextUtils.isEmpty(UserPasswordKey)){
                 AllowAccess(UserEmailKey,UserPasswordKey);
-                loadingBar.setTitle("Already Logged in");
-                loadingBar.setMessage("Please wait .....");
-                loadingBar.setCanceledOnTouchOutside(false);
-                loadingBar.show();
+
             }
         }
 
@@ -77,23 +74,20 @@ public class MainActivity extends AppCompatActivity {
         RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.child(parentDbName).child(user.getUid()).exists()){
+                if(snapshot.child(parentDbName).child(email).exists()){
                     Users userData = snapshot.child(parentDbName).child(user.getUid()).getValue(Users.class);
                     if(userData.getEmail().equals(email)){
                         if (userData.getPassword().equals(password)) {
                             Toast.makeText(MainActivity.this, "Log in successfully...", Toast.LENGTH_SHORT).show();
-                            loadingBar.dismiss();
                             Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                             startActivity(intent);
                         } else {
-                            loadingBar.dismiss();
                             Toast.makeText(MainActivity.this, "Password is incorrect...", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
                 else {
                     Toast.makeText(MainActivity.this, "Account" + email +  "do not exist.", Toast.LENGTH_SHORT).show();
-                    loadingBar.dismiss();
 
                 }
             }
