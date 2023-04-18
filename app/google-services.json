@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "338313008582",
+    "firebase_url": "https://goceryfinal-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "goceryfinal",
+    "storage_bucket": "goceryfinal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:338313008582:android:fb3d2231a6688eadf80ec7",
+        "android_client_info": {
+          "package_name": "com.system.gocery_final"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "338313008582-g875ckcd54a10vndoh3ne2ihjmj6o9ru.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.system.gocery_final",
+            "certificate_hash": "de7e915a7276c5f486050a2d4dfdcfda7bf35b85"
+          }
+        },
+        {
+          "client_id": "338313008582-d67j54l8be66e7jg91vfi1j2dl6ikbci.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNL0UINYRlenYxMrDWAPVJEjoo8BwzUJU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "338313008582-d67j54l8be66e7jg91vfi1j2dl6ikbci.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
