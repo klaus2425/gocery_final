@@ -42,7 +42,7 @@ dependencies {
     implementation 'io.github.pilgr:paperdb:2.7.2'
     implementation 'com.google.firebase:firebase-auth:21.3.0'
     implementation 'com.google.firebase:firebase-auth-ktx:21.3.0'
-    implementation 'com.google.firebase:firebase-firestore:24.4.1'
+    implementation 'com.google.firebase:firebase-firestore:24.5.0'
     implementation 'com.google.firebase:firebase-database-ktx:20.2.0'
 
 
