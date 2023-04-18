@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,10 +33,13 @@ import io.paperdb.Paper;
 public class LoginActivity extends AppCompatActivity {
 
     private String email,password;
+
+
     private EditText inputEmail, inputPassword;
     private Button loginButton;
     private FirebaseAuth auth;
     private FirebaseUser user;
+
     private String parentDbName = "Users";
     private SharedPreferences loginPreferences;
     private SharedPreferences.Editor loginPrefsEditor;
@@ -52,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
         chkBoxRememberMe = findViewById(R.id.remember_me_chkb);
+        TextView signup = findViewById(R.id.signUp);
 
             //PREFERENCES
 //        loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
@@ -64,14 +69,20 @@ public class LoginActivity extends AppCompatActivity {
 //        }
 
         Paper.init(this);
+
+
+        signup.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        });
+
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                email = inputEmail.getText().toString();
-                password = inputPassword.getText().toString();
-
-
-                        //PREFERENCES//
+                //PREFERENCES//
+//                email = inputEmail.getText().toString();
+//                password = inputPassword.getText().toString();
 //                if (chkBoxRememberMe.isChecked()) {
 //                    loginPrefsEditor.putBoolean("saveLogin", true);
 //                    loginPrefsEditor.putString("email", email);
