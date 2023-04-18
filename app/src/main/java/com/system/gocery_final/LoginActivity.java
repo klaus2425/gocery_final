@@ -4,10 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -22,16 +24,23 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.system.gocery_final.Model.Users;
+import com.system.gocery_final.Prevalent.Prevalent;
 
 import java.util.HashMap;
+import io.paperdb.Paper;
 
 public class LoginActivity extends AppCompatActivity {
+
+    private String email,password;
     private EditText inputEmail, inputPassword;
     private Button loginButton;
     private FirebaseAuth auth;
     private FirebaseUser user;
     private String parentDbName = "Users";
-
+    private SharedPreferences loginPreferences;
+    private SharedPreferences.Editor loginPrefsEditor;
+    private CheckBox chkBoxRememberMe;
+    private Boolean saveLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +51,41 @@ public class LoginActivity extends AppCompatActivity {
         inputPassword = (EditText) findViewById(R.id.password);
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
+        chkBoxRememberMe = findViewById(R.id.remember_me_chkb);
+
+            //PREFERENCES
+//        loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+//        loginPrefsEditor = loginPreferences.edit();
+//        saveLogin = loginPreferences.getBoolean("saveLogin", false);
+//        if (saveLogin == true) {
+//            inputEmail.setText(loginPreferences.getString("username", ""));
+//            inputPassword.setText(loginPreferences.getString("password", ""));
+//            chkBoxRememberMe.setChecked(true);
+//        }
+
+        Paper.init(this);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                email = inputEmail.getText().toString();
+                password = inputPassword.getText().toString();
+
+
+                        //PREFERENCES//
+//                if (chkBoxRememberMe.isChecked()) {
+//                    loginPrefsEditor.putBoolean("saveLogin", true);
+//                    loginPrefsEditor.putString("email", email);
+//                    loginPrefsEditor.putString("password", password);
+//                    loginPrefsEditor.commit();
+//                } else {
+//                    loginPrefsEditor.clear();
+//                    loginPrefsEditor.commit();
+//                }
+//               if(chkBoxRememberMe.isChecked()){
+//                    Paper.book().write(Prevalent.userPasswordKey,email);
+//                    Paper.book().write(Prevalent.userPasswordKey,password);
+//            }
+
                 loginUser();
             }
         });
@@ -55,15 +96,14 @@ public class LoginActivity extends AppCompatActivity {
         String password = inputPassword.getText().toString();
         if(TextUtils.isEmpty(password) || TextUtils.isEmpty(email) ) {
             Toast.makeText(LoginActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
-        }
-        auth.signInWithEmailAndPassword(email, password)
+        }auth.signInWithEmailAndPassword(email, password)
+
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful() ){
                             user = auth.getCurrentUser();
-
-                            allowAccessToAccount();
+                            allowAccessToAccount(email,password);
                         } else {
                             Toast.makeText(LoginActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
 
@@ -72,25 +112,30 @@ public class LoginActivity extends AppCompatActivity {
                 });
 
     }
-
-    private void allowAccessToAccount(){
+    private void allowAccessToAccount(String email, String password){
+        if(chkBoxRememberMe.isChecked()){
+            Paper.book().write(Prevalent.userPasswordKey,email);
+            Paper.book().write(Prevalent.userPasswordKey,password);
+        }
         final DatabaseReference RootRef;
         RootRef = FirebaseDatabase.getInstance().getReference();
-
         RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.child(parentDbName).child(user.getUid()).exists()){
-                    Users usersData = snapshot.child(parentDbName).child(user.getUid()).getValue(Users.class);
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    startActivity(intent);
+                    Users userData = snapshot.child(parentDbName).child(user.getUid()).getValue(Users.class);
+                    if(userData.getEmail().equals(email)){
+                        if (userData.getPassword().equals(password)) {
+                            Toast.makeText(LoginActivity.this, "Log in successfully...", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                            startActivity(intent);
+                        } else {
+                                Toast.makeText(LoginActivity.this, "Password is incorrect...", Toast.LENGTH_SHORT).show();
+                        }
+                    }
                 }
-                else
-                {
-                    Toast.makeText(LoginActivity.this, "Account with this email does not exist.", Toast.LENGTH_SHORT).show();
-
-
-
+                else {
+                    Toast.makeText(LoginActivity.this, "Account" + email +  "do not exist.", Toast.LENGTH_SHORT).show();
                 }
             }
 
