@@ -166,10 +166,12 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
+        android:id="@+id/signIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="signin"
         android:text="Sign In"
+        android:height="48dp"
         android:textColor="#73be73"
         android:textSize="19sp"
         android:textStyle="bold"
@@ -177,7 +179,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/already"
-        app:layout_constraintVertical_bias="0.064" />
+        app:layout_constraintVertical_bias="0.135" />
 
     <Button
         android:id="@+id/signUpButton"
