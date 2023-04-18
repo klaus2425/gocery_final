@@ -6,6 +6,6 @@ import com.system.gocery_final.Model.Users;
 public class Prevalent {
     private static Users currentOnlineUser;
 
-    private static final String userEmail = "UserEmail";
-    private static final String userPasswordKey = "UserPassword";
+    public static final String userEmail = "UserEmail";
+    public static final String userPasswordKey = "UserPassword";
 }
