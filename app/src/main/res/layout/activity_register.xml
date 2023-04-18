@@ -29,7 +29,7 @@
         android:background="@drawable/edit_text_bg"
         android:drawableLeft="@drawable/ic_person_24"
         android:drawablePadding="10dp"
-
+        android:inputType="text"
         android:elevation="3dp"
         android:hint="Last Name"
         android:padding="15dp"
@@ -48,7 +48,7 @@
         android:background="@drawable/edit_text_bg"
         android:drawableLeft="@drawable/ic_person_24"
         android:drawablePadding="10dp"
-
+        android:inputType="text"
         android:elevation="3dp"
         android:hint="First Name"
         android:padding="15dp"
@@ -127,6 +127,7 @@
         android:drawablePadding="10dp"
         android:elevation="3dp"
         android:hint="Address"
+        android:inputType="text"
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -142,6 +143,7 @@
         android:drawablePadding="10dp"
         android:elevation="3dp"
         android:hint="Contact Number"
+        android:inputType="number"
         android:padding="15dp"
         app:layout_constraintBottom_toTopOf="@+id/already"
         app:layout_constraintEnd_toEndOf="parent"
