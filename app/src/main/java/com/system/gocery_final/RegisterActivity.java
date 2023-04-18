@@ -38,7 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         auth = FirebaseAuth.getInstance();
-        user = auth.getCurrentUser();
+
         signUpButton = (Button) findViewById(R.id.signUpButton);
         inputFirstName = (EditText) findViewById(R.id.firstName);
         inputLastName = (EditText) findViewById(R.id.lastName);
@@ -74,6 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()){
+                                        user = auth.getCurrentUser();
                                         ValidateEmail(firstName, lastName, contact, password, address, email);
                                     } else {
                                         Toast.makeText(RegisterActivity.this, "Email already in use!", Toast.LENGTH_SHORT).show();
