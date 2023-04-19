@@ -33,8 +33,8 @@ import io.paperdb.Paper;
 public class LoginActivity extends AppCompatActivity {
 
     private String email,password;
-
-
+    private Button adminButton; // adminLink
+    private Button customerButton; // notAdminLink
     private EditText inputEmail, inputPassword;
     private Button loginButton;
     private FirebaseAuth auth;
@@ -56,7 +56,10 @@ public class LoginActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
         chkBoxRememberMe = findViewById(R.id.remember_me_chkb);
+        adminButton = (Button) findViewById(R.id.admin_panel_link);
         TextView signup = findViewById(R.id.signUp);
+        customerButton = (Button) findViewById(R.id.customerLink);
+        customerButton.setVisibility(View.INVISIBLE);
 
             //PREFERENCES
 //        loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
@@ -100,6 +103,26 @@ public class LoginActivity extends AppCompatActivity {
                 loginUser();
             }
         });
+
+        adminButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginButton.setText("Sign in as Admin");
+                adminButton.setVisibility(View.INVISIBLE);
+                customerButton.setVisibility(View.VISIBLE);
+                parentDbName = "Admins";
+            }
+        });
+
+        customerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginButton.setText("Sign in");
+                adminButton.setVisibility(View.VISIBLE);
+                customerButton.setVisibility(View.INVISIBLE);
+                parentDbName = "Users";
+            }
+        });
     }
 
     private void loginUser(){
@@ -137,9 +160,15 @@ public class LoginActivity extends AppCompatActivity {
                     Users userData = snapshot.child(parentDbName).child(user.getUid()).getValue(Users.class);
                     if(userData.getEmail().equals(email)){
                         if (userData.getPassword().equals(password)) {
-                            Toast.makeText(LoginActivity.this, "Log in successfully...", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                            startActivity(intent);
+                            if(parentDbName.equals("Admins")){
+                                Toast.makeText(LoginActivity.this, "Log in successfully...", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(LoginActivity.this, AdminAddNewProductActivity.class);
+                                startActivity(intent);
+                            } else if (parentDbName.equals("Users")) {
+                                Toast.makeText(LoginActivity.this, "Log in successfully...", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                startActivity(intent);
+                            }
                         } else {
                                 Toast.makeText(LoginActivity.this, "Password is incorrect...", Toast.LENGTH_SHORT).show();
                         }

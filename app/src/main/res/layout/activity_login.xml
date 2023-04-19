@@ -105,10 +105,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_button" />
 
+
     <Button
         android:id="@+id/login_button"
-        android:layout_width="125dp"
-        android:layout_height="71dp"
+        android:layout_width="175dp"
+        android:layout_height="76dp"
         android:backgroundTint="#8000CF"
         android:onClick="signIn"
         android:text="Sign In"
@@ -116,21 +117,35 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.199" />
-
+        app:layout_constraintTop_toBottomOf="@+id/remember_me_chkb"
+        app:layout_constraintVertical_bias="0.095" />
 
     <Button
         android:id="@+id/admin_panel_link"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="146dp"
+        android:layout_height="48dp"
         android:backgroundTint="@color/green"
         android:text="Admin"
+        android:textSize="19sp"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.956"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.206" />
+
+    <Button
+        android:id="@+id/customerLink"
+        android:layout_width="145dp"
+        android:layout_height="49dp"
+        android:backgroundTint="@color/orange"
+        android:text="Customer"
+        android:textSize="19sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.956"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.198" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
