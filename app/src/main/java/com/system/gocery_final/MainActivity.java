@@ -62,7 +62,10 @@ public class MainActivity extends AppCompatActivity {
         String UserPasswordKey = Paper.book().read(Prevalent.userPasswordKey);
         if(UserEmailKey != "" && UserPasswordKey != ""){
             if(!TextUtils.isEmpty(UserEmailKey) && !TextUtils.isEmpty(UserPasswordKey)){
-                AllowAccess(UserEmailKey,UserPasswordKey);
+
+                if(user!=null){
+                    AllowAccess(UserEmailKey,UserPasswordKey);
+                }
 
             }
         }
@@ -74,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.child(parentDbName).child(email).exists()){
+                if(snapshot.child(parentDbName).child(user.getUid()).exists()){
                     Users userData = snapshot.child(parentDbName).child(user.getUid()).getValue(Users.class);
                     if(userData.getEmail().equals(email)){
                         if (userData.getPassword().equals(password)) {

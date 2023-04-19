@@ -123,9 +123,9 @@ public class LoginActivity extends AppCompatActivity {
                 });
 
     }
-    private void allowAccessToAccount(String email, String password){
+    private void allowAccessToAccount(final String email, final String password){
         if(chkBoxRememberMe.isChecked()){
-            Paper.book().write(Prevalent.userPasswordKey,email);
+            Paper.book().write(Prevalent.userEmail,email);
             Paper.book().write(Prevalent.userPasswordKey,password);
         }
         final DatabaseReference RootRef;
