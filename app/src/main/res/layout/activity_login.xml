@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="cursive"
         android:text="Sign In"
-        android:textColor="#673AB7"
+        android:textColor="@color/purple"
         android:textSize="70sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
