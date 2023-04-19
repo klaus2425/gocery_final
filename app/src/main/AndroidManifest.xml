@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Gocery_Final"
         tools:targetApi="31">
         <activity
+            android:name=".AdminCategoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".AdminAddNewProductActivity"
             android:exported="false" />
         <activity
