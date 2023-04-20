@@ -72,7 +72,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         Intent galleryIntent = new Intent();
         galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
         galleryIntent.setType("image/*");
-        startActivityForResult(galleryIntent, PICK_IMAGE);
+        startActivityForResult(galleryIntent, galleryPic);
     }
 
 
