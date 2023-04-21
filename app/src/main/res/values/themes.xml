@@ -6,4 +6,13 @@
     </style>
 
     <style name="Theme.Gocery_Final" parent="Base.Theme.Gocery_Final" />
+
+    <style name="Theme.Gocery_Final.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Gocery_Final.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Gocery_Final.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
