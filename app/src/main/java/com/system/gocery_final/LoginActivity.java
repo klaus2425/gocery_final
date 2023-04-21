@@ -167,6 +167,7 @@ public class LoginActivity extends AppCompatActivity {
                             } else if (parentDbName.equals("Users")) {
                                 Toast.makeText(LoginActivity.this, "Log in successfully...", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                Prevalent.currentOnlineUser = userData;
                                 startActivity(intent);
                             }
                         } else {
@@ -175,7 +176,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(LoginActivity.this, "Account" + email +  "do not exist.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Account " + email +  " does not exist.", Toast.LENGTH_SHORT).show();
                 }
             }
 

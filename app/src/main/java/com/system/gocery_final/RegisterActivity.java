@@ -84,7 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         user = auth.getCurrentUser();
                                         ValidateEmail(firstName, lastName, contact, password, address, email);
                                     } else {
-                                        Toast.makeText(RegisterActivity.this, "Email already in use!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(RegisterActivity.this, "Email is already in use!", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });

@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(user!=null){
                     AllowAccess(UserEmailKey,UserPasswordKey);
+
                 }
 
             }
@@ -83,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
                         if (userData.getPassword().equals(password)) {
                             Toast.makeText(MainActivity.this, "Log in successfully...", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                            Prevalent.currentOnlineUser = userData;
                             startActivity(intent);
                         } else {
                             Toast.makeText(MainActivity.this, "Password is incorrect...", Toast.LENGTH_SHORT).show();
