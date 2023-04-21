@@ -7,18 +7,27 @@
         <item
             android:id="@+id/nav_cart"
             android:icon="@drawable/nav_cart"
-            android:title="Cart" />
+            android:title="Cart"
+            android:iconTint="@color/white"/>
         <item
             android:id="@+id/nav_orders"
             android:icon="@drawable/nav_orders"
-            android:title="Orders" />
+            android:title="Orders"
+            android:iconTint="@color/white"/>
         <item
             android:id="@+id/nav_categories"
             android:icon="@drawable/categories"
-            android:title="Categories" />
+            android:title="Categories"
+            android:iconTint="@color/white"/>
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_menu_settings"
-            android:title="Settings" />
+            android:title="Settings"
+            android:iconTint="@color/white"/>
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/baseline_logout_24"
+            android:iconTint="@color/white"
+            android:title="Log Out" />
     </group>
 </menu>
