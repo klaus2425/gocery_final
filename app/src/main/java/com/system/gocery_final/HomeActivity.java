@@ -52,7 +52,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
         Paper.init(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -119,6 +119,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 };
         recyclerView.setAdapter(adapter);
         adapter.startListening();
+
     }
 
 
