@@ -165,7 +165,7 @@ public class SettingsActivity extends AppCompatActivity {
                         userMap.put("image",myUrl);
                         ref.child(Prevalent.currentOnlineUser.getEmail()).updateChildren(userMap);
 
-                        startActivity(new Intent(SettingsActivity.this,MainActivity.class));
+                        startActivity(new Intent(SettingsActivity.this,HomeActivity.class));
                         Toast.makeText(SettingsActivity.this,"Profile Info Update Successfully",Toast.LENGTH_SHORT);
                         finish();
                     }
