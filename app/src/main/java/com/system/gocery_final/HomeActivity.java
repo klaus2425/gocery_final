@@ -52,6 +52,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Gocery");
+        
         setSupportActionBar(toolbar);
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
         Paper.init(this);
