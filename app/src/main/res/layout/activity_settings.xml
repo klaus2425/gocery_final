@@ -59,6 +59,7 @@
         android:layout_centerHorizontal="true"
         />
 
+    <!-- Ginawa ko button originally text to-->
     <Button
         android:id="@+id/profile_image_change"
         android:layout_width="wrap_content"
