@@ -178,8 +178,8 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void updateOnlyUserInfo() {
+        user = auth.getCurrentUser();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(user.getUid());
-
         HashMap<String,Object> userMap = new HashMap<>();
         userMap.put("firstName",firstNameEditText.getText().toString());
         userMap.put("lastName",laststNameEditText.getText().toString());
@@ -187,7 +187,7 @@ public class SettingsActivity extends AppCompatActivity {
         userMap.put("contact",userPhoneEditText.getText().toString());
         ref.child(Prevalent.currentOnlineUser.getEmail()).updateChildren(userMap);
 
-        startActivity(new Intent(SettingsActivity.this,MainActivity.class));
+        startActivity(new Intent(SettingsActivity.this,HomeActivity.class));
         Toast.makeText(SettingsActivity.this,"Profile Info Update Successfully",Toast.LENGTH_SHORT);
 
         finish();
