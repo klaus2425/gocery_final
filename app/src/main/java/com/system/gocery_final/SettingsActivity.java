@@ -191,7 +191,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void userInfoDisplay(CircleImageView profileImageView, EditText firstNameEditText, EditText lastNameEditText, EditText userPhoneEditText, EditText addressEditText) {
         user = auth.getCurrentUser();
-        DatabaseReference UserRef = FirebaseDatabase.getInstance().getReference().child(user.getUid()).child(Prevalent.currentOnlineUser.getEmail());
+        DatabaseReference UserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
         UserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
