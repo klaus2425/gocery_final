@@ -1,14 +1,11 @@
 package com.system.gocery_final;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 import com.system.gocery_final.Prevalent.Prevalent;
 import com.google.android.gms.tasks.Continuation;
@@ -34,31 +30,30 @@ import com.google.firebase.storage.StorageTask;
 import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import de.hdodenhof.circleimageview.CircleImageView;
-import com.canhub.cropper.CropImage;
-import com.canhub.cropper.CropImageActivity;
+
 
 public class SettingsActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseUser user;
     private CircleImageView profileImageView;
-    private EditText firstNameEditText,laststNameEditText, userPhoneEditText, addressEditText;
+    private EditText firstNameEditText, lastNameEditText, userPhoneEditText, addressEditText;
     private TextView closeTextBtn, saveTextButton;
     private Button profileChangeTextBtn;
 
     private Uri imageUri;
     private String myUrl = "";
     private StorageTask uploadTask;
-    private StorageReference storageProfilePrictureRef;
+    private StorageReference storageProfilePictureRef;
     private String checker = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        storageProfilePrictureRef = FirebaseStorage.getInstance().getReference().child("Profile pictures");
+        storageProfilePictureRef = FirebaseStorage.getInstance().getReference().child("Profile pictures");
         profileImageView = (CircleImageView) findViewById(R.id.settings_profile_image);
         firstNameEditText = (EditText) findViewById(R.id.settings_firstname);
-        laststNameEditText= (EditText) findViewById(R.id.settings_lastname);
+        lastNameEditText = (EditText) findViewById(R.id.settings_lastname);
         userPhoneEditText = (EditText) findViewById(R.id.settings_phonenumber);
         addressEditText = (EditText) findViewById(R.id.settings_address);
         profileChangeTextBtn = (Button) findViewById(R.id.profile_image_change);
@@ -66,7 +61,7 @@ public class SettingsActivity extends AppCompatActivity {
         saveTextButton = (TextView) findViewById(R.id.update_settings);
         auth = FirebaseAuth.getInstance();
 
-        userInfoDisplay(profileImageView,firstNameEditText,laststNameEditText,userPhoneEditText,addressEditText);
+        userInfoDisplay(profileImageView,firstNameEditText, lastNameEditText,userPhoneEditText,addressEditText);
 
         closeTextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,14 +113,14 @@ public class SettingsActivity extends AppCompatActivity {
         if(TextUtils.isEmpty(firstNameEditText.getText().toString())){
             Toast.makeText(this,"First Name Should Not Be Empty",Toast.LENGTH_SHORT).show();
         }
-        else if(TextUtils.isEmpty(laststNameEditText.getText().toString())){
+        else if(TextUtils.isEmpty(lastNameEditText.getText().toString())){
             Toast.makeText(this,"Last Name Should Not Be Empty",Toast.LENGTH_SHORT).show();
         }
         else if(TextUtils.isEmpty(addressEditText.getText().toString())){
             Toast.makeText(this,"Address Should Not Be Empty",Toast.LENGTH_SHORT).show();
         }
         else if(TextUtils.isEmpty(userPhoneEditText.getText().toString())){
-            Toast.makeText(this,"Contact Numbner Not Be Empty",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Contact Number Not Be Empty",Toast.LENGTH_SHORT).show();
         }
         else if(checker.equals("clicked")){
             uploadImage();
@@ -135,7 +130,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void uploadImage() {
         if(imageUri!=null){
-            final StorageReference fileRef = storageProfilePrictureRef.child(Prevalent.currentOnlineUser.getEmail()+ ".jpg");
+            final StorageReference fileRef = storageProfilePictureRef.child(Prevalent.currentOnlineUser.getEmail()+ ".jpg");
             uploadTask = fileRef.putFile(imageUri);
 
             uploadTask.continueWithTask(new Continuation() {
@@ -159,7 +154,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                         HashMap<String,Object> userMap = new HashMap<>();
                         userMap.put("firstName",firstNameEditText.getText().toString());
-                        userMap.put("lastName",laststNameEditText.getText().toString());
+                        userMap.put("lastName", lastNameEditText.getText().toString());
                         userMap.put("address",addressEditText.getText().toString());
                         userMap.put("contact",userPhoneEditText.getText().toString());
                         userMap.put("image",myUrl);
@@ -182,7 +177,7 @@ public class SettingsActivity extends AppCompatActivity {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(user.getUid());
         HashMap<String,Object> userMap = new HashMap<>();
         userMap.put("firstName",firstNameEditText.getText().toString());
-        userMap.put("lastName",laststNameEditText.getText().toString());
+        userMap.put("lastName", lastNameEditText.getText().toString());
         userMap.put("address",addressEditText.getText().toString());
         userMap.put("contact",userPhoneEditText.getText().toString());
         ref.child(Prevalent.currentOnlineUser.getEmail()).updateChildren(userMap);
@@ -194,7 +189,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     }
 
-    private void userInfoDisplay(CircleImageView profileImageView, EditText firstNameEditText, EditText laststNameEditText, EditText userPhoneEditText, EditText addressEditText) {
+    private void userInfoDisplay(CircleImageView profileImageView, EditText firstNameEditText, EditText lastNameEditText, EditText userPhoneEditText, EditText addressEditText) {
         user = auth.getCurrentUser();
         DatabaseReference UserRef = FirebaseDatabase.getInstance().getReference().child(user.getUid()).child(Prevalent.currentOnlineUser.getEmail());
         UserRef.addValueEventListener(new ValueEventListener() {
@@ -210,7 +205,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                        Picasso.get().load(image).into(profileImageView);
                        firstNameEditText.setText(firsName);
-                       laststNameEditText.setText(lastName);
+                       lastNameEditText.setText(lastName);
                        userPhoneEditText.setText(phone);
                        addressEditText.setText(address);
                    }

@@ -37,6 +37,8 @@
         android:gravity="center"
         android:layout_marginTop="10dp"
         />
+
+
     <TextView
         android:id="@+id/product_price"
         android:layout_width="match_parent"
@@ -63,6 +65,7 @@
         android:backgroundTint="@color/white"
         android:elevation="6dp"
         app:fab_iconSrc="@drawable/nav_cart" />
+
 
 
 
