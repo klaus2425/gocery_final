@@ -24,13 +24,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private ImageView productImage;
     private TextView productPrice, productDescription, productName,productQuantity;
 
-    private String pruductID="";
+    private String productID ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
-        pruductID = getIntent().getStringExtra("pid");
+        productID = getIntent().getStringExtra("pid");
         addToCartBtn =(FloatingActionButton) findViewById(R.id.add_product_to_cart_btn);
         minusBtn =(Button) findViewById(R.id.product_minus);
         plusBtn =(Button) findViewById(R.id.product_add);
@@ -39,8 +39,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productQuantity=(TextView)findViewById(R.id.product_quantity);
         productName=(TextView) findViewById(R.id.product_name_details);
         productPrice=(TextView) findViewById(R.id.product_price);
-
-        getProductDetails(pruductID);
+        productQuantity.setText("1");
+        getProductDetails(productID);
 
         plusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
