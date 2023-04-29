@@ -1,7 +1,13 @@
 package com.system.gocery_final;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,6 +19,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.system.gocery_final.Prevalent.Prevalent;
@@ -28,6 +36,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.squareup.picasso.Picasso;
+import com.theartofdev.edmodo.cropper.CropImage;
+
 import java.util.HashMap;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -36,7 +46,7 @@ public class SettingsActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseUser user;
     private CircleImageView profileImageView;
-    private EditText firstNameEditText, lastNameEditText, userPhoneEditText, addressEditText;
+    private EditText firstNameEditText, lastNameEditText, userPhoneEditText, addressEditText, userEmailEditText;
     private TextView closeTextBtn, saveTextButton;
     private Button profileChangeTextBtn;
 
@@ -55,6 +65,7 @@ public class SettingsActivity extends AppCompatActivity {
         firstNameEditText = (EditText) findViewById(R.id.settings_firstname);
         lastNameEditText = (EditText) findViewById(R.id.settings_lastname);
         userPhoneEditText = (EditText) findViewById(R.id.settings_phonenumber);
+        userEmailEditText = (EditText) findViewById(R.id.settings_email);
         addressEditText = (EditText) findViewById(R.id.settings_address);
         profileChangeTextBtn = (Button) findViewById(R.id.profile_image_change);
         closeTextBtn = (TextView) findViewById(R.id.close_settings);
@@ -87,13 +98,35 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 checker ="clicked";
-
+                String[] mimeTypes = {"image/jpg", "image/png", "image/jpeg"};
+                ImagePicker.with(SettingsActivity.this)
+                        .cropSquare()    			//Crop image(Optional), Check Customization for more option
+                        .compress(1024)//Final image size will be less than 1 MB(Optional)
+                        .galleryOnly()
+                        .galleryMimeTypes(mimeTypes)
+                        .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
+                        .createIntent(intent -> {
+                            ActivityResultLauncher.launch(intent);
+                            return null;
+                        });
             }
         });
     }
 
+    private final ActivityResultLauncher<Intent> ActivityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                Intent data = result.getData();
+                if (data != null && result.getResultCode() == Activity.RESULT_OK){
+                    imageUri = data.getData();
+                    profileImageView.setImageURI(imageUri);
+                }else {
+                    Toast.makeText(SettingsActivity.this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show();
+                }
+            }
+    );
 //    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        super.onActivityResult(requestCode, resultCode, data);
 //
 //        if (requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE  &&  resultCode==RESULT_OK  &&  data!=null)
@@ -106,6 +139,7 @@ public class SettingsActivity extends AppCompatActivity {
 //        else{
 //            Toast.makeText(this,"Error, Try Again",Toast.LENGTH_SHORT).show();
 //            startActivity(new Intent(SettingsActivity.this,SettingsActivity.class));
+//            finish();
 //        }
 //    }
 
@@ -129,7 +163,12 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void uploadImage() {
-        if(imageUri!=null){
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Update Profile");
+        progressDialog.setMessage("Please wait, while we are updating your account information");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+        if(imageUri != null){
             final StorageReference fileRef = storageProfilePictureRef.child(Prevalent.currentOnlineUser.getEmail()+ ".jpg");
             uploadTask = fileRef.putFile(imageUri);
 
@@ -150,22 +189,25 @@ public class SettingsActivity extends AppCompatActivity {
                         Uri downloadUrl = task.getResult();
                         myUrl = downloadUrl.toString();
 
-                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(user.getUid());
+                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users");
 
                         HashMap<String,Object> userMap = new HashMap<>();
                         userMap.put("firstName",firstNameEditText.getText().toString());
                         userMap.put("lastName", lastNameEditText.getText().toString());
                         userMap.put("address",addressEditText.getText().toString());
                         userMap.put("contact",userPhoneEditText.getText().toString());
-                        userMap.put("image",myUrl);
-                        ref.child(Prevalent.currentOnlineUser.getEmail()).updateChildren(userMap);
+                        userMap.put("email",userEmailEditText.getText().toString());
+                        userMap. put("image", myUrl);
+                        ref.child(user.getUid()).updateChildren(userMap);
 
-                        startActivity(new Intent(SettingsActivity.this,HomeActivity.class));
-                        Toast.makeText(SettingsActivity.this,"Profile Info Update Successfully",Toast.LENGTH_SHORT);
+                        progressDialog.dismiss();
+                        Toast.makeText(SettingsActivity.this,"Profile Info Update Successfully",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(SettingsActivity.this,MainActivity.class));
+
                         finish();
                     }
-                    else {
-                       Toast.makeText(SettingsActivity.this,"Error",Toast.LENGTH_SHORT);
+                    else {progressDialog.dismiss();
+                       Toast.makeText(SettingsActivity.this,"Error",Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -174,13 +216,14 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void updateOnlyUserInfo() {
         user = auth.getCurrentUser();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(user.getUid());
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users");
         HashMap<String,Object> userMap = new HashMap<>();
         userMap.put("firstName",firstNameEditText.getText().toString());
         userMap.put("lastName", lastNameEditText.getText().toString());
         userMap.put("address",addressEditText.getText().toString());
         userMap.put("contact",userPhoneEditText.getText().toString());
-        ref.child(Prevalent.currentOnlineUser.getEmail()).updateChildren(userMap);
+        userMap.put("email",userEmailEditText.getText().toString());
+        ref.child(user.getUid()).updateChildren(userMap);
 
         startActivity(new Intent(SettingsActivity.this,HomeActivity.class));
         Toast.makeText(SettingsActivity.this,"Profile Info Update Successfully",Toast.LENGTH_SHORT);
@@ -202,10 +245,12 @@ public class SettingsActivity extends AppCompatActivity {
                        String lastName = snapshot.child("lastName").getValue().toString();
                        String phone = snapshot.child("contact").getValue().toString();
                        String address = snapshot.child("address").getValue().toString();
+                       String email = snapshot.child("email").getValue().toString();
 
                        Picasso.get().load(image).into(profileImageView);
                        firstNameEditText.setText(firsName);
                        lastNameEditText.setText(lastName);
+                       userEmailEditText.setText(email);
                        userPhoneEditText.setText(phone);
                        addressEditText.setText(address);
                    }
