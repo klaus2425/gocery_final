@@ -66,6 +66,7 @@ public class SettingsActivity extends AppCompatActivity {
         lastNameEditText = (EditText) findViewById(R.id.settings_lastname);
         userPhoneEditText = (EditText) findViewById(R.id.settings_phonenumber);
         userEmailEditText = (EditText) findViewById(R.id.settings_email);
+        userEmailEditText.setEnabled(false);
         addressEditText = (EditText) findViewById(R.id.settings_address);
         profileChangeTextBtn = (Button) findViewById(R.id.profile_image_change);
         closeTextBtn = (TextView) findViewById(R.id.close_settings);
