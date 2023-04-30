@@ -43,7 +43,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
+
         productID = getIntent().getStringExtra("pid");
+
         addToCartBtn =(FloatingActionButton) findViewById(R.id.pd_add_product_to_cart_btn);
         minusBtn =(Button) findViewById(R.id.product_minus);
         plusBtn =(Button) findViewById(R.id.product_add);
