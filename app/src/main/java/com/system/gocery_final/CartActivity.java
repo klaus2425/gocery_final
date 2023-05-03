@@ -59,7 +59,7 @@ public class CartActivity extends AppCompatActivity {
         nextProcessButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txtTotalAmount.setText("Total Price = " + overTotalPrice + "php");
+                txtTotalAmount.setText("Total Price = Php " + overTotalPrice );
                 Intent intent = new Intent(CartActivity.this,ConfirmFinalOrderActivity.class);
                 intent.putExtra("Total Price", String.valueOf(overTotalPrice));
                 startActivity(intent);
@@ -80,11 +80,11 @@ public class CartActivity extends AppCompatActivity {
         FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter = new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull CartViewHolder holder, int position, @NonNull Cart model) {
-                holder.txtProductPrice.setText("Quantity = " + model.getPrice());
-                holder.txtProductName.setText("Price " + model.getPname());
-//               int oneTypeProductPrice = ((Integer.valueOf(model.getPrice()))) * ((Integer.valueOf(model.getQuantity())));
-//               overTotalPrice =overTotalPrice+ oneTypeProductPrice;
-
+                holder.txtProductPrice.setText("Price = Php " + model.getPrice());
+                holder.txtProductName.setText(model.getPname());
+               int oneTypeProductPrice = ((Integer.valueOf(model.getPrice()))) * ((Integer.valueOf(model.getQuantity())));
+               overTotalPrice = overTotalPrice+ oneTypeProductPrice;
+                txtTotalAmount.setText("Total Price = Php " + overTotalPrice );
                 holder.txtProductQuantity.setText(model.getQuantity());
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override

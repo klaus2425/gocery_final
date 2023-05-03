@@ -143,7 +143,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 if (snapshot.exists()){
                     Products products = snapshot.getValue(Products.class);
                     productName.setText(products.getPname());
-                    productPrice.setText(products.getPrice()+" PHP");
+                    productPrice.setText(products.getPrice());
                     productDescription.setText(products.getDescription());
                     Picasso.get().load(products.getImage()).into(productImage);
 
