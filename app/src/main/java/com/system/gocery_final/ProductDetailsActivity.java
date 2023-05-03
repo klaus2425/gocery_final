@@ -35,9 +35,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private ImageView productImage;
     private TextView productPrice, productDescription, productName;
     private EditText productQuantity;
-    private String productID ="";
+    private String productID ="", state = "Normal";
     FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseUser user = auth.getCurrentUser();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +89,20 @@ public class ProductDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addingToCartList();
+
+                if(state.equals("Order Placed") || state.equals("Order Shipped")){
+
+                }
             }
+
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        CheckOrderState();
     }
 
     private void addingToCartList() {
@@ -159,6 +172,32 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     }
 
+    private void CheckOrderState(){
+        DatabaseReference ordersRef;
+        ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(user.getUid());
+        ordersRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    String shippingState = snapshot.child("state").getValue().toString();
+                    String userName = snapshot.child("name").getValue().toString();
+
+                    if (shippingState.equals("shipped")){
+                        state = "Order Shipped";
+                    } else if (shippingState.equals("not shipped")) {
+                        state = "Order Place";
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
 
 //    public void plusBtn(View v){
 //          count++;
