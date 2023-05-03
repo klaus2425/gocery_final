@@ -4,20 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CartActivity">
+    tools:context=".CartActivity"
+    >
 
     <RelativeLayout
         android:id="@+id/rl_cart1"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/cardview_dark_background"
+        android:background="@drawable/layout_bg"
         android:layout_alignParentTop="true"
+        android:backgroundTint="@color/purple"
         >
         <TextView
             android:id="@+id/total_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Total Price = "
+            android:text="Cart is Empty "
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textAlignment="center"
