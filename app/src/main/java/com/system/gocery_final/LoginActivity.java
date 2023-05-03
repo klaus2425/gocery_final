@@ -61,18 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         customerButton = (Button) findViewById(R.id.customerLink);
         customerButton.setVisibility(View.INVISIBLE);
 
-            //PREFERENCES
-//        loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
-//        loginPrefsEditor = loginPreferences.edit();
-//        saveLogin = loginPreferences.getBoolean("saveLogin", false);
-//        if (saveLogin == true) {
-//            inputEmail.setText(loginPreferences.getString("username", ""));
-//            inputPassword.setText(loginPreferences.getString("password", ""));
-//            chkBoxRememberMe.setChecked(true);
-//        }
-
         Paper.init(this);
-
 
         signup.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
@@ -130,21 +119,22 @@ public class LoginActivity extends AppCompatActivity {
         String password = inputPassword.getText().toString();
         if(TextUtils.isEmpty(password) || TextUtils.isEmpty(email) ) {
             Toast.makeText(LoginActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
-        }auth.signInWithEmailAndPassword(email, password)
+        } else {
+            auth.signInWithEmailAndPassword(email, password)
 
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful() ){
-                            user = auth.getCurrentUser();
-                            allowAccessToAccount(email,password);
-                        } else {
-                            Toast.makeText(LoginActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                user = auth.getCurrentUser();
+                                allowAccessToAccount(email, password);
+                            } else {
+                                Toast.makeText(LoginActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
 
+                            }
                         }
-                    }
-                });
-
+                    });
+        }
     }
     private void allowAccessToAccount(final String email, final String password){
         if(chkBoxRememberMe.isChecked()){

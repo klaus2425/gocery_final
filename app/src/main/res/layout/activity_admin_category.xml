@@ -77,7 +77,7 @@
                     android:text="Frozen Goods"
                     android:textStyle="bold"
                     />
-                    />
+
         </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -265,4 +265,24 @@
                 />
         </LinearLayout>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/check_orders_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/admin_logout_btn"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="15dp"
+        android:text="Check Orders"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/admin_logout_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="Log Out"
+        android:textSize="20sp" />
 </RelativeLayout>
