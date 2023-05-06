@@ -1,10 +1,12 @@
 package com.system.gocery_final;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +17,8 @@ import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.system.gocery_final.Model.AdminOrders;
@@ -23,7 +27,8 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
 
     private RecyclerView ordersList;
     private DatabaseReference ordersRef;
-
+    private FirebaseAuth auth;
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +58,8 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
                holder.userTotalPrice.setText("Total Amount: = Php " + model.getTotalAmount());
                holder.userDateTime.setText("Order at: " + model.getDate() + " " + model.getTime());
                holder.userShippingAddress.setText("Shipping Address: " + model.getAddress() + ", "+ model.getCity());
+               auth = FirebaseAuth.getInstance();
+               user = auth.getCurrentUser();
                holder.showOrderButton.setOnClickListener(new View.OnClickListener() {
                    @Override
                    public void onClick(View v) {
@@ -60,6 +67,36 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
 
                        intent.putExtra("uid", model.getUid());
                        startActivity(intent);
+                   }
+               });
+
+               holder.itemView.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View v) {
+
+                       CharSequence option[] = new CharSequence[]{
+                               "Yes",
+                               "No"
+                       };
+                       AlertDialog.Builder builder = new AlertDialog.Builder(AdminNewOrdersActivity.this);
+                       builder.setTitle("Have you shipped this ordered products");
+                       builder.setItems(option, new DialogInterface.OnClickListener() {
+                           @Override
+                           public void onClick(DialogInterface dialog, int which) {
+
+                               if(which == 0)
+                               {
+                                   String uid = getRef(position).getKey();
+                                   ordersRef.child(uid).removeValue();
+                               }
+                               else
+                               {
+                                   finish();
+                               }
+                           }
+                       });
+                       builder.show();
+
                    }
                });
 
@@ -75,6 +112,10 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
        ordersList.setAdapter(adapter);
        adapter.startListening();
     }
+
+//    private void RemoveOrder() {
+//
+//    }
 
     public static class AdminOrdersViewHolder extends RecyclerView.ViewHolder{
 
