@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchProductsActivity"
+    >
+
+
+    <RelativeLayout
+        android:id="@+id/r5"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/layout_bg"
+        android:layout_alignParentTop="true"
+        android:backgroundTint="@color/purple"
+        android:layout_centerHorizontal="true"
+        >
+
+        <EditText
+            android:id="@+id/search_product_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Product Name"
+            android:textColorHighlight="@color/white"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:width="290dp"
+            android:layout_height="wrap_content"
+            android:text="Search"
+            android:textColor="@color/white"
+            android:background="@color/design_default_color_primary_dark"
+            android:layout_toRightOf="@id/search_product_name"
+            />
+
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
