@@ -2,13 +2,13 @@ package com.system.gocery_final.Model;
 
 public class AdminOrders {
 
-    private String address, city, date, name, number, state, time, totalAmount;
+    private String address, city, date, name, number, state, time, totalAmount, uid;
 
     public AdminOrders() {
 
     }
 
-    public AdminOrders(String address, String city, String date, String name, String number, String state, String time, String totalAmount) {
+    public AdminOrders(String address, String city, String date, String name, String number, String state, String time, String totalAmount, String uid) {
         this.address = address;
         this.city = city;
         this.date = date;
@@ -17,6 +17,15 @@ public class AdminOrders {
         this.state = state;
         this.time = time;
         this.totalAmount = totalAmount;
+        this.uid = uid;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getAddress() {

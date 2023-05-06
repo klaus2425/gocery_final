@@ -91,10 +91,11 @@ public class CartActivity extends AppCompatActivity {
             protected void onBindViewHolder(@NonNull CartViewHolder holder, int position, @NonNull Cart model) {
                 holder.txtProductPrice.setText("Price = Php " + model.getPrice());
                 holder.txtProductName.setText(model.getPname());
+                holder.txtProductQuantity.setText(model.getQuantity());
                int oneTypeProductPrice = ((Integer.valueOf(model.getPrice()))) * ((Integer.valueOf(model.getQuantity())));
                overTotalPrice = overTotalPrice+ oneTypeProductPrice;
                 txtTotalAmount.setText("Total Price = Php " + overTotalPrice );
-                holder.txtProductQuantity.setText(model.getQuantity());
+
 
                 if(!txtTotalAmount.getText().toString().equals("Cart is Empty")){
                     nextProcessButton.setVisibility(View.VISIBLE);

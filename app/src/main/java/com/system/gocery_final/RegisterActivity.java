@@ -106,6 +106,7 @@ public class RegisterActivity extends AppCompatActivity {
                     userdataMap.put("lastName", lastName);
                     userdataMap.put("address", address);
                     userdataMap.put("contact", contact);
+                    userdataMap.put("uid", user.getUid());
                     RootRef.child("Users").child(user.getUid()).updateChildren(userdataMap)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override

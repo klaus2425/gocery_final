@@ -1,13 +1,13 @@
 package com.system.gocery_final.Model;
 
 public class Users {
-    private String firstName, lastName, contact, password, email, address, image;
+    private String firstName, lastName, contact, password, email, address, image, uid;
 
     public Users() {
 
     }
 
-    public Users(String firstName, String lastName, String contact, String password, String email, String address, String image) {
+    public Users(String firstName, String lastName, String contact, String password, String email, String address, String image, String uid) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.contact = contact;
@@ -15,6 +15,7 @@ public class Users {
         this.email = email;
         this.address = address;
         this.image = image;
+        this.uid = uid;
     }
 
     public String getFirstName() {
