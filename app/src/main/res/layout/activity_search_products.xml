@@ -31,6 +31,7 @@
 
             />
         <Button
+            android:id="@+id/search_button"
             android:layout_width="match_parent"
             android:width="260dp"
             android:layout_height="wrap_content"
@@ -48,7 +49,7 @@
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/seach_list"
+        android:id="@+id/search_list"
         android:layout_below="@+id/r5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
