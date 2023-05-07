@@ -12,34 +12,46 @@
     <RelativeLayout
         android:id="@+id/r5"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:background="@drawable/layout_bg"
         android:layout_alignParentTop="true"
         android:backgroundTint="@color/purple"
         android:layout_centerHorizontal="true"
         >
-
         <EditText
             android:id="@+id/search_product_name"
-            android:layout_width="match_parent"
+            android:layout_width="290dp"
             android:layout_height="wrap_content"
             android:hint="Product Name"
+            android:textSize="18dp"
             android:textColorHighlight="@color/white"
-            />
+            android:layout_marginStart="5dp"
+            android:layout_centerVertical="true"
+            android:textColorHint="@color/design_default_color_primary_dark"
 
+            />
         <Button
             android:layout_width="match_parent"
-            android:width="290dp"
+            android:width="260dp"
             android:layout_height="wrap_content"
             android:text="Search"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:padding="10dp"
             android:textColor="@color/white"
             android:background="@color/design_default_color_primary_dark"
             android:layout_toRightOf="@id/search_product_name"
+            android:layout_centerInParent="true"
             />
-
 
 
     </RelativeLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/seach_list"
+        android:layout_below="@+id/r5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 
 </RelativeLayout>
