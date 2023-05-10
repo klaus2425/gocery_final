@@ -46,6 +46,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
 
+    private String type = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Gocery");
-        
+
+        type = getIntent().getExtras().get("Admin").toString();
+
         setSupportActionBar(toolbar);
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
         Paper.init(this);
@@ -111,12 +115,21 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         holder.txtProdPrice.setText("Price = Php " + model.getPrice());
                         Picasso.get().load(model.getImage()).into(holder.imageView);
 
+
+
                         holder.itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Intent intent = new Intent(HomeActivity.this,ProductDetailsActivity.class);
-                                intent.putExtra("pid",model.getPid());
-                                startActivity(intent);
+                                if(type.equals("Admin")){
+
+
+                                }else{
+                                    Intent intent = new Intent(HomeActivity.this,ProductDetailsActivity.class);
+                                    intent.putExtra("pid",model.getPid());
+                                    startActivity(intent);
+                                }
+
+
                             }
                         });
                     }
