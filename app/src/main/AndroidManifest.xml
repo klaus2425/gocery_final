@@ -24,6 +24,9 @@
         tools:replace="android:theme"
         tools:targetApi="31">
         <activity
+            android:name=".AdminMaintainProductsActivity"
+            android:exported="false" />
+        <activity
             android:name=".SearchProductsActivity"
             android:exported="false" />
         <activity
