@@ -28,7 +28,6 @@
             android:id="@+id/product_name_maintain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/product_image_maintain"
             android:hint="Product Name"
             android:textAlignment="center"
             android:padding="12dp"
@@ -54,6 +53,19 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/product_price_maintain"
             android:hint="Product Description"
+            android:layout_marginTop="2dp"
+            android:padding="12dp"
+            android:layout_margin="5dp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/apply_changes_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/product_description_maintain"
+            android:text="Apply Changes"
             android:layout_marginTop="2dp"
             android:padding="12dp"
             android:layout_margin="5dp"
