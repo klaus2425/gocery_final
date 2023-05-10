@@ -13,7 +13,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
     private ImageView img_beverages, img_frozenGoods, img_fruits, img_vegetables, img_dairy, img_cannedGoods, img_snacks, img_condiments,
     img_toiletries, img_cleaningMaterials;
 
-    private Button logoutBtn, checkOrdersBtn;
+    private Button logoutBtn, checkOrdersBtn, maintainBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +21,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
 
         logoutBtn = (Button) findViewById(R.id.admin_logout_btn);
         checkOrdersBtn = (Button) findViewById(R.id.check_orders_btn);
+        maintainBtn=(Button) findViewById(R.id.maintain_btn);
 
         img_beverages = (ImageView) findViewById(R.id.cat_beverages);
         img_frozenGoods = (ImageView) findViewById(R.id.cat_frozengoods);
@@ -32,6 +33,17 @@ public class AdminCategoryActivity extends AppCompatActivity {
         img_condiments = (ImageView) findViewById(R.id.cat_condiments);
         img_toiletries = (ImageView) findViewById(R.id.cat_toiletries);
         img_cleaningMaterials = (ImageView) findViewById(R.id.cat_cleaningmaterials);
+
+
+        maintainBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminCategoryActivity.this, HomeActivity.class);
+                intent.putExtra("Admin", "Admin");
+                startActivity(intent);
+
+            }
+        });
 
 
         logoutBtn.setOnClickListener(new View.OnClickListener() {
