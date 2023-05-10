@@ -56,7 +56,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Gocery");
 
-        type = getIntent().getExtras().get("Admin").toString();
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+
+        if(bundle!= null){
+            type = getIntent().getExtras().get("Admin").toString();
+        }
+
 
         setSupportActionBar(toolbar);
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
@@ -84,8 +91,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         TextView userNameTextView = headerView.findViewById(R.id.user_profile_name);
         CircleImageView profileImageView = headerView.findViewById(R.id.user_profile_image);
 
-        userNameTextView.setText(Prevalent.currentOnlineUser.getFirstName() + " " + Prevalent.currentOnlineUser.getLastName());
-        Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile).into(profileImageView);
+        if(!type.equals("Admin")){
+            userNameTextView.setText(Prevalent.currentOnlineUser.getFirstName() + " " + Prevalent.currentOnlineUser.getLastName());
+            Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile).into(profileImageView);
+        }
 
         recyclerView = findViewById(R.id.recycler_menu);
         recyclerView.setHasFixedSize(true);
@@ -121,6 +130,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                             @Override
                             public void onClick(View v) {
                                 if(type.equals("Admin")){
+                                    Intent intent = new Intent(HomeActivity.this, AdminMaintainProductsActivity.class);
+                                    intent.putExtra("pid",model.getPid());
+                                    startActivity(intent);
 
 
                                 }else{
