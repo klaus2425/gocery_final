@@ -28,6 +28,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.system.gocery_final.Model.Products;
 import com.system.gocery_final.Prevalent.Prevalent;
 import com.system.gocery_final.ViewHolder.ProductViewHolder;
@@ -45,7 +47,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private DatabaseReference ProductsRef;
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-
+    private FirebaseUser user;
+    private FirebaseAuth auth;
     private String type = "";
 
 
@@ -64,6 +67,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             type = getIntent().getExtras().get("Admin").toString();
         }
 
+        //Verification Check
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        if(user.isEmailVerified()){
+            System.out.println("Email is verified");
+        } else System.out.println("Email is not verified");
 
         setSupportActionBar(toolbar);
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");

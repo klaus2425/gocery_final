@@ -7,12 +7,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.google.firebase.database.DatabaseReference;
+
 public class AdminMaintainProductsActivity extends AppCompatActivity {
 
     private Button applyChangesbtn;
     private EditText name, price, description;
     private ImageView imageView;
-
+    private String productID ="";
+    private DatabaseReference productsRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

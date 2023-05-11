@@ -81,8 +81,10 @@ public class RegisterActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()){
+
                                         user = auth.getCurrentUser();
                                         ValidateEmail(firstName, lastName, contact, password, address, email);
+                                        user.sendEmailVerification();
                                     } else {
                                         Toast.makeText(RegisterActivity.this, "Email is already in use!", Toast.LENGTH_SHORT).show();
                                     }
