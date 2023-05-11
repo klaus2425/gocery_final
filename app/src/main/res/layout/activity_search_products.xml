@@ -20,32 +20,34 @@
         >
         <EditText
             android:id="@+id/search_product_name"
-            android:layout_width="290dp"
-            android:layout_height="wrap_content"
+            android:layout_width="280dp"
+            android:layout_height="45dp"
+            android:padding="10dp"
             android:hint="Search Products"
             android:inputType="text"
-            android:textSize="18dp"
+            android:textSize="18sp"
+            android:background="@drawable/edit_text_bg"
             android:textColorHighlight="@color/white"
             android:layout_marginStart="5dp"
             android:layout_centerVertical="true"
             android:maxLines="1"
             android:textColorHint="@color/green"
-
             />
+
         <Button
             android:id="@+id/search_button"
             android:layout_width="match_parent"
-            android:width="260dp"
             android:layout_height="wrap_content"
-            android:text="Search"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            android:padding="10dp"
-            android:textColor="@color/white"
-            android:background="@color/design_default_color_primary_dark"
-            android:layout_toRightOf="@id/search_product_name"
             android:layout_centerInParent="true"
-            />
+            android:layout_toRightOf="@id/search_product_name"
+            android:width="260dp"
+            android:backgroundTint="@color/green"
+            android:drawableLeft="@drawable/baseline_search_24"
+            android:padding="10dp"
+            android:text="Search"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
 
     </RelativeLayout>
