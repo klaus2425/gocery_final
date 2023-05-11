@@ -22,12 +22,14 @@
             android:id="@+id/search_product_name"
             android:layout_width="290dp"
             android:layout_height="wrap_content"
-            android:hint="Product Name"
+            android:hint="Search Products"
+            android:inputType="text"
             android:textSize="18dp"
             android:textColorHighlight="@color/white"
             android:layout_marginStart="5dp"
             android:layout_centerVertical="true"
-            android:textColorHint="@color/design_default_color_primary_dark"
+            android:maxLines="1"
+            android:textColorHint="@color/green"
 
             />
         <Button
