@@ -41,7 +41,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.squareup.picasso.Picasso;
-import com.theartofdev.edmodo.cropper.CropImage;
+
 
 import java.util.HashMap;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -134,23 +134,7 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             }
     );
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE  &&  resultCode==RESULT_OK  &&  data!=null)
-//        {
-//            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-//            imageUri = result.getUri();
-//
-//            profileImageView.setImageURI(imageUri);
-//        }
-//        else{
-//            Toast.makeText(this,"Error, Try Again",Toast.LENGTH_SHORT).show();
-//            startActivity(new Intent(SettingsActivity.this,SettingsActivity.class));
-//            finish();
-//        }
-//    }
+
 
     private void userInfoSaved() {
         if(TextUtils.isEmpty(firstNameEditText.getText().toString())){
