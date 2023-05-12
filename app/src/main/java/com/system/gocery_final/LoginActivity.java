@@ -127,7 +127,12 @@ public class LoginActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 user = auth.getCurrentUser();
-                                allowAccessToAccount(email, password);
+                                if(user.isEmailVerified()) {
+                                    allowAccessToAccount(email, password);
+                                }else {
+                                    Toast.makeText(LoginActivity.this, "Please Verify your email", Toast.LENGTH_SHORT).show();
+                                    user.sendEmailVerification();
+                                }
                             } else {
                                 Toast.makeText(LoginActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
 

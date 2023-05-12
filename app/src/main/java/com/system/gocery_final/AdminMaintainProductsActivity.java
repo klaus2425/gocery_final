@@ -61,7 +61,7 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
         String pName = name.getText().toString();
         String pPrice = price.getText().toString();
         String pDescription = description.getText().toString();
-
+        String pQuantity = quantity.getText().toString();
         if(pName.equals("")) Toast.makeText(this, "Missing Product Name", Toast.LENGTH_SHORT).show();
         else if(pPrice.equals("")) Toast.makeText(this, "Missing Product Price", Toast.LENGTH_SHORT).show();
         else if(pDescription.equals("")) Toast.makeText(this, "Missing Product Description", Toast.LENGTH_SHORT).show();
@@ -71,7 +71,7 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
             productMap.put("description", pDescription);
             productMap.put("price", pPrice);
             productMap.put("pname", pName);
-            productMap.put("quantity", quantity);
+            productMap.put("quantity", pQuantity);
 
             productsRef.updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
