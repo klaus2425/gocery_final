@@ -64,6 +64,14 @@ public class LoginActivity extends AppCompatActivity {
         forgotPasswordLink = (TextView) findViewById(R.id.forgot_password_link);
         Paper.init(this);
 
+        forgotPasswordLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
+                intent.putExtra("settings", "check");
+                startActivity(intent);
+            }
+        });
         signup.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);

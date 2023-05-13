@@ -54,7 +54,7 @@ public class SettingsActivity extends AppCompatActivity {
     private CircleImageView profileImageView;
     private EditText firstNameEditText, lastNameEditText, userPhoneEditText, addressEditText, userEmailEditText, userPasswordEditText;
     private TextView closeTextBtn, saveTextButton;
-    private Button profileChangeTextBtn;
+    private Button profileChangeTextBtn, securityQuestionBtn;
     private AuthCredential credential;
     private Uri imageUri;
     private String myUrl = "";
@@ -80,13 +80,22 @@ public class SettingsActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
         credential = EmailAuthProvider.getCredential(Prevalent.currentOnlineUser.getEmail(), Prevalent.currentOnlineUser.getPassword());
-
+        securityQuestionBtn = (Button) findViewById(R.id.security_questions_btn);
         userInfoDisplay(profileImageView,firstNameEditText, lastNameEditText,userPhoneEditText,addressEditText);
 
         closeTextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        securityQuestionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SettingsActivity.this, ResetPasswordActivity.class);
+                intent.putExtra("settings", "check");
+                startActivity(intent);
             }
         });
 
