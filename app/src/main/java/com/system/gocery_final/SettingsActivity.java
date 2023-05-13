@@ -205,6 +205,7 @@ public class SettingsActivity extends AppCompatActivity {
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
                                                     Log.d(TAG, "User email address updated.");
+                                                    user.sendEmailVerification();
                                                 }
                                             }
                                         });
@@ -258,6 +259,7 @@ public class SettingsActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
                                     Log.d(TAG, "User email address updated.");
+                                    user.sendEmailVerification();
                                 }
                             }
                         });
