@@ -24,15 +24,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.system.gocery_final.Admin.AdminCategoryActivity;
 import com.system.gocery_final.Model.Users;
 import com.system.gocery_final.Prevalent.Prevalent;
 
-import java.util.HashMap;
 import io.paperdb.Paper;
 
 public class LoginActivity extends AppCompatActivity {
 
     private String email,password;
+    private TextView forgotPasswordLink;
     private Button adminButton; // adminLink
     private Button customerButton; // notAdminLink
     private EditText inputEmail, inputPassword;
@@ -60,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         TextView signup = findViewById(R.id.signUp);
         customerButton = (Button) findViewById(R.id.customerLink);
         customerButton.setVisibility(View.INVISIBLE);
-
+        forgotPasswordLink = (TextView) findViewById(R.id.forgot_password_link);
         Paper.init(this);
 
         signup.setOnClickListener(v -> {

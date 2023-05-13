@@ -1,4 +1,4 @@
-package com.system.gocery_final;
+package com.system.gocery_final.Admin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.system.gocery_final.HomeActivity;
+import com.system.gocery_final.MainActivity;
+import com.system.gocery_final.R;
 
 public class AdminCategoryActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.system.gocery_final;
+package com.system.gocery_final.Admin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.system.gocery_final.Model.AdminOrders;
+import com.system.gocery_final.R;
 
 public class AdminNewOrdersActivity extends AppCompatActivity {
 
