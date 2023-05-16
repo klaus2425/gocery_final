@@ -1,4 +1,4 @@
-package com.system.gocery_final;
+package com.system.gocery_final.Customers;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +19,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.system.gocery_final.Model.Users;
 import com.system.gocery_final.Prevalent.Prevalent;
+import com.system.gocery_final.R;
+
 import io.paperdb.Paper;
 
 

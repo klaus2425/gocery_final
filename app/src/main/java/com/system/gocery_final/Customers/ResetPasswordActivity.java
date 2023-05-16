@@ -1,4 +1,4 @@
-package com.system.gocery_final;
+package com.system.gocery_final.Customers;
 
 import static android.content.ContentValues.TAG;
 
@@ -27,7 +27,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.system.gocery_final.Prevalent.Prevalent;
+import com.system.gocery_final.R;
 
 import java.util.HashMap;
 

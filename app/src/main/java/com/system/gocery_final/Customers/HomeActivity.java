@@ -1,4 +1,4 @@
-package com.system.gocery_final;
+package com.system.gocery_final.Customers;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,6 +28,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.system.gocery_final.Admin.AdminMaintainProductsActivity;
 import com.system.gocery_final.Model.Products;
 import com.system.gocery_final.Prevalent.Prevalent;
+import com.system.gocery_final.R;
 import com.system.gocery_final.ViewHolder.ProductViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;

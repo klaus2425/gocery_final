@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/purple"
+    tools:context=".Sellers.SellerRegistrationActivity">
+
+
+    <ImageView
+        android:id="@+id/img_seller"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:src="@drawable/seller_banner"
+        android:scaleType="fitCenter"
+        />
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/img_seller"
+        android:layout_marginTop="20dp"
+        app:cardCornerRadius="50dp"
+        android:layout_marginBottom="-50dp"
+
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/title_seller"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Seller Registration"
+                android:gravity="center"
+                android:layout_margin="20dp"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:textColor="@color/purple"
+                />
+            <EditText
+                android:id="@+id/seller_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_below="@+id/title_seller"
+                android:background="@drawable/edit_text_bg"
+                android:inputType="text"
+                android:hint="Name"
+                android:textSize="18sp"
+                android:padding="10dp"
+                android:layout_marginTop="20dp"
+
+                />
+            <EditText
+                android:id="@+id/seller_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_below="@+id/seller_name"
+                android:background="@drawable/edit_text_bg"
+                android:inputType="text"
+                android:hint="Email Address"
+                android:textSize="18sp"
+                android:padding="10dp"
+                android:layout_marginTop="20dp"
+
+                />
+            <EditText
+                android:id="@+id/seller_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_below="@+id/seller_email"
+                android:background="@drawable/edit_text_bg"
+                android:inputType="textPassword"
+                android:hint="Password"
+                android:textSize="18sp"
+                android:padding="10dp"
+                android:layout_marginTop="20dp"
+
+                />
+
+            <EditText
+                android:id="@+id/seller_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_below="@+id/seller_password"
+                android:background="@drawable/edit_text_bg"
+                android:inputType="text"
+                android:hint="Phone Number"
+                android:textSize="18sp"
+                android:padding="10dp"
+                android:layout_marginTop="20dp"
+                />
+
+            <EditText
+                android:id="@+id/seller_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_below="@+id/seller_phone"
+                android:background="@drawable/edit_text_bg"
+                android:inputType="text"
+                android:hint="Address"
+                android:textSize="18sp"
+                android:padding="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_below="@+id/seller_address"
+                android:text="Register"
+                android:textSize="18sp"
+                
+                />
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

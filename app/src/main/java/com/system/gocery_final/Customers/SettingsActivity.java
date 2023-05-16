@@ -1,8 +1,7 @@
-package com.system.gocery_final;
+package com.system.gocery_final.Customers;
 
 import static android.content.ContentValues.TAG;
 
-import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -41,6 +40,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.squareup.picasso.Picasso;
+import com.system.gocery_final.R;
 
 
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package com.system.gocery_final;
+package com.system.gocery_final.Customers;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.rey.material.widget.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 import com.system.gocery_final.Model.Products;
+import com.system.gocery_final.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

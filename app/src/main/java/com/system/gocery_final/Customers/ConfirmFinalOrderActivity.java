@@ -1,4 +1,4 @@
-package com.system.gocery_final;
+package com.system.gocery_final.Customers;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.system.gocery_final.Prevalent.Prevalent;
+import com.system.gocery_final.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

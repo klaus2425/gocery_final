@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.system.gocery_final.HomeActivity;
-import com.system.gocery_final.MainActivity;
+import com.system.gocery_final.Customers.HomeActivity;
+import com.system.gocery_final.Customers.MainActivity;
 import com.system.gocery_final.R;
 
 public class AdminCategoryActivity extends AppCompatActivity {

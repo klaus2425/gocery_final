@@ -24,13 +24,16 @@
         tools:replace="android:theme"
         tools:targetApi="31">
         <activity
-            android:name=".ResetPasswordActivity"
+            android:name=".Sellers.SellerRegistrationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Customers.ResetPasswordActivity"
             android:exported="false" />
         <activity
             android:name=".Admin.AdminMaintainProductsActivity"
             android:exported="false" />
         <activity
-            android:name=".SearchProductsActivity"
+            android:name=".Customers.SearchProductsActivity"
             android:exported="false" />
         <activity
             android:name=".Admin.AdminUserProductsActivity"
@@ -39,22 +42,22 @@
             android:name=".Admin.AdminNewOrdersActivity"
             android:exported="false" />
         <activity
-            android:name=".ConfirmFinalOrderActivity"
+            android:name=".Customers.ConfirmFinalOrderActivity"
             android:exported="false" />
         <activity
-            android:name=".CartActivity"
+            android:name=".Customers.CartActivity"
             android:exported="false" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
         <activity
-            android:name=".ProductDetailsActivity"
+            android:name=".Customers.ProductDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".SettingsActivity"
+            android:name=".Customers.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".Customers.HomeActivity"
             android:exported="false"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.Gocery_Final.NoActionBar" />
@@ -65,10 +68,10 @@
             android:name=".Admin.AdminAddNewProductActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".Customers.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Customers.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -77,7 +80,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".Customers.LoginActivity"
             android:exported="true" />
         <activity
             android:name="com.canhub.cropper.CropImageActivity"
