@@ -24,6 +24,12 @@
         tools:replace="android:theme"
         tools:targetApi="31">
         <activity
+            android:name=".Admin.CheckNewProductsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Admin.AdminHomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".Sellers.SellerHomeActivity"
             android:exported="false"
             android:label="@string/title_activity_seller_home" />
