@@ -72,7 +72,7 @@
             android:name=".Admin.AdminCategoryActivity"
             android:exported="false" />
         <activity
-            android:name=".Admin.AdminAddNewProductActivity"
+            android:name=".Sellers.SellerAddNewProductActivity"
             android:exported="false" />
         <activity
             android:name=".Customers.RegisterActivity"
