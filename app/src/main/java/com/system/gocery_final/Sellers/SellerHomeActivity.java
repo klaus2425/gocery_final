@@ -11,6 +11,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.system.gocery_final.Admin.SellerProductCategoryActivity;
 import com.system.gocery_final.Customers.MainActivity;
 import com.system.gocery_final.R;
 
@@ -29,7 +30,10 @@ public class SellerHomeActivity extends AppCompatActivity {
             }
             else if (item.getItemId() == R.id.navigation_add) {
 
-                mTextMessage.setText(R.string.title_dashboard);
+                Intent intent = new Intent(SellerHomeActivity.this, SellerProductCategoryActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
                 return true;
             } else if (item.getItemId() == R.id.navigation_logout) {
                 final FirebaseAuth mAuth;

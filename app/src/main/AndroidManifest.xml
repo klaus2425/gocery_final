@@ -69,7 +69,7 @@
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.Gocery_Final.NoActionBar" />
         <activity
-            android:name=".Admin.AdminCategoryActivity"
+            android:name=".Admin.SellerProductCategoryActivity"
             android:exported="false" />
         <activity
             android:name=".Sellers.SellerAddNewProductActivity"
