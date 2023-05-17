@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.system.gocery_final.Admin.AdminHomeActivity;
 import com.system.gocery_final.Admin.SellerProductCategoryActivity;
 import com.system.gocery_final.Model.Users;
 import com.system.gocery_final.Prevalent.Prevalent;
@@ -171,7 +172,7 @@ public class LoginActivity extends AppCompatActivity {
                                 startActivity(intent);
                             } else if (parentDbName.equals("Users")) {
                                 Toast.makeText(LoginActivity.this, "Log in successfully...", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
                                 Prevalent.currentOnlineUser = userData;
                                 startActivity(intent);
                             }
