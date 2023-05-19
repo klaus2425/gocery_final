@@ -115,7 +115,7 @@ public class SellerRegistrationActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
                                         Toast.makeText(SellerRegistrationActivity.this, "Success", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(SellerRegistrationActivity.this, SellerHomeActivity.class);
+                                        Intent intent = new Intent(SellerRegistrationActivity.this, LoginActivity.class);
                                         startActivity(intent);
                                     } else {
                                         Toast.makeText(SellerRegistrationActivity.this, "Network Error, Try again", Toast.LENGTH_SHORT).show();
