@@ -1,4 +1,6 @@
-package com.system.gocery_final.Customers;
+package com.system.gocery_final;
+
+import static com.system.gocery_final.Prevalent.Prevalent.currentOnlineUser;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +32,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.system.gocery_final.Model.Cart;
-import com.system.gocery_final.R;
+import com.system.gocery_final.Prevalent.Prevalent;
 import com.system.gocery_final.ViewHolder.CartViewHolder;
 
 public class CartActivity extends AppCompatActivity {
