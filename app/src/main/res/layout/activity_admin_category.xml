@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Admin.SellerProductCategoryActivity">
+    tools:context=".Admin.AdminCategoryActivity">
 
     <TextView
         android:id="@+id/slogan_category"
@@ -26,7 +26,7 @@
         android:orientation="horizontal"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:layout_marginTop="90dp">
+        android:layout_marginTop="45dp">
 
         
         <LinearLayout
@@ -266,34 +266,34 @@
         </LinearLayout>
     </LinearLayout>
 
-<!--    <Button-->
-<!--        android:id="@+id/maintain_btn"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_above="@+id/check_orders_btn"-->
-<!--        android:layout_marginHorizontal="20dp"-->
-<!--        android:layout_marginBottom="15dp"-->
-<!--        android:text="Maintain Products"-->
-<!--        android:textSize="20sp" />-->
+    <Button
+        android:id="@+id/maintain_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/check_orders_btn"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="15dp"
+        android:text="Maintain Products"
+        android:textSize="20sp" />
 
 
-<!--    <Button-->
-<!--        android:id="@+id/check_orders_btn"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_above="@+id/admin_logout_btn"-->
-<!--        android:layout_marginHorizontal="20dp"-->
-<!--        android:layout_marginBottom="15dp"-->
-<!--        android:text="Check Orders"-->
-<!--        android:textSize="20sp" />-->
+    <Button
+        android:id="@+id/check_orders_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/admin_logout_btn"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="15dp"
+        android:text="Check Orders"
+        android:textSize="20sp" />
 
-<!--    <Button-->
-<!--        android:id="@+id/admin_logout_btn"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_marginHorizontal="20dp"-->
-<!--        android:layout_marginBottom="20dp"-->
-<!--        android:text="Log Out"-->
-<!--        android:textSize="20sp" />-->
+    <Button
+        android:id="@+id/admin_logout_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="Log Out"
+        android:textSize="20sp" />
 </RelativeLayout>

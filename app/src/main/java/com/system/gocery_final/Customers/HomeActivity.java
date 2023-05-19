@@ -125,7 +125,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         FirebaseRecyclerOptions<Products> options =
                 new FirebaseRecyclerOptions.Builder<Products>()
-                        .setQuery(ProductsRef.orderByChild("productState").equalTo("Approved"), Products.class)
+                        .setQuery(ProductsRef, Products.class)
                         .build();
 
 

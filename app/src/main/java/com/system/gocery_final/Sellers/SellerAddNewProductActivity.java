@@ -19,16 +19,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.system.gocery_final.Admin.SellerProductCategoryActivity;
+import com.system.gocery_final.Admin.AdminCategoryActivity;
 import com.system.gocery_final.R;
 
 import java.text.SimpleDateFormat;
@@ -41,7 +37,7 @@ public class SellerAddNewProductActivity extends AppCompatActivity {
     ActivityResultLauncher<String> activityResultLauncher;
 
     private StorageReference ProductImagesRef;
-    private DatabaseReference ProductsRef, sellersRef;
+    private DatabaseReference ProductsRef;
     private ProgressDialog loadingBar;
     private String categoryName,Description, price, pName, saveCurrentDate,saveCurrentTime, quantity;
     private Button addNewProductButton;
@@ -50,12 +46,12 @@ public class SellerAddNewProductActivity extends AppCompatActivity {
     private String productRandomKey, downloadImageUrl;
     ImageView inputProductImage;
     private static final int galleryPic = 1;
-    private String sName, sAddress, sEmail, sPhone;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_seller_add_new_product);
+        setContentView(R.layout.activity_admin_add_new_product);
         categoryName = getIntent().getExtras().get("category").toString(); // Get category from AdminCategoryActivity
         addNewProductButton = (Button) findViewById(R.id.add_new_product);
         ProductImagesRef = FirebaseStorage.getInstance().getReference().child("Product Images");
@@ -66,7 +62,6 @@ public class SellerAddNewProductActivity extends AppCompatActivity {
         inputProductPrice = (EditText) findViewById(R.id.product_price);
         inputProductQuantity = (EditText) findViewById(R.id.product_quantity);
         loadingBar = new ProgressDialog(this);
-        sellersRef = FirebaseDatabase.getInstance().getReference().child("Sellers");
         inputProductImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,24 +76,7 @@ public class SellerAddNewProductActivity extends AppCompatActivity {
             }
         });
 
-        sellersRef.child(FirebaseAuth.getInstance().getUid())
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists()){
-                            sName = snapshot.child("name").getValue().toString();
-                            sAddress = snapshot.child("address").getValue().toString();
-                            sEmail = snapshot.child("email").getValue().toString();
-                            sPhone = snapshot.child("contact").getValue().toString();
 
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
     }
 
     private void OpenGallery() {
@@ -235,15 +213,6 @@ public class SellerAddNewProductActivity extends AppCompatActivity {
         productMap.put("price", price);
         productMap.put("pname", pName);
         productMap.put("quantity", quantity);
-        productMap.put("productState", "Not Approved");
-
-        productMap.put("sellerName", sName);
-        productMap.put("sellerAddress", sAddress);
-        productMap.put("sellerEmail", sEmail);
-        productMap.put("sellerPhone", sPhone);
-
-
-
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -252,7 +221,7 @@ public class SellerAddNewProductActivity extends AppCompatActivity {
                     {
                         if (task.isSuccessful())
                         {
-                                Intent intent = new Intent(SellerAddNewProductActivity.this, SellerHomeActivity.class);
+                                Intent intent = new Intent(SellerAddNewProductActivity.this, AdminCategoryActivity.class);
                                 startActivity(intent);
                                 loadingBar.dismiss();
 
@@ -267,9 +236,6 @@ public class SellerAddNewProductActivity extends AppCompatActivity {
                     }
                 });
     }
-
-
-
 }
 
 

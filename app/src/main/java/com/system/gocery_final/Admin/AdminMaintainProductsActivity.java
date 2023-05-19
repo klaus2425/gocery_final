@@ -69,7 +69,7 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
         productsRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                Intent intent = new Intent(AdminMaintainProductsActivity.this, SellerProductCategoryActivity.class);
+                Intent intent = new Intent(AdminMaintainProductsActivity.this, AdminCategoryActivity.class);
                 startActivity(intent);
                 finish();
 
@@ -99,7 +99,7 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
                         Toast.makeText(AdminMaintainProductsActivity.this, "Product succcessfully updated", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(AdminMaintainProductsActivity.this, SellerProductCategoryActivity.class);
+                        Intent intent = new Intent(AdminMaintainProductsActivity.this, AdminCategoryActivity.class);
                         startActivity(intent);
                         finish();
                     }

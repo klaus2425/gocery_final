@@ -24,7 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.system.gocery_final.Admin.SellerProductCategoryActivity;
+import com.system.gocery_final.Admin.AdminCategoryActivity;
 import com.system.gocery_final.Model.Users;
 import com.system.gocery_final.Prevalent.Prevalent;
 import com.system.gocery_final.R;
@@ -167,7 +167,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (userData.getPassword().equals(password)) {
                             if(parentDbName.equals("Admins")){
                                 Toast.makeText(LoginActivity.this, "Admin successfully...", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginActivity.this, SellerProductCategoryActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, AdminCategoryActivity.class);
                                 startActivity(intent);
                             } else if (parentDbName.equals("Users")) {
                                 Toast.makeText(LoginActivity.this, "Log in successfully...", Toast.LENGTH_SHORT).show();
