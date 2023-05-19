@@ -25,7 +25,6 @@
             android:textStyle="bold"
             />
     </RelativeLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/orders_list"
         android:layout_width="match_parent"
