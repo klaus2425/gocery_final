@@ -50,7 +50,7 @@
                 android:hint="Name"
                 android:textSize="18sp"
                 android:padding="10dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
 
                 />
             <EditText
@@ -116,7 +116,6 @@
                 />
 
             <Button
-                android:id="@+id/seller_register_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -124,20 +123,8 @@
                 android:layout_below="@+id/seller_address"
                 android:text="Register"
                 android:textSize="18sp"
-
+                
                 />
-            <Button
-                android:id="@+id/seller_already_have_account"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:backgroundTint="@color/green"
-                android:layout_below="@+id/seller_register_button"
-                android:text="Already have an account?"
-                android:textSize="18sp"
-                />
-
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
