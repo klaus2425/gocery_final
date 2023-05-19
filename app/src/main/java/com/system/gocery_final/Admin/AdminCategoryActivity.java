@@ -17,13 +17,13 @@ public class AdminCategoryActivity extends AppCompatActivity {
     private ImageView img_beverages, img_frozenGoods, img_fruits, img_vegetables, img_dairy, img_cannedGoods, img_snacks, img_condiments,
     img_toiletries, img_cleaningMaterials;
 
-    private Button logoutBtn, checkOrdersBtn, maintainBtn;
+    private Button goBack, checkOrdersBtn, maintainBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_category);
 
-        logoutBtn = (Button) findViewById(R.id.admin_logout_btn);
+        goBack = (Button) findViewById(R.id.admin_logout_btn);
         checkOrdersBtn = (Button) findViewById(R.id.check_orders_btn);
         maintainBtn=(Button) findViewById(R.id.maintain_btn);
 
@@ -50,10 +50,10 @@ public class AdminCategoryActivity extends AppCompatActivity {
         });
 
 
-        logoutBtn.setOnClickListener(new View.OnClickListener() {
+        goBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminCategoryActivity.this, MainActivity.class);
+                Intent intent = new Intent(AdminCategoryActivity.this, AdminHomeActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
