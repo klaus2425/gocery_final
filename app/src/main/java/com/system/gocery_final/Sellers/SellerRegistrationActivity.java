@@ -50,7 +50,6 @@ public class SellerRegistrationActivity extends AppCompatActivity {
         emailInput = findViewById(R.id.seller_email);
         passwordInput = findViewById(R.id.seller_password);
         addressInput = findViewById(R.id.seller_address);
-        registerButton = (Button) findViewById(R.id.seller_register_button);
         sellerLoginBegin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
