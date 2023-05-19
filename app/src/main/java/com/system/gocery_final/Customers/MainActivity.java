@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,7 +20,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.system.gocery_final.Model.Users;
 import com.system.gocery_final.Prevalent.Prevalent;
 import com.system.gocery_final.R;
-import com.system.gocery_final.Sellers.SellerRegistrationActivity;
 
 import io.paperdb.Paper;
 
@@ -31,13 +29,11 @@ public class MainActivity extends AppCompatActivity {
     private Button registerButton, loginButton;
     private FirebaseUser user;
     private FirebaseAuth auth;
-    private TextView sellerBegin;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        sellerBegin = (TextView) findViewById(R.id.seller_begin);
+
         Paper.init(this);
 
         registerButton = (Button) findViewById(R.id.main_register_btn);
@@ -50,13 +46,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        });
-        sellerBegin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SellerRegistrationActivity.class);
                 startActivity(intent);
             }
         });
