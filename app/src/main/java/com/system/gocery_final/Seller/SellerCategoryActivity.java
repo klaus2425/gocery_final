@@ -16,15 +16,14 @@ public class SellerCategoryActivity extends AppCompatActivity {
     private ImageView img_beverages, img_frozenGoods, img_fruits, img_vegetables, img_dairy, img_cannedGoods, img_snacks, img_condiments,
     img_toiletries, img_cleaningMaterials;
 
-    private Button goBack, checkOrdersBtn, maintainBtn;
+    private Button goBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seller_category);
 
         goBack = (Button) findViewById(R.id.admin_logout_btn);
-        checkOrdersBtn = (Button) findViewById(R.id.check_orders_btn);
-        maintainBtn=(Button) findViewById(R.id.maintain_btn);
+
 
         img_beverages = (ImageView) findViewById(R.id.cat_beverages);
         img_frozenGoods = (ImageView) findViewById(R.id.cat_frozengoods);
@@ -38,15 +37,7 @@ public class SellerCategoryActivity extends AppCompatActivity {
         img_cleaningMaterials = (ImageView) findViewById(R.id.cat_cleaningmaterials);
 
 
-        maintainBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SellerCategoryActivity.this, HomeActivity.class);
-                intent.putExtra("Admin", "Admin");
-                startActivity(intent);
 
-            }
-        });
 
 
         goBack.setOnClickListener(new View.OnClickListener() {
@@ -59,13 +50,6 @@ public class SellerCategoryActivity extends AppCompatActivity {
             }
         });
 
-        checkOrdersBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SellerCategoryActivity.this, SellerNewOrdersActivity.class);
-                startActivity(intent);
-            }
-        });
 
         img_beverages.setOnClickListener(new View.OnClickListener() {
             @Override

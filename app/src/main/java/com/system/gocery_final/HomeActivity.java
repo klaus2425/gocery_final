@@ -55,6 +55,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         toolbar.setTitle("Gocery");
 
 
+
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
 
@@ -77,6 +78,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         if(type.equals("Admin")){
             fab.setVisibility(View.GONE);
+
         }
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,6 +107,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         if(!type.equals("Admin")){
             userNameTextView.setText(Prevalent.currentOnlineUser.getFirstName() + " " + Prevalent.currentOnlineUser.getLastName());
             Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile).into(profileImageView);
+            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         }
 
         recyclerView = findViewById(R.id.recycler_menu);
