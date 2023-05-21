@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                 loginButton.setText("Sign in as Seller");
                 sellerButton.setVisibility(View.INVISIBLE);
                 customerButton.setVisibility(View.VISIBLE);
-                parentDbName = "Admins";
+                parentDbName = "Seller";
             }
         });
 
@@ -122,6 +122,8 @@ public class LoginActivity extends AppCompatActivity {
                                     allowAccessToAccount(email, password);
                                 }else {
                                     Toast.makeText(LoginActivity.this, "Please verify your email.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, "Seller Selected", Toast.LENGTH_SHORT).show();
+
                                     user.sendEmailVerification();
                                 }
                             } else {
@@ -143,11 +145,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.child(parentDbName).child(user.getUid()).exists()){
+
                     Users userData = snapshot.child(parentDbName).child(user.getUid()).getValue(Users.class);
                     if(userData.getEmail().equals(email)){
-                        if (userData.getPassword().equals(password)) {
-                            if(parentDbName.equals("Admins")){
 
+                        if (userData.getPassword().equals(password)) {
+                            if(parentDbName.equals("Seller")){
                                 Toast.makeText(LoginActivity.this, "Seller Login Successful", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, SellerHomeActivity.class);
                                 startActivity(intent);
