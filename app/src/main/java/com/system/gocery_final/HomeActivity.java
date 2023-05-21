@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.system.gocery_final.Admin.AdminMaintainProductsActivity;
+import com.system.gocery_final.Seller.SellerMaintainProductsActivity;
 import com.system.gocery_final.Model.Products;
 import com.system.gocery_final.Prevalent.Prevalent;
 import com.system.gocery_final.ViewHolder.ProductViewHolder;
@@ -143,7 +143,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                             @Override
                             public void onClick(View v) {
                                 if(type.equals("Admin")){
-                                    Intent intent = new Intent(HomeActivity.this, AdminMaintainProductsActivity.class);
+                                    Intent intent = new Intent(HomeActivity.this, SellerMaintainProductsActivity.class);
                                     intent.putExtra("pid",model.getPid());
                                     startActivity(intent);
 

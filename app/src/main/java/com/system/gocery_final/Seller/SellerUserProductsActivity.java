@@ -1,4 +1,4 @@
-package com.system.gocery_final.Admin;
+package com.system.gocery_final.Seller;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +18,7 @@ import com.system.gocery_final.Model.Cart;
 import com.system.gocery_final.R;
 import com.system.gocery_final.ViewHolder.CartViewHolder;
 
-public class AdminUserProductsActivity extends AppCompatActivity {
+public class SellerUserProductsActivity extends AppCompatActivity {
 
     private RecyclerView productsList;
     RecyclerView.LayoutManager layoutManager;
@@ -28,7 +28,7 @@ public class AdminUserProductsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_user_products);
+        setContentView(R.layout.activity_seller_user_products);
 
         userID = getIntent().getStringExtra("uid");
 

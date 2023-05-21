@@ -1,4 +1,4 @@
-package com.system.gocery_final.Admin;
+package com.system.gocery_final.Seller;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +23,7 @@ import com.system.gocery_final.R;
 
 import java.util.HashMap;
 
-public class AdminMaintainProductsActivity extends AppCompatActivity {
+public class SellerMaintainProductsActivity extends AppCompatActivity {
 
     private Button applyChangesBtn, deleteBtn;
     private EditText name, price, description, quantity;
@@ -34,7 +34,7 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_maintain_products);
+        setContentView(R.layout.activity_seller_maintain_products);
 
         productID = getIntent().getStringExtra("pid");
         productsRef = FirebaseDatabase.getInstance().getReference().child("Products").child(productID);
@@ -69,11 +69,11 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
         productsRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                Intent intent = new Intent(AdminMaintainProductsActivity.this, AdminCategoryActivity.class);
+                Intent intent = new Intent(SellerMaintainProductsActivity.this, SellerCategoryActivity.class);
                 startActivity(intent);
                 finish();
 
-                Toast.makeText(AdminMaintainProductsActivity.this, "Product Delete Successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SellerMaintainProductsActivity.this, "Product Delete Successfully", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -98,8 +98,8 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(AdminMaintainProductsActivity.this, "Product succcessfully updated", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(AdminMaintainProductsActivity.this, AdminCategoryActivity.class);
+                        Toast.makeText(SellerMaintainProductsActivity.this, "Product succcessfully updated", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(SellerMaintainProductsActivity.this, SellerCategoryActivity.class);
                         startActivity(intent);
                         finish();
                     }

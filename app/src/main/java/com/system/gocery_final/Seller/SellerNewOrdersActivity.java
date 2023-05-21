@@ -1,4 +1,4 @@
-package com.system.gocery_final.Admin;
+package com.system.gocery_final.Seller;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -24,7 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.system.gocery_final.Model.AdminOrders;
 import com.system.gocery_final.R;
 
-public class AdminNewOrdersActivity extends AppCompatActivity {
+public class SellerNewOrdersActivity extends AppCompatActivity {
 
     private RecyclerView ordersList;
     private DatabaseReference ordersRef;
@@ -34,7 +34,7 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_new_orders);
+        setContentView(R.layout.activity_seller_new_orders);
 
         ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders");
         ordersList= findViewById(R.id.orders_list);
@@ -64,7 +64,7 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
                holder.showOrderButton.setOnClickListener(new View.OnClickListener() {
                    @Override
                    public void onClick(View v) {
-                       Intent intent = new Intent(AdminNewOrdersActivity.this, AdminUserProductsActivity.class);
+                       Intent intent = new Intent(SellerNewOrdersActivity.this, SellerUserProductsActivity.class);
 
                        intent.putExtra("uid", model.getUid());
                        startActivity(intent);
@@ -79,7 +79,7 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
                                "Yes",
                                "No"
                        };
-                       AlertDialog.Builder builder = new AlertDialog.Builder(AdminNewOrdersActivity.this);
+                       AlertDialog.Builder builder = new AlertDialog.Builder(SellerNewOrdersActivity.this);
                        builder.setTitle("Have you shipped this ordered products");
                        builder.setItems(option, new DialogInterface.OnClickListener() {
                            @Override

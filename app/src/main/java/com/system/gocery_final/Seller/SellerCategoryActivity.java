@@ -1,4 +1,4 @@
-package com.system.gocery_final.Admin;
+package com.system.gocery_final.Seller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,10 +9,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.system.gocery_final.HomeActivity;
-import com.system.gocery_final.MainActivity;
 import com.system.gocery_final.R;
 
-public class AdminCategoryActivity extends AppCompatActivity {
+public class SellerCategoryActivity extends AppCompatActivity {
 
     private ImageView img_beverages, img_frozenGoods, img_fruits, img_vegetables, img_dairy, img_cannedGoods, img_snacks, img_condiments,
     img_toiletries, img_cleaningMaterials;
@@ -21,7 +20,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_category);
+        setContentView(R.layout.activity_seller_category);
 
         goBack = (Button) findViewById(R.id.admin_logout_btn);
         checkOrdersBtn = (Button) findViewById(R.id.check_orders_btn);
@@ -42,7 +41,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
         maintainBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminCategoryActivity.this, HomeActivity.class);
+                Intent intent = new Intent(SellerCategoryActivity.this, HomeActivity.class);
                 intent.putExtra("Admin", "Admin");
                 startActivity(intent);
 
@@ -53,7 +52,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
         goBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminCategoryActivity.this, AdminHomeActivity.class);
+                Intent intent = new Intent(SellerCategoryActivity.this, SellerHomeActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
@@ -63,7 +62,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
         checkOrdersBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminCategoryActivity.this, AdminNewOrdersActivity.class);
+                Intent intent = new Intent(SellerCategoryActivity.this, SellerNewOrdersActivity.class);
                 startActivity(intent);
             }
         });
@@ -71,7 +70,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
         img_beverages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
+                Intent intent = new Intent(SellerCategoryActivity.this, SellerAddNewProductActivity.class);
                 intent.putExtra("category", "beverages"); // store category to pass
                 startActivity(intent);
             }
@@ -80,7 +79,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
         img_frozenGoods.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
+                Intent intent = new Intent(SellerCategoryActivity.this, SellerAddNewProductActivity.class);
                 intent.putExtra("category", "frozengoods");
                 startActivity(intent);
             }
@@ -89,7 +88,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
         img_fruits.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
+                Intent intent = new Intent(SellerCategoryActivity.this, SellerAddNewProductActivity.class);
                 intent.putExtra("category", "fruits");
                 startActivity(intent);
             }
@@ -98,7 +97,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
         img_cleaningMaterials.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
+                Intent intent = new Intent(SellerCategoryActivity.this, SellerAddNewProductActivity.class);
                 intent.putExtra("category", "cleaningmaterials");
                 startActivity(intent);
             }
@@ -107,7 +106,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
         img_vegetables.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
+                Intent intent = new Intent(SellerCategoryActivity.this, SellerAddNewProductActivity.class);
                 intent.putExtra("category", "vegetables");
                 startActivity(intent);
             }
@@ -116,7 +115,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
         img_dairy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
+                Intent intent = new Intent(SellerCategoryActivity.this, SellerAddNewProductActivity.class);
                 intent.putExtra("category", "dairy");
                 startActivity(intent);
             }
@@ -125,7 +124,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
         img_cannedGoods.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
+                Intent intent = new Intent(SellerCategoryActivity.this, SellerAddNewProductActivity.class);
                 intent.putExtra("category", "cannedgoods");
                 startActivity(intent);
             }
@@ -134,7 +133,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
         img_condiments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
+                Intent intent = new Intent(SellerCategoryActivity.this, SellerAddNewProductActivity.class);
                 intent.putExtra("category", "condiments");
                 startActivity(intent);
             }
@@ -143,7 +142,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
         img_snacks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
+                Intent intent = new Intent(SellerCategoryActivity.this, SellerAddNewProductActivity.class);
                 intent.putExtra("category", "snacks");
                 startActivity(intent);
             }
@@ -152,7 +151,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
         img_toiletries.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
+                Intent intent = new Intent(SellerCategoryActivity.this, SellerAddNewProductActivity.class);
                 intent.putExtra("category", "toiletries");
                 startActivity(intent);
             }

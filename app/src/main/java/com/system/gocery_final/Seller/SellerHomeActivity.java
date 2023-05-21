@@ -1,4 +1,4 @@
-package com.system.gocery_final.Admin;
+package com.system.gocery_final.Seller;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,13 +11,10 @@ import com.system.gocery_final.R;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 
-public class AdminHomeActivity extends AppCompatActivity {
+public class SellerHomeActivity extends AppCompatActivity {
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -28,7 +25,7 @@ public class AdminHomeActivity extends AppCompatActivity {
 
                 return true;
             } else if (item.getItemId() ==R.id.navigation_add) {
-                Intent intent = new Intent(AdminHomeActivity.this, AdminCategoryActivity.class);
+                Intent intent = new Intent(SellerHomeActivity.this, SellerCategoryActivity.class);
                 startActivity(intent);
                 finish();
                 return true;
@@ -37,7 +34,7 @@ public class AdminHomeActivity extends AppCompatActivity {
                 mAuth = FirebaseAuth.getInstance();
                 mAuth.signOut();
 
-                Intent intent = new Intent(AdminHomeActivity.this, MainActivity.class);
+                Intent intent = new Intent(SellerHomeActivity.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
@@ -51,7 +48,7 @@ public class AdminHomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_home);
+        setContentView(R.layout.activity_seller_home);
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
