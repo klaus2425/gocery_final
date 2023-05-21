@@ -3,8 +3,8 @@ package com.system.gocery_final;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -34,18 +34,16 @@ public class LoginActivity extends AppCompatActivity {
 
     private String email,password;
     private TextView forgotPasswordLink;
-    private Button adminButton; // adminLink
+    private Button sellerButton; // adminLink
     private Button customerButton; // notAdminLink
     private EditText inputEmail, inputPassword;
     private Button loginButton;
     private FirebaseAuth auth;
     private FirebaseUser user;
-
+    private ProgressDialog loadingBar;
     private String parentDbName = "Users";
-    private SharedPreferences loginPreferences;
-    private SharedPreferences.Editor loginPrefsEditor;
     private CheckBox chkBoxRememberMe;
-    private Boolean saveLogin;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +54,9 @@ public class LoginActivity extends AppCompatActivity {
         inputPassword = (EditText) findViewById(R.id.password);
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
+        loadingBar = new ProgressDialog(this);
         chkBoxRememberMe = findViewById(R.id.remember_me_chkb);
-        adminButton = (Button) findViewById(R.id.admin_panel_link);
+        sellerButton = (Button) findViewById(R.id.admin_panel_link);
         TextView signup = findViewById(R.id.signUp);
         customerButton = (Button) findViewById(R.id.customerLink);
         customerButton.setVisibility(View.INVISIBLE);
@@ -81,32 +80,15 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //PREFERENCES//
-//                email = inputEmail.getText().toString();
-//                password = inputPassword.getText().toString();
-//                if (chkBoxRememberMe.isChecked()) {
-//                    loginPrefsEditor.putBoolean("saveLogin", true);
-//                    loginPrefsEditor.putString("email", email);
-//                    loginPrefsEditor.putString("password", password);
-//                    loginPrefsEditor.commit();
-//                } else {
-//                    loginPrefsEditor.clear();
-//                    loginPrefsEditor.commit();
-//                }
-//               if(chkBoxRememberMe.isChecked()){
-//                    Paper.book().write(Prevalent.userPasswordKey,email);
-//                    Paper.book().write(Prevalent.userPasswordKey,password);
-//            }
-
                 loginUser();
             }
         });
 
-        adminButton.setOnClickListener(new View.OnClickListener() {
+        sellerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginButton.setText("Sign in as Admin");
-                adminButton.setVisibility(View.INVISIBLE);
+                loginButton.setText("Sign in as Seller");
+                sellerButton.setVisibility(View.INVISIBLE);
                 customerButton.setVisibility(View.VISIBLE);
                 parentDbName = "Admins";
             }
@@ -116,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loginButton.setText("Sign in");
-                adminButton.setVisibility(View.VISIBLE);
+                sellerButton.setVisibility(View.VISIBLE);
                 customerButton.setVisibility(View.INVISIBLE);
                 parentDbName = "Users";
             }
@@ -139,7 +121,7 @@ public class LoginActivity extends AppCompatActivity {
                                 if(user.isEmailVerified()) {
                                     allowAccessToAccount(email, password);
                                 }else {
-                                    Toast.makeText(LoginActivity.this, "Please Verify your email", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, "Please verify your email.", Toast.LENGTH_SHORT).show();
                                     user.sendEmailVerification();
                                 }
                             } else {
@@ -165,17 +147,19 @@ public class LoginActivity extends AppCompatActivity {
                     if(userData.getEmail().equals(email)){
                         if (userData.getPassword().equals(password)) {
                             if(parentDbName.equals("Admins")){
-                                Toast.makeText(LoginActivity.this, "Admin successfully...", Toast.LENGTH_SHORT).show();
+
+                                Toast.makeText(LoginActivity.this, "Seller Login Successful", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, SellerHomeActivity.class);
                                 startActivity(intent);
                             } else if (parentDbName.equals("Users")) {
-                                Toast.makeText(LoginActivity.this, "Log in successfully...", Toast.LENGTH_SHORT).show();
+
+                                Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                 Prevalent.currentOnlineUser = userData;
                                 startActivity(intent);
                             }
                         } else {
-                                Toast.makeText(LoginActivity.this, "Password is incorrect...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Password is incorrect", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
