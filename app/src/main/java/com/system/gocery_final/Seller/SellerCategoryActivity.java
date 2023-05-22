@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.system.gocery_final.HomeActivity;
 import com.system.gocery_final.R;
 
 public class SellerCategoryActivity extends AppCompatActivity {
@@ -22,7 +21,7 @@ public class SellerCategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seller_category);
 
-        goBack = (Button) findViewById(R.id.admin_logout_btn);
+        goBack = (Button) findViewById(R.id.go_back_btn);
 
 
         img_beverages = (ImageView) findViewById(R.id.cat_beverages);
