@@ -85,6 +85,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
             }
         });
 
+
+
         addToCartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,14 +120,18 @@ public class ProductDetailsActivity extends AppCompatActivity {
         saveCurrentTime = currentTime.format(calForDate.getTime());
 
         final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
+        final DatabaseReference cartListRef2 = FirebaseDatabase.getInstance().getReference();
 
-        final HashMap<String, Object> cartmap = new HashMap<>();
+        HashMap<String, Object> cartmap = new HashMap<>();
         cartmap.put("pid", productID);
         cartmap.put("pname", productName.getText().toString());
         cartmap.put("price", productPrice.getText().toString());
         cartmap.put("date", saveCurrentDate);
         cartmap.put("time", saveCurrentTime);
         cartmap.put("quantity", productQuantity.getText().toString());
+
+        cartListRef2.child("Order History").child(user.getUid()).child(saveCurrentDate).child("products").child(productID)
+                        .updateChildren(cartmap);
 
         cartListRef.child("User View").child(user.getUid()).child("Products").child(productID).updateChildren(cartmap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -184,7 +190,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 if(snapshot.exists()){
                     String shippingState = snapshot.child("state").getValue().toString();
                     String userName = snapshot.child("name").getValue().toString();
-
+                    addToCartBtn.setVisibility(View.GONE);
                     if (shippingState.equals("shipped")){
                         state = "Order Shipped";
                     } else if (shippingState.equals("not shipped")) {
