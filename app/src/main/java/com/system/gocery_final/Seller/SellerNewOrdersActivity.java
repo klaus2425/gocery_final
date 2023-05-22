@@ -87,8 +87,8 @@ public class SellerNewOrdersActivity extends AppCompatActivity {
                        builder.setItems(option, new DialogInterface.OnClickListener() {
                            @Override
                            public void onClick(DialogInterface dialog, int which) {
-                                DatabaseReference orderHistory = FirebaseDatabase.getInstance().getReference().child("Users").child(model.getUid())
-                                        .child("order history").child(model.getDate());
+                                DatabaseReference orderHistory = FirebaseDatabase.getInstance().getReference().child("Order History").child(model.getUid())
+                                        .child(model.getDate()+ model.getTime());
                                if(which == 0)
                                {
                                    String uid = getRef(position).getKey();
@@ -97,9 +97,8 @@ public class SellerNewOrdersActivity extends AppCompatActivity {
                                    ordersMap.put("time", model.getTime());
                                    ordersMap.put("price", model.getTotalAmount());
                                    ordersMap.put("uid", model.getUid());
-
-                                    orderHistory.updateChildren(ordersMap);
-
+                                   ordersMap.put("address", model.getAddress());
+                                   orderHistory.updateChildren(ordersMap);
                                    ordersRef.child(uid).removeValue();
                                }
                                else
