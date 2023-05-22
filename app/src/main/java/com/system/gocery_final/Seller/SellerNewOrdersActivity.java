@@ -95,7 +95,8 @@ public class SellerNewOrdersActivity extends AppCompatActivity {
                                    HashMap<String, Object> ordersMap = new HashMap<>();
                                    ordersMap.put("date", model.getDate());
                                    ordersMap.put("time", model.getTime());
-                                   ordersMap.put("price", model.getTotalAmount());
+                                   ordersMap.put("totalamount", model.getTotalAmount());
+                                   ordersMap.put("city", model.getCity());
                                    ordersMap.put("uid", model.getUid());
                                    ordersMap.put("address", model.getAddress());
                                    orderHistory.updateChildren(ordersMap);
@@ -142,6 +143,8 @@ public class SellerNewOrdersActivity extends AppCompatActivity {
             userDateTime = itemView.findViewById(R.id.order_date_time);
             userShippingAddress = itemView.findViewById(R.id.order_address_city);
             showOrderButton = itemView.findViewById(R.id.show_all_products);
+
+
 
         }
     }

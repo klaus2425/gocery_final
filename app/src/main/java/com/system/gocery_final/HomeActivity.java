@@ -245,6 +245,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
 
         }
+        else if(id == R.id.nav_history){
+            Intent intent = new Intent(HomeActivity.this, OrderHistoryActivity.class);
+            startActivity(intent);
+        }
         else if (id == R.id.nav_logout)
         {
             if(!type.equals("Admin")){

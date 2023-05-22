@@ -33,4 +33,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/history_rl"
         >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
 </RelativeLayout>
