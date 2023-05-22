@@ -40,7 +40,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
         goBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SelectCategoryActivity.this, SellerHomeActivity.class);
+                Intent intent = new Intent(SelectCategoryActivity.this, HomeActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
@@ -52,6 +52,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "beverages"); // store category to pass
+                intent.putExtra("category title", "Beverages");
                 startActivity(intent);
             }
         });
@@ -61,6 +62,8 @@ public class SelectCategoryActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "frozengoods");
+                intent.putExtra("category title", "Frozen Goods");
+
                 startActivity(intent);
             }
         });
@@ -70,6 +73,8 @@ public class SelectCategoryActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "fruits");
+                intent.putExtra("category title", "Fruits");
+
                 startActivity(intent);
             }
         });
@@ -79,6 +84,8 @@ public class SelectCategoryActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "cleaningmaterials");
+                intent.putExtra("category title", "Cleaning Materials");
+
                 startActivity(intent);
             }
         });
@@ -88,6 +95,8 @@ public class SelectCategoryActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "vegetables");
+                intent.putExtra("category title", "Vegetables");
+
                 startActivity(intent);
             }
         });
@@ -97,6 +106,8 @@ public class SelectCategoryActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "dairy");
+                intent.putExtra("category title", "Dairy");
+
                 startActivity(intent);
             }
         });
@@ -106,6 +117,8 @@ public class SelectCategoryActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "cannedgoods");
+                intent.putExtra("category title", "Canned Goods");
+
                 startActivity(intent);
             }
         });
@@ -115,6 +128,8 @@ public class SelectCategoryActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "condiments");
+                intent.putExtra("category title", "Condiments");
+
                 startActivity(intent);
             }
         });
@@ -124,6 +139,8 @@ public class SelectCategoryActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "snacks");
+                intent.putExtra("category title", "Snacks");
+
                 startActivity(intent);
             }
         });
@@ -133,6 +150,8 @@ public class SelectCategoryActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "toiletries");
+                intent.putExtra("category title", "Toiletries");
+
                 startActivity(intent);
             }
         });
