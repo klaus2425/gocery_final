@@ -50,7 +50,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
         img_beverages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SellerCategoryActivity.this, SellerAddNewProductActivity.class);
+                Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "beverages"); // store category to pass
                 startActivity(intent);
             }
@@ -59,7 +59,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
         img_frozenGoods.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SellerCategoryActivity.this, SellerAddNewProductActivity.class);
+                Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "frozengoods");
                 startActivity(intent);
             }
@@ -68,7 +68,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
         img_fruits.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SellerCategoryActivity.this, SellerAddNewProductActivity.class);
+                Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "fruits");
                 startActivity(intent);
             }
@@ -77,7 +77,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
         img_cleaningMaterials.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SellerCategoryActivity.this, SellerAddNewProductActivity.class);
+                Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "cleaningmaterials");
                 startActivity(intent);
             }
@@ -86,7 +86,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
         img_vegetables.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SellerCategoryActivity.this, SellerAddNewProductActivity.class);
+                Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "vegetables");
                 startActivity(intent);
             }
@@ -95,7 +95,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
         img_dairy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SellerCategoryActivity.this, SellerAddNewProductActivity.class);
+                Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "dairy");
                 startActivity(intent);
             }
@@ -104,7 +104,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
         img_cannedGoods.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SellerCategoryActivity.this, SellerAddNewProductActivity.class);
+                Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "cannedgoods");
                 startActivity(intent);
             }
@@ -113,7 +113,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
         img_condiments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SellerCategoryActivity.this, SellerAddNewProductActivity.class);
+                Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "condiments");
                 startActivity(intent);
             }
@@ -122,7 +122,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
         img_snacks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SellerCategoryActivity.this, SellerAddNewProductActivity.class);
+                Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "snacks");
                 startActivity(intent);
             }
@@ -131,7 +131,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
         img_toiletries.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SellerCategoryActivity.this, SellerAddNewProductActivity.class);
+                Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "toiletries");
                 startActivity(intent);
             }
