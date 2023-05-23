@@ -34,6 +34,10 @@
         android:layout_width="226dp"
         android:layout_height="84dp"
         android:text="Register"
+
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:textStyle="bold"
         android:layout_marginBottom="20dp"
          />
 
@@ -41,6 +45,9 @@
         android:id="@+id/main_login_btn"
         android:layout_width="226dp"
         android:layout_height="84dp"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:textAlignment="center"
         android:text="Login"
  />
     </LinearLayout>
