@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
     FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseUser user = auth.getCurrentUser();
 
+    private RatingBar ratingBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productQuantity= (EditText) findViewById(R.id.product_quantity);
         productName=(TextView) findViewById(R.id.product_name_details);
         productPrice=(TextView) findViewById(R.id.product_price);
+        ratingBar=(RatingBar) findViewById(R.id.ratingBar);
         productQuantity.setText("1");
         getProductDetails(productID);
 
