@@ -79,7 +79,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         saveCurrentTime = currentTime.format(calForDate.getTime());
 
         final DatabaseReference ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(user.getUid());
-
+        final DatabaseReference ordersHistory = FirebaseDatabase.getInstance().getReference().child("Order History").child(user.getUid());
         HashMap<String, Object> ordersMap = new HashMap<>();
         ordersMap.put("totalAmount", totalAmount);
         ordersMap.put("name", nameEditText.getText().toString());
@@ -101,9 +101,8 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                                     if(task.isSuccessful()){
                                         Toast.makeText(ConfirmFinalOrderActivity.this, "Order has been placed", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(ConfirmFinalOrderActivity.this, HomeActivity.class);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(intent);
-                                        finish();
                                     }
                                 }
                             });

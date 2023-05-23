@@ -130,7 +130,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         cartmap.put("time", saveCurrentTime);
         cartmap.put("quantity", productQuantity.getText().toString());
 
-        cartListRef2.child("Order History").child(user.getUid()).child(saveCurrentDate).child("products").child(productID)
+        cartListRef2.child("Order History").child(user.getUid()).child(getIntent().getExtras().get("session").toString()).child("products").child(productID)
                         .updateChildren(cartmap);
 
         cartListRef.child("User View").child(user.getUid()).child("Products").child(productID).updateChildren(cartmap)
@@ -144,8 +144,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()){
                                                 Toast.makeText(ProductDetailsActivity.this, "Added to Cart!", Toast.LENGTH_SHORT).show();
-                                                Intent intent = new Intent(ProductDetailsActivity.this, HomeActivity.class);
-                                                startActivity(intent);
+                                                finish();
                                             }
                                         }
                                     });

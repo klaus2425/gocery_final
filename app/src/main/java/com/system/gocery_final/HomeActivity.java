@@ -35,6 +35,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.paperdb.Paper;
 
@@ -45,7 +48,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseUser user;
     private FirebaseAuth auth;
     private String type = "";
-
+    String session = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +57,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Gocery");
 
-
+        Calendar calForDate = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+        session = currentDate.format(calForDate.getTime()) + currentTime.format(calForDate.getTime());
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -156,6 +162,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                                 }else{
                                     Intent intent = new Intent(HomeActivity.this,ProductDetailsActivity.class);
                                     intent.putExtra("pid",model.getPid());
+                                    intent.putExtra("session", session);
                                     startActivity(intent);
                                 }
 
