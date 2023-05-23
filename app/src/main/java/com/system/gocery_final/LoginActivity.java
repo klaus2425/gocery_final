@@ -80,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 loginUser();
             }
         });
@@ -119,15 +120,20 @@ public class LoginActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 user = auth.getCurrentUser();
                                 if(user.isEmailVerified()) {
+                                    loadingBar.setTitle("Logging in");
+                                    loadingBar.setMessage("Please wait while we are checking credentials.");
+                                    loadingBar.setCanceledOnTouchOutside(false);
+                                    loadingBar.show();
                                     allowAccessToAccount(email, password);
                                 }else {
                                     Toast.makeText(LoginActivity.this, "Please verify your email.", Toast.LENGTH_SHORT).show();
                                     Toast.makeText(LoginActivity.this, "Seller Selected", Toast.LENGTH_SHORT).show();
-
+                                    loadingBar.dismiss();
                                     user.sendEmailVerification();
                                 }
                             } else {
                                 Toast.makeText(LoginActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                                loadingBar.dismiss();
 
                             }
                         }
@@ -162,6 +168,7 @@ public class LoginActivity extends AppCompatActivity {
                                 startActivity(intent);
                             }
                         } else {
+                                loadingBar.dismiss();
                                 Toast.makeText(LoginActivity.this, "Password is incorrect", Toast.LENGTH_SHORT).show();
                         }
                     }
