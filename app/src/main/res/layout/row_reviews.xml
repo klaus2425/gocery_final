@@ -62,7 +62,7 @@
             android:layout_below="@+id/dateTv"
             android:layout_marginTop="5dp"
             android:textColor="@color/design_default_color_primary"
-            android:text="Review of The User"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod nisl quis euismod cursus. Aenean luctus nulla sem, non fringilla mauris viverra ac. Donec orci turpis, congue ut felis sed, porttitor condimentum lacus."
             />
 
 
