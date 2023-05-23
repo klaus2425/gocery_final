@@ -12,7 +12,7 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:id="@+id/profilell"
+            android:id="@+id/profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
@@ -21,11 +21,49 @@
 
             >
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profileTv"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/ic_person_24"
+                app:civ_border ="true"
+                app:civ_border_color="@color/design_default_color_primary"
+                app:civ_border_width="1dp"/>
+
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-
-
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textColor="@color/design_default_color_primary"
+                android:textSize="20sp"
+                />
         </LinearLayout>
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_below="@+id/profile"
+            android:numStars="5"
+            android:layout_marginEnd="10dp"/>
+        <TextView
+            android:id="@+id/dateTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profile"
+            android:layout_toEndOf="@+id/ratingBar"
+            android:text="dd/MM/yyyy"
+            android:textSize="12sp"
+            />
+        <TextView
+            android:id="@+id/reviewTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dateTv"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/design_default_color_primary"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod nisl quis euismod cursus. Aenean luctus nulla sem, non fringilla mauris viverra ac. Donec orci turpis, congue ut felis sed, porttitor condimentum lacus."
+            />
 
 
     </RelativeLayout>
