@@ -21,8 +21,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.system.gocery_final.Model.AdminOrders;
-import com.system.gocery_final.Seller.SellerNewOrdersActivity;
-import com.system.gocery_final.Seller.SellerUserProductsActivity;
 
 public class OrderHistoryActivity extends AppCompatActivity {
     private RecyclerView ordersList;
@@ -32,6 +30,8 @@ public class OrderHistoryActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history);
         auth = FirebaseAuth.getInstance();
@@ -50,35 +50,42 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 .setQuery(ordersRef, AdminOrders.class)
                 .build();
 
-        FirebaseRecyclerAdapter<AdminOrders, OrderHistoryActivity.AdminOrdersViewHolder> adapter = new FirebaseRecyclerAdapter<AdminOrders,
-                OrderHistoryActivity.AdminOrdersViewHolder>(options) {
+        FirebaseRecyclerAdapter<AdminOrders, SellerOrdersViewHolder> adapter = new FirebaseRecyclerAdapter<AdminOrders,
+                SellerOrdersViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull OrderHistoryActivity.AdminOrdersViewHolder holder, @SuppressLint("RecyclerView") int position, @NonNull AdminOrders model) {
+            protected void onBindViewHolder(@NonNull SellerOrdersViewHolder holder, @SuppressLint("RecyclerView") int position, @NonNull AdminOrders model) {
                 holder.userName.setText("Name: " + model.getName());
                 holder.userPhoneNumber.setText("Phone: " + model.getNumber());
                 holder.userTotalPrice.setText("Total Amount: = Php " + model.getTotalAmount());
                 holder.userDateTime.setText("Order at: " + model.getDate() + " " + model.getTime());
                 holder.userShippingAddress.setText("Shipping Address: " + model.getAddress() + ", " + model.getCity());
-                auth = FirebaseAuth.getInstance();
-                user = auth.getCurrentUser();
+                holder.showOrderButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(OrderHistoryActivity.this, OrderHistoryDetailsActivity.class);
+                        intent.putExtra("orderid", model.getOrderid());
+                        startActivity(intent);
+
+                    }
+                });
             }
 
 
             @NonNull
             @Override
-            public OrderHistoryActivity.AdminOrdersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            public SellerOrdersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.orders_layout, parent, false);
-                return new OrderHistoryActivity.AdminOrdersViewHolder(view);
+                return new SellerOrdersViewHolder(view);
             }
         };
         ordersList.setAdapter(adapter);
         adapter.startListening();
     }
-    public static class AdminOrdersViewHolder extends RecyclerView.ViewHolder{
+    public static class SellerOrdersViewHolder extends RecyclerView.ViewHolder{
 
         public TextView userName, userPhoneNumber, userTotalPrice, userDateTime, userShippingAddress;
         public Button showOrderButton;
-        public AdminOrdersViewHolder(@NonNull View itemView) {
+        public SellerOrdersViewHolder(@NonNull View itemView) {
             super(itemView);
 
             userName = itemView.findViewById(R.id.order_user_name);
@@ -87,8 +94,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
             userDateTime = itemView.findViewById(R.id.order_date_time);
             userShippingAddress = itemView.findViewById(R.id.order_address_city);
             showOrderButton = itemView.findViewById(R.id.show_all_products);
-
-            showOrderButton.setVisibility(View.GONE);
+            showOrderButton.setText("More Details");
             userPhoneNumber.setVisibility(View.GONE);
             userName.setVisibility(View.GONE);
 
