@@ -1,6 +1,7 @@
 package com.system.gocery_final;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -48,7 +49,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseUser user;
     private FirebaseAuth auth;
     private String type = "";
-    String session = "";
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String SESSION = "session";
+    public static final String ONGOING = "ongoing";
+    private String session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,11 +61,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Gocery");
 
-        Calendar calForDate = Calendar.getInstance();
-        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
-        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
-        session = currentDate.format(calForDate.getTime()) + currentTime.format(calForDate.getTime());
 
+        loadData();
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
 
@@ -91,6 +92,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View view) {
                 if(!type.equals("Admin")){
                     Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+                    intent.putExtra("session", session);
                     startActivity(intent);
                 }
 
@@ -272,5 +274,32 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void saveData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Calendar calForDate = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+        session = currentDate.format(calForDate.getTime()) + currentTime.format(calForDate.getTime());
+
+        editor.putString(SESSION, session);
+        editor.putBoolean(ONGOING, true);
+        editor.commit();
+        Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
+
+    }
+
+    public void loadData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        if(!sharedPreferences.getBoolean(ONGOING, false)){
+            saveData();
+        }
+        else {
+            Toast.makeText(this, "Loaded", Toast.LENGTH_SHORT).show();
+
+            session = sharedPreferences.getString(SESSION, "session");
+        }
     }
 }

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -29,6 +30,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseUser user;
     private String totalAmount = "";
+    public static final String SHARED_PREFS = "sharedPrefs";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +92,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         ordersMap.put("time", saveCurrentTime);
         ordersMap.put("state","not shipped");
         ordersMap.put("uid", user.getUid());
+        ordersMap.put("orderid", getIntent().getExtras().get("session").toString());
         ordersRef.updateChildren(ordersMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -100,6 +103,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
                                         Toast.makeText(ConfirmFinalOrderActivity.this, "Order has been placed", Toast.LENGTH_SHORT).show();
+                                        clearPrefs();
                                         Intent intent = new Intent(ConfirmFinalOrderActivity.this, HomeActivity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(intent);
@@ -110,5 +114,12 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void clearPrefs() {
+        SharedPreferences sp = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.clear();
+        editor.commit();
     }
 }

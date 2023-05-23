@@ -88,17 +88,18 @@ public class SellerNewOrdersActivity extends AppCompatActivity {
                            @Override
                            public void onClick(DialogInterface dialog, int which) {
                                 DatabaseReference orderHistory = FirebaseDatabase.getInstance().getReference().child("Order History").child(model.getUid())
-                                        .child(model.getDate()+ model.getTime());
+                                        .child(model.getOrderid());
                                if(which == 0)
                                {
                                    String uid = getRef(position).getKey();
                                    HashMap<String, Object> ordersMap = new HashMap<>();
                                    ordersMap.put("date", model.getDate());
                                    ordersMap.put("time", model.getTime());
-                                   ordersMap.put("totalamount", model.getTotalAmount());
+                                   ordersMap.put("totalAmount", model.getTotalAmount());
                                    ordersMap.put("city", model.getCity());
                                    ordersMap.put("uid", model.getUid());
                                    ordersMap.put("address", model.getAddress());
+                                   ordersMap.put("orderid", model.getOrderid());
                                    orderHistory.updateChildren(ordersMap);
                                    ordersRef.child(uid).removeValue();
                                }

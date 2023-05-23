@@ -69,6 +69,7 @@ public class CartActivity extends AppCompatActivity {
                 txtTotalAmount.setText("Total Price = Php " + overTotalPrice );
                 Intent intent = new Intent(CartActivity.this,ConfirmFinalOrderActivity.class);
                 intent.putExtra("Total Price", String.valueOf(overTotalPrice));
+                intent.putExtra("session", getIntent().getExtras().get("session").toString());
                 startActivity(intent);
                 finish();
             }
