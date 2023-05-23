@@ -14,10 +14,10 @@
         android:backgroundTint="@color/purple"
         >
         <TextView
-            android:id="@+id/history_products_list"
+            android:id="@+id/history_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Pending Orders"
+            android:text="Items"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textAlignment="center"

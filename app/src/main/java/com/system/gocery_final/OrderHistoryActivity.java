@@ -64,8 +64,8 @@ public class OrderHistoryActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent intent = new Intent(OrderHistoryActivity.this, OrderHistoryDetailsActivity.class);
                         intent.putExtra("orderid", model.getOrderid());
+                        intent.putExtra("uid", user.getUid());
                         startActivity(intent);
-
                     }
                 });
             }
