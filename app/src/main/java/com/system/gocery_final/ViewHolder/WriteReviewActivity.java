@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rey.material.widget.FloatingActionButton;
+import com.squareup.picasso.Picasso;
 import com.system.gocery_final.R;
 
 import java.util.HashMap;
@@ -45,9 +46,7 @@ public class WriteReviewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_review);
 
-        firebaseauth = FirebaseAuth.getInstance();
-
-        loadMyReview();
+       
 
         backBtn = findViewById(R.id.backBtn);
         prodImage = findViewById(R.id.product_image_details);
@@ -57,7 +56,10 @@ public class WriteReviewActivity extends AppCompatActivity {
         submitComment = findViewById(R.id.submitComment);
 
         pid = getIntent().getStringExtra("pid");
+        firebaseauth = FirebaseAuth.getInstance();
 
+        loadMyReview();
+        loadShopInfo();
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,12 +76,47 @@ public class WriteReviewActivity extends AppCompatActivity {
 
     }
 
+    private void loadShopInfo() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        ref.child(pid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String productName = "" + snapshot.child("pname");
+                String productImage = "" + snapshot.child("image");
+
+                prodName.setText(productName);
+                    try {
+                        Picasso.get().load(productImage).placeholder(R.drawable.background).into(prodImage);
+                    }
+                    catch (Exception e){
+                        prodImage.setImageResource(R.drawable.);
+                    }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
     private void loadMyReview() {
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
             ref.child(pid).child("Ratings").child(firebaseauth.getUid()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.exists()){
+
+                        String uid =""+snapshot.child("uid").getValue();
+                        String ratings =""+snapshot.child("ratings").getValue();
+                        String review =""+snapshot.child("review").getValue();
+                        String timestamp =""+snapshot.child("timestamp").getValue();
+
+                        float myRating =Float.parseFloat(ratings);
+                        ratingBar.setRating(myRating);
+                        reviewEt.setText(review);
                     }
                 }
 
@@ -87,7 +124,7 @@ public class WriteReviewActivity extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            })
+            });
 
     }
 
