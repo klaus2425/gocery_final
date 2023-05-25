@@ -25,6 +25,12 @@
         android:layout_marginTop="10dp"
 
         />
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        />
     <TextView
         android:id="@+id/product_description_details"
         android:layout_width="match_parent"
@@ -37,11 +43,7 @@
         android:gravity="center"
         android:layout_marginTop="10dp"/>
 
-    <RatingBar
-        android:id="@+id/ratingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
+
 
 <LinearLayout
     android:id="@+id/rl_prod_price"
@@ -111,16 +113,29 @@
             android:textStyle="bold"
             />
 
-
     </LinearLayout>
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        
 
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/details_number_layout"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:scrollbars="none"
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/reviewsRv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/row_reviews" />
 
     </ScrollView>
-    <
+
+
     <com.rey.material.widget.FloatingActionButton
         android:id="@+id/pd_add_product_to_cart_btn"
         android:layout_width="wrap_content"
@@ -150,6 +165,7 @@
         android:elevation="6dp"
         app:fab_iconSrc="@drawable/baseline_comment_24"
         />
+
 
 
 
