@@ -138,7 +138,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         reviewArrayList = new ArrayList<>();
                 
         DatabaseReference ref =FirebaseDatabase.getInstance().getReference();
-        ref.child("Products").child(productID).child("reviews").child("ratings").addValueEventListener(new ValueEventListener() {
+        ref.child("Products").child(productID).child("reviews").child(user.getUid()).child("ratings").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 reviewArrayList.clear();
@@ -156,10 +156,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 reviewsRv.setAdapter(adapterReview);
 
                 long numberOfReviews = snapshot.getChildrenCount();
+
                 float avgRating = ratingSum/numberOfReviews;
 
-//                ratingsTv.setText(String.format("%.2f")+"[" +numberOfReviews+"]");
-//                ratingBar.setRating(avgRating);
+//              ratingsTv.setText(String.valueOf(avgRating));
+                ratingBar.setRating(avgRating);
 
 
             }
