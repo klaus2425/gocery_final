@@ -5,27 +5,26 @@
         android:id="@+id/nav_search"
         android:icon="@drawable/nav_orders"
         android:title="Search"
-        android:iconTint="@color/white"/>
+        />
 
     <item
         android:id="@+id/nav_categories"
         android:icon="@drawable/categories"
         android:title="Categories"
-        android:iconTint="@color/white"/>
+        />
     <item
         android:id="@+id/nav_fab"
-        android:iconTint="@color/white"
         android:title=""
         android:enabled="false"/>
     <item
         android:id="@+id/nav_history"
         android:icon="@drawable/baseline_history_24"
         android:title="Order History"
-        android:iconTint="@color/white"/>
+        />
 
     <item
         android:id="@+id/nav_settings"
         android:icon="@drawable/ic_menu_settings"
         android:title="Settings"
-        android:iconTint="@color/white"/>
+        />
 </menu>

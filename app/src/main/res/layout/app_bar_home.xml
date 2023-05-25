@@ -30,7 +30,7 @@
             android:background="@color/white"
             app:fabAnchorMode="cradle"
             app:fabAlignmentMode="center"
-            app:fabCradleMargin="20dp"
+            app:fabCradleMargin="15dp"
             app:fabCradleRoundedCornerRadius="100dp"
             >
             <com.google.android.material.bottomnavigation.BottomNavigationView
