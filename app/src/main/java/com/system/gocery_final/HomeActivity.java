@@ -43,7 +43,7 @@ import java.util.Calendar;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.paperdb.Paper;
 
-public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends AppCompatActivity{
     private DatabaseReference ProductsRef;
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -99,27 +99,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
             }
         });
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        View headerView = navigationView.getHeaderView(0);
-        TextView userNameTextView = headerView.findViewById(R.id.user_profile_name);
-        CircleImageView profileImageView = headerView.findViewById(R.id.user_profile_image);
-        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-
-        if(!type.equals("Admin")){
-            userNameTextView.setText(Prevalent.currentOnlineUser.getFirstName() + " " + Prevalent.currentOnlineUser.getLastName());
-            Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile).into(profileImageView);
-            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-
-        }
 
         recyclerView = findViewById(R.id.recycler_menu);
         recyclerView.setHasFixedSize(true);
@@ -275,65 +254,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
     };
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item)
-    {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
 
-        if (id == R.id.nav_cart)
-        {
-            if(!type.equals("Admin")){
-                Intent intent = new Intent(HomeActivity.this, CartActivity.class);
-                intent.putExtra("session", session);
-                startActivity(intent);
-            }
-
-        }
-        else if (id == R.id.nav_search)
-        {
-            if(!type.equals("Admin")){
-                Intent intent = new Intent(HomeActivity.this, SearchProductsActivity.class);
-                startActivity(intent);
-            }
-
-
-        }
-        else if (id == R.id.nav_categories)
-        {
-            Intent intent = new Intent(HomeActivity.this, SelectCategoryActivity.class);
-            startActivity(intent);
-        }
-        else if (id == R.id.nav_settings)
-        {
-            if(!type.equals("Admin")){
-                Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
-                startActivity(intent);
-            }
-
-        }
-        else if(id == R.id.nav_history){
-            Intent intent = new Intent(HomeActivity.this, OrderHistoryActivity.class);
-            startActivity(intent);
-        }
-        else if (id == R.id.nav_logout)
-        {
-            if(!type.equals("Admin")){
-                Paper.book().destroy();
-                Toast.makeText(this,"Selected", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(HomeActivity.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
-            }
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
 
     public void saveData(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
