@@ -8,15 +8,21 @@
     tools:context=".ViewHolder.WriteReviewActivity">
 
 <RelativeLayout
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp"
+    android:background="@color/design_default_color_primary"
+
+    >
+
+
+
     
     <ImageButton
-        android:layout_width="30dp"
-        android:layout_height=""
-    
-    
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>
     
 <!--prodImage
     <de.hdodenhof.circleimageview.CircleImageView
