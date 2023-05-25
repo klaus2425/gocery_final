@@ -274,7 +274,8 @@ public class HomeActivity extends AppCompatActivity{
         Calendar calForDate = Calendar.getInstance();
         SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
-        session = currentDate.format(calForDate.getTime()) + currentTime.format(calForDate.getTime());
+        DatabaseReference refKey=FirebaseDatabase.getInstance().getReference();
+        session = refKey.push().getKey();
 
         editor.putString(SESSION, session);
         editor.putBoolean(ONGOING, true);
