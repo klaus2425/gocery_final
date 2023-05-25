@@ -128,6 +128,22 @@
         android:elevation="6dp"
         app:fab_iconSrc="@drawable/nav_cart" />
 
+
+    <com.rey.material.widget.FloatingActionButton
+        android:id="@+id/pd_add_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:elevation="6dp"
+        app:fab_iconSrc="@drawable/baseline_comment_24"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reviewsRv"
         android:layout_width="match_parent"
