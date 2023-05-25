@@ -77,7 +77,7 @@ public class WriteReviewActivity extends AppCompatActivity {
     }
 
     private void loadShopInfo() {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         ref.child(pid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -103,7 +103,7 @@ public class WriteReviewActivity extends AppCompatActivity {
     }
 
     private void loadMyReview() {
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
             ref.child(pid).child("Ratings").child(firebaseauth.getUid()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -140,7 +140,7 @@ public class WriteReviewActivity extends AppCompatActivity {
         hashMap.put("review",""+review);
         hashMap.put("timestamp",""+timestamp);
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         ref.child(pid).child("Ratings").child(firebaseauth.getUid()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
