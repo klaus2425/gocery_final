@@ -25,7 +25,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.rey.material.widget.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 import com.system.gocery_final.Model.Products;
-import com.system.gocery_final.ViewHolder.WriteReviewActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
