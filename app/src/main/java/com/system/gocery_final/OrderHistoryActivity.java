@@ -47,7 +47,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
         super.onStart();
         FirebaseRecyclerOptions<AdminOrders> options = new
                 FirebaseRecyclerOptions.Builder<AdminOrders>()
-                .setQuery(ordersRef, AdminOrders.class)
+                .setQuery(ordersRef.orderByChild("status").startAt("placed").endAt("placed"), AdminOrders.class)
                 .build();
 
         FirebaseRecyclerAdapter<AdminOrders, SellerOrdersViewHolder> adapter = new FirebaseRecyclerAdapter<AdminOrders,

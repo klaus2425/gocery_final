@@ -84,6 +84,8 @@ public class CartActivity extends AppCompatActivity {
 
         CheckOrderState();
         final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
+        final DatabaseReference cartListHistory = FirebaseDatabase.getInstance().getReference();
+
         FirebaseRecyclerOptions<Cart> options =
                 new FirebaseRecyclerOptions.Builder<Cart>().setQuery(cartListRef.child("User View").child(user.getUid()).child("Products"), Cart.class).build();
 
@@ -122,14 +124,16 @@ public class CartActivity extends AppCompatActivity {
                                     startActivity(intent);
                                 }
                                 if(i==1){
+                                    cartListHistory.child("Order History").child(user.getUid()).child(getIntent().getExtras().get("session").toString()).child("products")
+                                                    .child(model.getPid()).removeValue();
                                     cartListRef.child("User View").child(user.getUid()).child("Products")
                                             .child(model.getPid()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
+
                                                     if(task.isSuccessful()){
                                                         Toast.makeText(CartActivity.this, "Item Removed Successfully", Toast.LENGTH_SHORT).show();
-                                                        Intent intent = new Intent(CartActivity.this,HomeActivity.class);
-                                                        startActivity(intent);
+
                                                     }
                                                 }
                                             });

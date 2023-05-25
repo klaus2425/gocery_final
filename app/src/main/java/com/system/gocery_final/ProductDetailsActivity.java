@@ -127,16 +127,17 @@ public class ProductDetailsActivity extends AppCompatActivity {
         final DatabaseReference cartListRef2 = FirebaseDatabase.getInstance().getReference();
 
         HashMap<String, Object> cartmap = new HashMap<>();
+        HashMap<String, Object> cartStatus = new HashMap<>();
         cartmap.put("pid", productID);
         cartmap.put("pname", productName.getText().toString());
         cartmap.put("price", productPrice.getText().toString());
         cartmap.put("date", saveCurrentDate);
         cartmap.put("time", saveCurrentTime);
         cartmap.put("quantity", productQuantity.getText().toString());
-
+        cartStatus.put("status", "unconfirmed");
         cartListRef2.child("Order History").child(user.getUid()).child(getIntent().getExtras().get("session").toString()).child("products").child(productID)
                         .updateChildren(cartmap);
-
+        cartListRef2.child("Order History").child(user.getUid()).child(getIntent().getExtras().get("session").toString()).updateChildren(cartStatus);
         cartListRef.child("User View").child(user.getUid()).child("Products").child(productID).updateChildren(cartmap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

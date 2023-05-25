@@ -83,6 +83,9 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         final DatabaseReference ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(user.getUid());
         final DatabaseReference ordersHistory = FirebaseDatabase.getInstance().getReference().child("Order History").child(user.getUid())
                 .child(getIntent().getExtras().get("session").toString());
+        final DatabaseReference ordersStatusRef = FirebaseDatabase.getInstance().getReference().child("Order History").child(user.getUid())
+                .child(getIntent().getExtras().get("session").toString());
+        HashMap<String, Object> orderStatus = new HashMap<>();
         HashMap<String, Object> ordersMap = new HashMap<>();
         ordersMap.put("totalAmount", totalAmount);
         ordersMap.put("name", nameEditText.getText().toString());
@@ -94,7 +97,11 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         ordersMap.put("state","not shipped");
         ordersMap.put("uid", user.getUid());
         ordersMap.put("orderid", getIntent().getExtras().get("session").toString());
+        orderStatus.put("status", "placed");
+
+        ordersStatusRef.updateChildren(orderStatus);
         ordersHistory.updateChildren(ordersMap);
+
         ordersRef.updateChildren(ordersMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
