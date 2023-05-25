@@ -59,8 +59,7 @@ public class HomeActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Gocery");
+
 
 
         loadData();
@@ -79,7 +78,6 @@ public class HomeActivity extends AppCompatActivity{
             System.out.println("Email is verified");
         } else System.out.println("Email is not verified");
 
-        setSupportActionBar(toolbar);
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
         Paper.init(this);
 
