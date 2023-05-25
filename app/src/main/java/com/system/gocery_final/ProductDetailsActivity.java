@@ -25,13 +25,14 @@ import com.google.firebase.database.ValueEventListener;
 import com.rey.material.widget.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 import com.system.gocery_final.Model.Products;
+import com.system.gocery_final.ViewHolder.WriteReviewActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 
 public class ProductDetailsActivity extends AppCompatActivity {
-    private FloatingActionButton addToCartBtn;
+    private FloatingActionButton addToCartBtn, writeComment;
     private Button plusBtn, minusBtn;
     private ImageView productImage;
     private TextView productPrice, productDescription, productName;
@@ -49,7 +50,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_details);
 
         productID = getIntent().getStringExtra("pid");
-
+        writeComment =(FloatingActionButton) findViewById(R.id.pd_add_comment);
         addToCartBtn =(FloatingActionButton) findViewById(R.id.pd_add_product_to_cart_btn);
         minusBtn =(Button) findViewById(R.id.product_minus);
         plusBtn =(Button) findViewById(R.id.product_add);
@@ -85,6 +86,16 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     value--;
                     productQuantity.setText(String.valueOf(value));
                 }
+
+            }
+        });
+
+        writeComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProductDetailsActivity.this, WriteReviewActivity.class);
+                intent.putExtra("pid",productID);
+                startActivity(intent);
 
             }
         });
