@@ -15,11 +15,10 @@
     android:backgroundTint="@color/purple"
 
     >
-
-
-
+    
     
     <ImageButton
+        android:id="@+id/backBtn"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/baseline_arrow_back_ios_new_24"
@@ -70,13 +69,22 @@
         android:id="@+id/reviewEt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background=""
+        android:background="@drawable/baseline_rectangle_24"
         android:hint="Type Your Review"
         android:gravity="top"
         android:minHeight="100dp"
         android:padding="10dp"
         android:layout_margin="20dp"
         />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/submitComment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+
+        />
+
 
 
 
