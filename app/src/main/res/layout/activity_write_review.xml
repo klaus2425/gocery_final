@@ -30,22 +30,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Add Comment"
+        android:text="Write Review"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         />
-
-
-
 </RelativeLayout>
     
-<!--prodImage
+<!--prodImage-->
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/product_image_details"
-        android:layout_width="wrap_content"
-        android:layout_height="260dp"
-        android:scaleType="centerCrop"/>
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        />
+
 
     <TextView
         android:id="@+id/product_name_details"
@@ -58,7 +57,28 @@
         android:textSize="20sp"
         android:gravity="center"
         android:layout_marginTop="10dp"/>
--->
+    
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:layout_marginTop="10dp"
+
+        />
+    <EditText
+        android:id="@+id/reviewEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background=""
+        android:hint="Type Your Review"
+        android:gravity="top"
+        android:minHeight="100dp"
+        android:padding="10dp"
+        android:layout_margin="20dp"
+        />
+
+
 
 
 </LinearLayout>
