@@ -158,8 +158,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 long numberOfReviews = snapshot.getChildrenCount();
                 float avgRating = ratingSum/numberOfReviews;
 
-                ratingsTv.setText(String.format("%.2f")+"[" +numberOfReviews+"]");
-                ratingBar.setRating(avgRating);
+//                ratingsTv.setText(String.format("%.2f")+"[" +numberOfReviews+"]");
+//                ratingBar.setRating(avgRating);
 
 
             }
