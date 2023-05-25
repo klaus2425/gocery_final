@@ -15,4 +15,13 @@
     <style name="Theme.Gocery_Final.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Gocery_Final.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="FABStyle" parent="Widget.Design.FloatingActionButton">
+        <item name="shapeAppearanceOverlay">@style/FabShapeStyle</item>
+    </style>
+
+    <style name="FabShapeStyle" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerRadius">10dp</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

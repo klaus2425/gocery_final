@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/nav_cart"
-        android:icon="@drawable/nav_cart"
-        android:title="Cart"
-        android:iconTint="@color/white"/>
+
     <item
         android:id="@+id/nav_search"
         android:icon="@drawable/nav_orders"
@@ -16,6 +12,11 @@
         android:icon="@drawable/categories"
         android:title="Categories"
         android:iconTint="@color/white"/>
+    <item
+        android:id="@+id/nav_fab"
+        android:iconTint="@color/white"
+        android:title=""
+        android:enabled="false"/>
     <item
         android:id="@+id/nav_history"
         android:icon="@drawable/baseline_history_24"
