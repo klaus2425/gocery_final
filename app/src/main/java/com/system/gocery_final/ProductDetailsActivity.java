@@ -2,9 +2,11 @@ package com.system.gocery_final;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,29 +26,39 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rey.material.widget.FloatingActionButton;
 import com.squareup.picasso.Picasso;
+import com.system.gocery_final.Model.ModelReview;
 import com.system.gocery_final.Model.Products;
+import com.system.gocery_final.ViewHolder.AdapterReview;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 public class ProductDetailsActivity extends AppCompatActivity {
     private FloatingActionButton addToCartBtn, writeComment;
     private Button plusBtn, minusBtn;
     private ImageView productImage;
-    private TextView productPrice, productDescription, productName;
+    private TextView productPrice, productDescription, productName, ratingsTv;
     private EditText productQuantity;
     private String productID ="", state = "Normal";
     FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseUser user = auth.getCurrentUser();
 
-    private RatingBar ratingBar;
+    private RecyclerView reviewsRv;
 
+    private RatingBar ratingBar;
+    private ArrayList<ModelReview> reviewArrayList;
+    private AdapterReview adapterReview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
+
+        reviewsRv = findViewById(R.id.reviewsRv);
+        ratingBar=(RatingBar) findViewById(R.id.ratingBar);
 
         productID = getIntent().getStringExtra("pid");
         writeComment =(FloatingActionButton) findViewById(R.id.pd_add_comment);
@@ -58,9 +70,12 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productQuantity= (EditText) findViewById(R.id.product_quantity);
         productName=(TextView) findViewById(R.id.product_name_details);
         productPrice=(TextView) findViewById(R.id.product_price);
-        ratingBar=(RatingBar) findViewById(R.id.ratingBar);
         productQuantity.setText("1");
         getProductDetails(productID);
+
+        loadReviews();
+
+
 
         plusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +130,46 @@ public class ProductDetailsActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+    private float ratingSum =0;
+    private void loadReviews() {
+
+        reviewArrayList = new ArrayList<>();
+                
+        DatabaseReference ref =FirebaseDatabase.getInstance().getReference();
+        ref.child("Products").child(productID).child("reviews").child("ratings").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                reviewArrayList.clear();
+                ratingSum= 0;
+
+                for (DataSnapshot s: snapshot.getChildren()){
+                    float rating = Float.parseFloat(s.child("ratings").getValue().toString());
+                    ratingSum = ratingSum + rating;
+
+                    ModelReview modelReview = s.getValue(ModelReview.class);
+                    reviewArrayList.add(modelReview);
+                }
+                adapterReview = new AdapterReview(ProductDetailsActivity.this,reviewArrayList);
+
+                reviewsRv.setAdapter(adapterReview);
+
+                long numberOfReviews = snapshot.getChildrenCount();
+                float avgRating = ratingSum/numberOfReviews;
+
+                ratingsTv.setText(String.format("%.2f")+"[" +numberOfReviews+"]");
+                ratingBar.setRating(avgRating);
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     @Override
