@@ -98,7 +98,6 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         ordersMap.put("uid", user.getUid());
         ordersMap.put("orderid", getIntent().getExtras().get("session").toString());
         orderStatus.put("status", "placed");
-
         ordersStatusRef.updateChildren(orderStatus);
         ordersHistory.updateChildren(ordersMap);
 

@@ -44,7 +44,7 @@ public class CartActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseUser user;
     private ImageView empty;
-
+    private FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter;
 
     private int overTotalPrice = 0;
     @Override
@@ -89,7 +89,7 @@ public class CartActivity extends AppCompatActivity {
         FirebaseRecyclerOptions<Cart> options =
                 new FirebaseRecyclerOptions.Builder<Cart>().setQuery(cartListRef.child("User View").child(user.getUid()).child("Products"), Cart.class).build();
 
-        FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter = new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
+        adapter = new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull CartViewHolder holder, int position, @NonNull Cart model) {
                 holder.txtProductPrice.setText("Price = Php " + model.getPrice());
@@ -133,7 +133,9 @@ public class CartActivity extends AppCompatActivity {
 
                                                     if(task.isSuccessful()){
                                                         Toast.makeText(CartActivity.this, "Item Removed Successfully", Toast.LENGTH_SHORT).show();
-
+                                                        startActivity(getIntent());
+                                                        finish();
+                                                        overridePendingTransition(0, 0);
                                                     }
                                                 }
                                             });
