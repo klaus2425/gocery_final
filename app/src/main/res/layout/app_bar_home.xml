@@ -22,7 +22,7 @@
             android:layout_centerHorizontal="true"
             >
             <EditText
-                android:id="@+id/search_product_name"
+                android:id="@+id/search_home"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:padding="10dp"

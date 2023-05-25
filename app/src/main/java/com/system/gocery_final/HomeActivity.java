@@ -8,9 +8,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -50,6 +52,7 @@ public class HomeActivity extends AppCompatActivity{
     private FirebaseUser user;
     private FirebaseAuth auth;
     private String type = "";
+    private EditText searchHome;
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String SESSION = "session";
     public static final String ONGOING = "ongoing";
@@ -103,10 +106,20 @@ public class HomeActivity extends AppCompatActivity{
         layoutManager = new LinearLayoutManager(this);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
-
+        searchHome = (EditText) findViewById(R.id.search_home);
+        searchHome.setFocusable(false);
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_nav_view);
         bottomNavigationView.setOnNavigationItemSelectedListener(bNavListener);
 
+
+        searchHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, SearchProductsActivity.class);
+                startActivity(intent);
+                Animatoo.INSTANCE.animateFade(HomeActivity.this);
+            }
+        });
 
     }
 

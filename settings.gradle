@@ -8,6 +8,8 @@ pluginManagement {
                 includeModule("com.theartofdev.edmodo", "android-image-cropper")
             }
         }
+        jcenter()
+
     }
 }
 dependencyResolutionManagement {
@@ -21,6 +23,7 @@ dependencyResolutionManagement {
                 includeModule("com.theartofdev.edmodo", "android-image-cropper")
             }
         }
+        jcenter()
     }
 }
 rootProject.name = "Gocery_Final"
