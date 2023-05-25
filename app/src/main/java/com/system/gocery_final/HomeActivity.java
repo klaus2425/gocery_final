@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
@@ -126,6 +127,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
 
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_nav_view);
+        bottomNavigationView.setOnNavigationItemSelectedListener(bNavListener);
 
     }
 
@@ -216,6 +219,61 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
+
+    private BottomNavigationView.OnNavigationItemSelectedListener bNavListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            int id = item.getItemId();
+
+            if (id == R.id.nav_cart)
+            {
+                if(!type.equals("Admin")){
+                    Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+                    intent.putExtra("session", session);
+                    startActivity(intent);
+                }
+
+            }
+            else if (id == R.id.nav_search)
+            {
+                if(!type.equals("Admin")){
+                    Intent intent = new Intent(HomeActivity.this, SearchProductsActivity.class);
+                    startActivity(intent);
+                }
+
+
+            }
+            else if (id == R.id.nav_categories)
+            {
+                Intent intent = new Intent(HomeActivity.this, SelectCategoryActivity.class);
+                startActivity(intent);
+            }
+            else if (id == R.id.nav_settings)
+            {
+                if(!type.equals("Admin")){
+                    Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
+                    startActivity(intent);
+                }
+
+            }
+            else if(id == R.id.nav_history){
+                Intent intent = new Intent(HomeActivity.this, OrderHistoryActivity.class);
+                startActivity(intent);
+            }
+            else if (id == R.id.nav_logout)
+            {
+                if(!type.equals("Admin")){
+                    Paper.book().destroy();
+                    Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+                }
+
+            }
+            return true;
+        }
+    };
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
