@@ -113,7 +113,14 @@
 
 
     </LinearLayout>
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        
 
+
+    </ScrollView>
+    <
     <com.rey.material.widget.FloatingActionButton
         android:id="@+id/pd_add_product_to_cart_btn"
         android:layout_width="wrap_content"
@@ -144,12 +151,7 @@
         app:fab_iconSrc="@drawable/baseline_comment_24"
         />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/reviewsRv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/row_reviews" />
+
 
 </RelativeLayout>
 
