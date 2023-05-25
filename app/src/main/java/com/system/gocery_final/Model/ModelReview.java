@@ -1,7 +1,7 @@
 package com.system.gocery_final.Model;
 
 public class ModelReview {
-    private String uid, ratingsm, review, timestamp;
+    private String uid, ratings, review, timestamp;
 
     public String getUid() {
         return uid;
@@ -11,12 +11,12 @@ public class ModelReview {
         this.uid = uid;
     }
 
-    public String getRatingsm() {
-        return ratingsm;
+    public String getRatings() {
+        return ratings;
     }
 
-    public void setRatingsm(String ratingsm) {
-        this.ratingsm = ratingsm;
+    public void setRatings(String ratings) {
+        this.ratings = ratings;
     }
 
     public String getReview() {
