@@ -56,7 +56,7 @@ public class WriteReviewActivity extends AppCompatActivity {
 
         pid = getIntent().getStringExtra("pid");
         firebaseauth = FirebaseAuth.getInstance();
-
+        user= firebaseauth.getCurrentUser();
         loadMyReview();
         loadShopInfo();
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -77,11 +77,11 @@ public class WriteReviewActivity extends AppCompatActivity {
 
     private void loadShopInfo() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        ref.child(pid).addValueEventListener(new ValueEventListener() {
+        ref.child("Products").child(pid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String productName = "" + snapshot.child("pname");
-                String productImage = "" + snapshot.child("image");
+                String productName = snapshot.child("pname").getValue().toString();
+                String productImage = snapshot.child("image").getValue().toString();
 
                 prodName.setText(productName);
                     try {
@@ -103,15 +103,14 @@ public class WriteReviewActivity extends AppCompatActivity {
 
     private void loadMyReview() {
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-            ref.child(pid).child("Ratings").child(firebaseauth.getUid()).addValueEventListener(new ValueEventListener() {
+            ref.child("Products").child(pid).child("reviews").child(user.getUid()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.exists()){
-
-                        String uid =""+snapshot.child("uid").getValue();
-                        String ratings =""+snapshot.child("ratings").getValue();
-                        String review =""+snapshot.child("review").getValue();
-                        String timestamp =""+snapshot.child("timestamp").getValue();
+                        String uid =snapshot.child("uid").getValue().toString();
+                        String ratings =snapshot.child("ratings").getValue().toString();
+                        String review =snapshot.child("review").getValue().toString();
+                        String timestamp = snapshot.child("timestamp").getValue().toString();
 
                         float myRating =Float.parseFloat(ratings);
                         ratingBar.setRating(myRating);
@@ -134,13 +133,13 @@ public class WriteReviewActivity extends AppCompatActivity {
         String timestamp = "" + System.currentTimeMillis();
 
         HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("uid",""+firebaseauth.getUid());
-        hashMap.put("ratings",""+ratings);
-        hashMap.put("review",""+review);
-        hashMap.put("timestamp",""+timestamp);
+        hashMap.put("uid", user.getUid());
+        hashMap.put("ratings",ratings);
+        hashMap.put("review",review);
+        hashMap.put("timestamp", timestamp);
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        ref.child(pid).child("Ratings").child(firebaseauth.getUid()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+        ref.child("Products").child(pid).child("reviews").child(user.getUid()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(WriteReviewActivity.this,"Review Published Successfuly",Toast.LENGTH_SHORT).show();
