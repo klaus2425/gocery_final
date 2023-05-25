@@ -41,6 +41,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.squareup.picasso.Picasso;
+import com.system.gocery_final.Seller.SellerHomeActivity;
 
 
 import java.util.HashMap;
@@ -54,7 +55,7 @@ public class SettingsActivity extends AppCompatActivity {
     private CircleImageView profileImageView;
     private EditText firstNameEditText, lastNameEditText, userPhoneEditText, addressEditText, userEmailEditText, userPasswordEditText;
     private TextView closeTextBtn, saveTextButton;
-    private Button profileChangeTextBtn, securityQuestionBtn;
+    private Button profileChangeTextBtn, securityQuestionBtn, logoutBtn;
     private AuthCredential credential;
     private Uri imageUri;
     private String myUrl = "";
@@ -76,6 +77,7 @@ public class SettingsActivity extends AppCompatActivity {
         addressEditText = (EditText) findViewById(R.id.settings_address);
         profileChangeTextBtn = (Button) findViewById(R.id.profile_image_change);
         closeTextBtn = (TextView) findViewById(R.id.close_settings);
+        logoutBtn = (Button) findViewById(R.id.settings_logout_btn);
         saveTextButton = (TextView) findViewById(R.id.update_settings);
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
@@ -127,6 +129,20 @@ public class SettingsActivity extends AppCompatActivity {
                             ActivityResultLauncher.launch(intent);
                             return null;
                         });
+            }
+        });
+
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final FirebaseAuth mAuth;
+                mAuth = FirebaseAuth.getInstance();
+                mAuth.signOut();
+
+                Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
             }
         });
     }
