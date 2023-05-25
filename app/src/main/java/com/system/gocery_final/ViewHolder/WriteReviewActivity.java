@@ -86,10 +86,10 @@ public class WriteReviewActivity extends AppCompatActivity {
 
                 prodName.setText(productName);
                     try {
-                        Picasso.get().load(productImage).placeholder(R.drawable.background).into(prodImage);
+                        Picasso.get().load(productImage).placeholder(R.drawable.noImage).into(prodImage);
                     }
                     catch (Exception e){
-                        prodImage.setImageResource(R.drawable.);
+                        prodImage.setImageResource(R.drawable.noImage);
                     }
 
             }
@@ -149,7 +149,7 @@ public class WriteReviewActivity extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(WriteReviewActivity.this,""e.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(WriteReviewActivity.this,""+ e.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
 
