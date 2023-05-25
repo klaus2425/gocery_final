@@ -86,10 +86,10 @@ public class WriteReviewActivity extends AppCompatActivity {
 
                 prodName.setText(productName);
                     try {
-                        Picasso.get().load(productImage).placeholder(R.drawable.noImage).into(prodImage);
+                        Picasso.get().load(productImage).placeholder(R.drawable.person).into(prodImage);
                     }
                     catch (Exception e){
-                        prodImage.setImageResource(R.drawable.noImage);
+                        prodImage.setImageResource(R.drawable.person);
                     }
 
             }
