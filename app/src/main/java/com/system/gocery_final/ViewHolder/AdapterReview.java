@@ -91,9 +91,7 @@ public class AdapterReview extends RecyclerView.Adapter<AdapterReview.HolderRevi
                         holder.profileTv.setImageResource(R.drawable.ic_person_24);
                     }
                 }
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -120,7 +118,6 @@ public class AdapterReview extends RecyclerView.Adapter<AdapterReview.HolderRevi
                     }
                 }
                 long numberOfReviews = snapshot.getChildrenCount();
-                float avgRating = ratingSum / numberOfReviews;
             }
 
             @Override

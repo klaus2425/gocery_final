@@ -9,17 +9,13 @@ import android.view.View;
 import android.view.Menu;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,7 +27,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.system.gocery_final.Seller.SellerMaintainProductsActivity;
 import com.system.gocery_final.Model.Products;
-import com.system.gocery_final.Prevalent.Prevalent;
 import com.system.gocery_final.ViewHolder.ProductViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -42,7 +37,6 @@ import com.squareup.picasso.Picasso;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import io.paperdb.Paper;
 
 public class HomeActivity extends AppCompatActivity{
@@ -225,13 +219,8 @@ public class HomeActivity extends AppCompatActivity{
                 }
 
             }
-            else if (id == R.id.nav_search)
+            else if (id == R.id.bot_nav_home)
             {
-                if(!type.equals("Admin")){
-                    Intent intent = new Intent(HomeActivity.this, SearchProductsActivity.class);
-                    startActivity(intent);
-                }
-
 
             }
             else if (id == R.id.nav_categories)
