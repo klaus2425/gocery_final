@@ -48,6 +48,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private String productID ="", state = "Normal";
     FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseUser user = auth.getCurrentUser();
+    private int databaseQuantity;
 
     private RecyclerView reviewsRv;
 
@@ -117,25 +118,37 @@ public class ProductDetailsActivity extends AppCompatActivity {
         });
 
 
-
         addToCartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference addRef = FirebaseDatabase.getInstance().getReference("Products");
-                int databaseQuantity = Integer.parseInt(addRef.child(productID).child("quantity").toString());
+                final DatabaseReference addRef = FirebaseDatabase.getInstance().getReference("Products").child(productID);
 
-                if(state.equals("Order Placed") || state.equals("Order Shipped")){
-                    Toast.makeText(ProductDetailsActivity.this, "You can purchase more products when it is shipped", Toast.LENGTH_LONG).show();
-                } else if (productQuantity.getText().toString().equals("0")) {
-                    Toast.makeText(ProductDetailsActivity.this, "Quantity cannot be 0", Toast.LENGTH_SHORT).show();
-                } else if (databaseQuantity == 0) {
-                    Toast.makeText(ProductDetailsActivity.this, "Product out of stock.", Toast.LENGTH_SHORT).show();
-                } else if (Integer.parseInt(productQuantity.getText().toString()) > databaseQuantity) {
-                    Toast.makeText(ProductDetailsActivity.this, "Order quantity cannot be greater than stock.", Toast.LENGTH_SHORT).show();
 
-                } else {
-                    addingToCartList();
-                }
+                addRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        databaseQuantity = Integer.parseInt(snapshot.child("quantity").getValue().toString());
+                        if(state.equals("Order Placed") || state.equals("Order Shipped")){
+                            Toast.makeText(ProductDetailsActivity.this, "You can purchase more products when it is shipped", Toast.LENGTH_LONG).show();
+                        } else if (productQuantity.getText().toString().equals("0")) {
+                            Toast.makeText(ProductDetailsActivity.this, "Quantity cannot be 0", Toast.LENGTH_SHORT).show();
+                        } else if (databaseQuantity == 0) {
+                            Toast.makeText(ProductDetailsActivity.this, "Product out of stock.", Toast.LENGTH_SHORT).show();
+                        } else if (Integer.parseInt(productQuantity.getText().toString()) > databaseQuantity) {
+                            Toast.makeText(ProductDetailsActivity.this, "Order quantity cannot be greater than stock.", Toast.LENGTH_SHORT).show();
+
+                        } else {
+                            addingToCartList();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
             }
 
         });
