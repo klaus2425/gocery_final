@@ -110,6 +110,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                         Toast.makeText(ResetPasswordActivity.this, "Security questions set successfully", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(ResetPasswordActivity.this, HomeActivity.class);
                         startActivity(intent);
+                        finish();
                     }
                 }
             });
@@ -186,6 +187,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                                                                 Toast.makeText(ResetPasswordActivity.this, "Security questions set successfully", Toast.LENGTH_SHORT).show();
                                                                 Intent intent = new Intent(ResetPasswordActivity.this, LoginActivity.class);
                                                                 startActivity(intent);
+                                                                finish();
                                                             }
                                                         }
                                                     });

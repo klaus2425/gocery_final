@@ -54,6 +54,8 @@ public class SelectCategoryActivity extends AppCompatActivity {
                 intent.putExtra("category", "beverages"); // store category to pass
                 intent.putExtra("category title", "Beverages");
                 startActivity(intent);
+                finish();
+
             }
         });
 
@@ -65,6 +67,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
                 intent.putExtra("category title", "Frozen Goods");
 
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -74,8 +77,8 @@ public class SelectCategoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "fruits");
                 intent.putExtra("category title", "Fruits");
-
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -85,8 +88,9 @@ public class SelectCategoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "cleaningmaterials");
                 intent.putExtra("category title", "Cleaning Materials");
-
                 startActivity(intent);
+                finish();
+
             }
         });
 
@@ -98,6 +102,8 @@ public class SelectCategoryActivity extends AppCompatActivity {
                 intent.putExtra("category title", "Vegetables");
 
                 startActivity(intent);
+                finish();
+
             }
         });
 
@@ -109,6 +115,8 @@ public class SelectCategoryActivity extends AppCompatActivity {
                 intent.putExtra("category title", "Dairy");
 
                 startActivity(intent);
+                finish();
+
             }
         });
 
@@ -120,6 +128,8 @@ public class SelectCategoryActivity extends AppCompatActivity {
                 intent.putExtra("category title", "Canned Goods");
 
                 startActivity(intent);
+                finish();
+
             }
         });
 
@@ -131,6 +141,8 @@ public class SelectCategoryActivity extends AppCompatActivity {
                 intent.putExtra("category title", "Condiments");
 
                 startActivity(intent);
+                finish();
+
             }
         });
 
@@ -142,6 +154,8 @@ public class SelectCategoryActivity extends AppCompatActivity {
                 intent.putExtra("category title", "Snacks");
 
                 startActivity(intent);
+                finish();
+
             }
         });
 
@@ -153,6 +167,8 @@ public class SelectCategoryActivity extends AppCompatActivity {
                 intent.putExtra("category title", "Toiletries");
 
                 startActivity(intent);
+                finish();
+
             }
         });
 

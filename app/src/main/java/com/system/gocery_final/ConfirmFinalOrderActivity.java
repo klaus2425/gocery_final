@@ -115,6 +115,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                                         Intent intent = new Intent(ConfirmFinalOrderActivity.this, HomeActivity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(intent);
+                                        finish();
                                     }
                                 }
                             });

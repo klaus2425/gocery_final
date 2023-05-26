@@ -98,6 +98,8 @@ public class SettingsActivity extends AppCompatActivity {
                 Intent intent = new Intent(SettingsActivity.this, ResetPasswordActivity.class);
                 intent.putExtra("check", "settings");
                 startActivity(intent);
+                finish();
+
             }
         });
 
