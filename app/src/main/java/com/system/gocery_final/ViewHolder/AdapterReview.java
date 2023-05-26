@@ -84,7 +84,7 @@ public class AdapterReview extends RecyclerView.Adapter<AdapterReview.HolderRevi
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
-                    String name = snapshot.child("firstName ").getValue().toString() + snapshot.child("lastName").getValue().toString();
+                    String name = snapshot.child("firstName").getValue().toString() + " " + snapshot.child("lastName").getValue().toString();
 
 
                     holder.nameTv.setText(name);
