@@ -2,6 +2,7 @@ package com.system.gocery_final;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -59,7 +60,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         reviewsRv = findViewById(R.id.reviewsRv);
         ratingBar=(RatingBar) findViewById(R.id.ratingBar);
-
+        ratingsTv = (TextView) findViewById(R.id.ratingsTv);
         productID = getIntent().getStringExtra("pid");
         writeComment =(FloatingActionButton) findViewById(R.id.pd_add_comment);
         addToCartBtn =(FloatingActionButton) findViewById(R.id.pd_add_product_to_cart_btn);
@@ -134,35 +135,29 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     private float ratingSum =0;
     private void loadReviews() {
-
         reviewArrayList = new ArrayList<>();
-                
+
         DatabaseReference ref =FirebaseDatabase.getInstance().getReference();
-        ref.child("Products").child(productID).child("reviews").child(user.getUid()).child("ratings").addValueEventListener(new ValueEventListener() {
+        ref.child("Products").child(productID).child("reviews").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 reviewArrayList.clear();
                 ratingSum= 0;
+                    for (DataSnapshot s : snapshot.getChildren()) {
+                        float rating = Float.parseFloat(s.child("ratings").getValue().toString());
+                        ratingSum = ratingSum + rating;
 
-                for (DataSnapshot s: snapshot.getChildren()){
-                    float rating = Float.parseFloat(s.child("ratings").getValue().toString());
-                    ratingSum = ratingSum + rating;
+                        ModelReview modelReview = s.getValue(ModelReview.class);
+                        reviewArrayList.add(modelReview);
+                    }
+                    adapterReview = new AdapterReview(ProductDetailsActivity.this, reviewArrayList);
+                    reviewsRv.setAdapter(adapterReview);
 
-                    ModelReview modelReview = s.getValue(ModelReview.class);
-                    reviewArrayList.add(modelReview);
-                }
-                adapterReview = new AdapterReview(ProductDetailsActivity.this,reviewArrayList);
+                    long numberOfReviews = snapshot.getChildrenCount();
+                    float avgRating = ratingSum / numberOfReviews;
 
-                reviewsRv.setAdapter(adapterReview);
-
-                long numberOfReviews = snapshot.getChildrenCount();
-
-                float avgRating = ratingSum/numberOfReviews;
-
-//              ratingsTv.setText(String.valueOf(avgRating));
-                ratingBar.setRating(avgRating);
-
-
+                    ratingBar.setRating(avgRating);
+                    ratingsTv.setText(String.valueOf(avgRating));
             }
 
             @Override

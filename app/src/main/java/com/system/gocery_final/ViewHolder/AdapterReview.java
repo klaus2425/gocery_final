@@ -5,9 +5,9 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -62,7 +62,7 @@ public class AdapterReview extends RecyclerView.Adapter<AdapterReview.HolderRevi
         String review = modelReview.getReview();
 
         loadUserDetail(modelReview,holder);
-
+        loadReviews(modelReview, holder);
 
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(Long.parseLong(timestamp));
@@ -78,10 +78,10 @@ public class AdapterReview extends RecyclerView.Adapter<AdapterReview.HolderRevi
         String uid = modelReview.getUid();
 
         DatabaseReference ref= FirebaseDatabase.getInstance().getReference();
-        ref.child("User").addValueEventListener(new ValueEventListener() {
+        ref.child("Users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+                Toast.makeText(context, snapshot.toString(), Toast.LENGTH_SHORT).show();
                 String name = snapshot.child("firstName").getValue().toString() + snapshot.child("lastName").getValue().toString();
                 String profileImage = snapshot.child("image").getValue().toString();
 
@@ -102,7 +102,33 @@ public class AdapterReview extends RecyclerView.Adapter<AdapterReview.HolderRevi
 
     }
 
+    private float ratingSum = 0;
+    private void loadReviews(ModelReview modelReview, HolderReview holder) {
 
+        String productID = modelReview.getUid();
+        DatabaseReference ref =FirebaseDatabase.getInstance().getReference();
+        ref.child("Products").child(productID).child("reviews").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ratingSum= 0;
+                if(snapshot.exists()) {
+                    for (DataSnapshot s : snapshot.getChildren()) {
+                        float rating = Float.parseFloat(s.child("ratings").getValue().toString());
+                        ratingSum = ratingSum + rating;
+                    }
+                }
+                long numberOfReviews = snapshot.getChildrenCount();
+                float avgRating = ratingSum / numberOfReviews;
+                holder.ratingBar.setRating(avgRating);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
     @Override
     public int getItemCount() {
         return 0;
