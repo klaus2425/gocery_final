@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -77,7 +78,6 @@ public class HomeActivity extends AppCompatActivity{
 
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
         Paper.init(this);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         if(type.equals("Admin")){
             fab.setVisibility(View.GONE);
@@ -91,7 +91,6 @@ public class HomeActivity extends AppCompatActivity{
                     intent.putExtra("session", session);
                     startActivity(intent);
                 }
-
             }
         });
 
@@ -103,6 +102,7 @@ public class HomeActivity extends AppCompatActivity{
         searchHome = (EditText) findViewById(R.id.search_home);
         searchHome.setFocusable(false);
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_nav_view);
+        bottomNavigationView.getMenu().getItem(0).setChecked(false);
         bottomNavigationView.setOnNavigationItemSelectedListener(bNavListener);
 
 
@@ -147,16 +147,12 @@ public class HomeActivity extends AppCompatActivity{
                                     Intent intent = new Intent(HomeActivity.this, SellerMaintainProductsActivity.class);
                                     intent.putExtra("pid",model.getPid());
                                     startActivity(intent);
-
-
                                 }else{
                                     Intent intent = new Intent(HomeActivity.this,ProductDetailsActivity.class);
                                     intent.putExtra("pid",model.getPid());
                                     intent.putExtra("session", session);
                                     startActivity(intent);
                                 }
-
-
                             }
                         });
                     }
@@ -209,21 +205,7 @@ public class HomeActivity extends AppCompatActivity{
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             int id = item.getItemId();
-
-            if (id == R.id.nav_cart)
-            {
-                if(!type.equals("Admin")){
-                    Intent intent = new Intent(HomeActivity.this, CartActivity.class);
-                    intent.putExtra("session", session);
-                    startActivity(intent);
-                }
-
-            }
-            else if (id == R.id.bot_nav_home)
-            {
-
-            }
-            else if (id == R.id.nav_categories)
+            if (id == R.id.nav_categories)
             {
                 Intent intent = new Intent(HomeActivity.this, SelectCategoryActivity.class);
                 startActivity(intent);
@@ -234,22 +216,10 @@ public class HomeActivity extends AppCompatActivity{
                     Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
                     startActivity(intent);
                 }
-
             }
             else if(id == R.id.nav_history){
                 Intent intent = new Intent(HomeActivity.this, OrderHistoryActivity.class);
                 startActivity(intent);
-            }
-            else if (id == R.id.nav_logout)
-            {
-                if(!type.equals("Admin")){
-                    Paper.book().destroy();
-                    Intent intent = new Intent(HomeActivity.this, MainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                    finish();
-                }
-
             }
             return true;
         }
