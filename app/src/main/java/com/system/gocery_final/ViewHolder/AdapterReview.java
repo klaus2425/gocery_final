@@ -84,8 +84,6 @@ public class AdapterReview extends RecyclerView.Adapter<AdapterReview.HolderRevi
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
                     String name = snapshot.child("firstName").getValue().toString() + " " + snapshot.child("lastName").getValue().toString();
-
-
                     holder.nameTv.setText(name);
                     try {
                         Picasso.get().load(snapshot.child("image").getValue().toString()).placeholder(R.drawable.ic_person_24).into(holder.profileTv);
@@ -118,12 +116,11 @@ public class AdapterReview extends RecyclerView.Adapter<AdapterReview.HolderRevi
                     Toast.makeText(context, "Retrieved1231", Toast.LENGTH_SHORT).show();
                     for (DataSnapshot s : snapshot.getChildren()) {
                         float rating = Float.parseFloat(s.child("ratings").getValue().toString());
-                        ratingSum = ratingSum + rating;
+                        holder.ratingBar.setRating(rating);
                     }
                 }
                 long numberOfReviews = snapshot.getChildrenCount();
                 float avgRating = ratingSum / numberOfReviews;
-                holder.ratingBar.setRating(avgRating);
             }
 
             @Override
@@ -150,7 +147,7 @@ public class AdapterReview extends RecyclerView.Adapter<AdapterReview.HolderRevi
 
             profileTv = itemView.findViewById(R.id.profileTv);
             nameTv = itemView.findViewById(R.id.nameTv);
-            ratingBar = itemView.findViewById(R.id.ratingBar);
+            ratingBar = itemView.findViewById(R.id.ratingBar_user);
             dateTv = itemView.findViewById(R.id.dateTv);
             reviewTv = itemView.findViewById(R.id.reviewTv);
         }

@@ -158,7 +158,7 @@
 
 
         >
-        <androidx.recyclerview.widget.RecyclerView
+         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/reviewsRv"
             android:padding="10dp"
             android:layout_width="wrap_content"

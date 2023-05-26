@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardBackgroundColor="@color/white"
     android:elevation="3dp"
-    app:contentPadding="5dp">
+     >
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -46,7 +46,7 @@
                 />
         </LinearLayout>
         <RatingBar
-            android:id="@+id/ratingBar"
+            android:id="@+id/ratingBar_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/Widget.AppCompat.RatingBar.Small"
@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/profile"
-            android:layout_toEndOf="@+id/ratingBar"
+            android:layout_toEndOf="@+id/ratingBar_user"
             android:text="dd/MM/yyyy"
             android:textSize="12sp"
             />
