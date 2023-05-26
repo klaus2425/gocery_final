@@ -71,7 +71,7 @@ public class AdapterReview extends RecyclerView.Adapter<AdapterReview.HolderRevi
 
         String dateFormat = DateFormat.format("dd/MM/yyyy",cal).toString();
 
-
+        holder.dateTv.setText(dateFormat);
         holder.ratingBar.setRating(Float.parseFloat(ratings));
         holder.reviewTv.setText(review);
     }
