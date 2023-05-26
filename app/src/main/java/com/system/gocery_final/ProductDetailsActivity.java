@@ -6,11 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -39,7 +41,7 @@ import java.util.HashMap;
 
 public class ProductDetailsActivity extends AppCompatActivity {
     private FloatingActionButton addToCartBtn, writeComment;
-    private Button plusBtn, minusBtn;
+    private ImageButton plusBtn, minusBtn;
     private ImageView productImage;
     private TextView productPrice, productDescription, productName, ratingsTv;
     private EditText productQuantity;
@@ -64,8 +66,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productID = getIntent().getStringExtra("pid");
         writeComment =(FloatingActionButton) findViewById(R.id.pd_add_comment);
         addToCartBtn =(FloatingActionButton) findViewById(R.id.pd_add_product_to_cart_btn);
-        minusBtn =(Button) findViewById(R.id.product_minus);
-        plusBtn =(Button) findViewById(R.id.product_add);
+        minusBtn =(ImageButton) findViewById(R.id.product_minus);
+        plusBtn =(ImageButton) findViewById(R.id.product_add);
         productImage=(ImageView) findViewById(R.id.product_image_details);
         productDescription=(TextView) findViewById(R.id.product_description_details);
         productQuantity= (EditText) findViewById(R.id.product_quantity);

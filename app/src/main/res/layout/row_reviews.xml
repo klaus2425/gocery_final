@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -6,7 +7,12 @@
     app:cardBackgroundColor="@color/white"
     android:elevation="3dp"
     app:contentPadding="5dp">
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="20dp"
+        android:background="@android:color/darker_gray"
+        />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -15,6 +21,7 @@
             android:id="@+id/profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
@@ -34,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Name"
-                android:textColor="@color/design_default_color_primary"
+                android:textColor="@android:color/darker_gray"
                 android:textSize="20sp"
                 />
         </LinearLayout>
@@ -61,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/dateTv"
             android:layout_marginTop="5dp"
-            android:textColor="@color/design_default_color_primary"
+            android:textColor="@color/black"
             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod nisl quis euismod cursus. Aenean luctus nulla sem, non fringilla mauris viverra ac. Donec orci turpis, congue ut felis sed, porttitor condimentum lacus."
             />
 
