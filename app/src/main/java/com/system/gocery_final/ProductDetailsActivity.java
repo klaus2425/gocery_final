@@ -73,7 +73,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productPrice=(TextView) findViewById(R.id.product_price);
         productQuantity.setText("1");
         getProductDetails(productID);
-
         loadReviews();
 
 
@@ -152,12 +151,12 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     }
                     adapterReview = new AdapterReview(ProductDetailsActivity.this, reviewArrayList);
                     reviewsRv.setAdapter(adapterReview);
-
                     long numberOfReviews = snapshot.getChildrenCount();
                     float avgRating = ratingSum / numberOfReviews;
 
                     ratingBar.setRating(avgRating);
-                    ratingsTv.setText(String.valueOf(avgRating));
+                    if(snapshot.exists()) ratingsTv.setText(String.valueOf(avgRating));
+                    else ratingsTv.setText("No Ratings Yet");
             }
 
             @Override

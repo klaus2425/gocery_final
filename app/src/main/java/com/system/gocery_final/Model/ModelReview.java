@@ -3,6 +3,16 @@ package com.system.gocery_final.Model;
 public class ModelReview {
     private String uid, ratings, review, timestamp;
 
+    public ModelReview() {
+    }
+
+    public ModelReview(String uid, String ratings, String review, String timestamp) {
+        this.uid = uid;
+        this.ratings = ratings;
+        this.review = review;
+        this.timestamp = timestamp;
+    }
+
     public String getUid() {
         return uid;
     }
