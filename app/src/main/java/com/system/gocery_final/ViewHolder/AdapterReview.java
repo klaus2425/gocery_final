@@ -48,7 +48,6 @@ public class AdapterReview extends RecyclerView.Adapter<AdapterReview.HolderRevi
     @Override
     public HolderReview onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.row_reviews,parent,false);
-        Toast.makeText(context, "called", Toast.LENGTH_SHORT).show();
 
         return new HolderReview(view);
     }
@@ -107,6 +106,7 @@ public class AdapterReview extends RecyclerView.Adapter<AdapterReview.HolderRevi
 
     private float ratingSum = 0;
     private void loadReviews(ModelReview modelReview, HolderReview holder) {
+
 
         String productID = modelReview.getUid();
         DatabaseReference ref =FirebaseDatabase.getInstance().getReference();
