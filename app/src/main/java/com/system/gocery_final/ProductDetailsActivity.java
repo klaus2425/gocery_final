@@ -121,12 +121,19 @@ public class ProductDetailsActivity extends AppCompatActivity {
         addToCartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                DatabaseReference addRef = FirebaseDatabase.getInstance().getReference("Products");
+                int databaseQuantity = Integer.parseInt(addRef.child(productID).child("quantity").toString());
 
                 if(state.equals("Order Placed") || state.equals("Order Shipped")){
                     Toast.makeText(ProductDetailsActivity.this, "You can purchase more products when it is shipped", Toast.LENGTH_LONG).show();
-                }
-                else {
+                } else if (productQuantity.getText().toString().equals("0")) {
+                    Toast.makeText(ProductDetailsActivity.this, "Quantity cannot be 0", Toast.LENGTH_SHORT).show();
+                } else if (databaseQuantity == 0) {
+                    Toast.makeText(ProductDetailsActivity.this, "Product out of stock.", Toast.LENGTH_SHORT).show();
+                } else if (Integer.parseInt(productQuantity.getText().toString()) > databaseQuantity) {
+                    Toast.makeText(ProductDetailsActivity.this, "Order quantity cannot be greater than stock.", Toast.LENGTH_SHORT).show();
+
+                } else {
                     addingToCartList();
                 }
             }
