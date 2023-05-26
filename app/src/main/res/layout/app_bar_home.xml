@@ -31,7 +31,7 @@
                 android:layout_marginEnd="10dp"
                 android:inputType="text"
                 android:textSize="18sp"
-                android:drawableRight="@drawable/baseline_search_24"
+                android:drawableEnd="@drawable/baseline_search_24"
                 android:background="@drawable/edit_text_bg"
                 android:textColorHighlight="@color/white"
                 android:layout_centerVertical="true"

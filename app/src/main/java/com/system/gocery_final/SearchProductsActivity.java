@@ -10,8 +10,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -23,7 +23,7 @@ import com.system.gocery_final.ViewHolder.ProductViewHolder;
 
 public class SearchProductsActivity extends AppCompatActivity {
 
-    private Button SearchBtn;
+    private ImageView SearchBtn;
     private EditText inputText;
     private RecyclerView searchList;
     private String searchInput;
@@ -35,7 +35,7 @@ public class SearchProductsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_products);
         searchInput = "";
         inputText= (EditText) findViewById(R.id.search_product_name);
-        SearchBtn = (Button) findViewById(R.id.search_button);
+        SearchBtn = (ImageView) findViewById(R.id.search_button);
         searchList = findViewById(R.id.search_list);
 
         searchList.setLayoutManager(new LinearLayoutManager(SearchProductsActivity.this));
@@ -63,7 +63,7 @@ public class SearchProductsActivity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull Products model) {
                 holder.txtProdName.setText(model.getPname());
-                holder.txtProdPrice.setText("Price = Php " + model.getPrice());
+                holder.txtProdPrice.setText("₱ " + model.getPrice());
                 Picasso.get().load(model.getImage()).into(holder.imageView);
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
