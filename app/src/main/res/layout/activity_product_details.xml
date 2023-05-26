@@ -34,9 +34,6 @@
 
                 />
 
-
-
-
             <LinearLayout
             android:id="@+id/rl_prod_price"
             android:layout_width="match_parent"
@@ -46,8 +43,6 @@
             android:layout_marginBottom="10dp"
             android:layout_marginStart="10dp"
             >
-
-
 
             <TextView
                 android:id="@+id/product_peso"
@@ -66,8 +61,6 @@
                     android:text="Product Price"
                     android:textColor="@color/purple"
                     android:textSize="16sp"
-
-
                     />
 
             </LinearLayout>
@@ -157,9 +150,8 @@
         android:layout_below="@+id/details_number_layout"
         android:text="Product Details"
         android:textColor="@android:color/black"
-        android:textStyle="bold"
         android:textSize="16sp"
-        android:gravity="center"
+        android:paddingStart="10dp"
         android:layout_marginTop="10dp"/>
 
     <ScrollView
