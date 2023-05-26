@@ -9,15 +9,15 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/lightgray"
+
         android:theme="@style/Theme.Gocery_Final.AppBarOverlay">
 
         <RelativeLayout
             android:id="@+id/r5"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="@drawable/layout_bg"
             android:layout_alignParentTop="true"
-            android:backgroundTint="@color/white"
             android:paddingHorizontal="10dp"
             android:layout_centerHorizontal="true"
             >
@@ -55,7 +55,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/bottom_bar"
             android:layout_gravity="bottom"
-            android:background="@color/white"
             app:fabAnchorMode="cradle"
             app:fabAlignmentMode="center"
             app:fabCradleMargin="15dp"
