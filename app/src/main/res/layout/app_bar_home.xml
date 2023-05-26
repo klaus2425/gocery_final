@@ -46,9 +46,11 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_home" />
+    <include
+        layout="@layout/content_home" />
 
         <com.google.android.material.bottomappbar.BottomAppBar
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/bottom_bar"
