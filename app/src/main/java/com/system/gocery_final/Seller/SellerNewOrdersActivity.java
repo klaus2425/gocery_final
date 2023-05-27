@@ -61,7 +61,7 @@ public class SellerNewOrdersActivity extends AppCompatActivity {
                holder.userPhoneNumber.setText("Phone: " + model.getNumber());
                holder.userTotalPrice.setText("Total Amount: = Php " + model.getTotalAmount());
                holder.userDateTime.setText("Order at: " + model.getDate() + " " + model.getTime());
-               holder.userShippingAddress.setText("Shipping Address: " + model.getAddress() + ", "+ model.getCity());
+               holder.userShippingAddress.setText("Shipping Address: " + model.getAddress());
                auth = FirebaseAuth.getInstance();
                user = auth.getCurrentUser();
                holder.showOrderButton.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +95,6 @@ public class SellerNewOrdersActivity extends AppCompatActivity {
                                    ordersMap.put("date", model.getDate());
                                    ordersMap.put("time", model.getTime());
                                    ordersMap.put("totalAmount", model.getTotalAmount());
-                                   ordersMap.put("city", model.getCity());
                                    ordersMap.put("uid", model.getUid());
                                    ordersMap.put("address", model.getAddress());
                                    ordersMap.put("orderid", model.getOrderid());

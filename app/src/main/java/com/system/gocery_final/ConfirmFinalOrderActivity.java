@@ -26,7 +26,7 @@ import java.util.HashMap;
 
 public class ConfirmFinalOrderActivity extends AppCompatActivity {
     private EditText nameEditText, numberEditText, addressEditText, cityEditText;
-    private Button confirmOrderBtn;
+    private Button confirmOrderBtn, backButton;
     private FirebaseAuth auth;
     private FirebaseUser user;
     private String totalAmount = "";
@@ -35,7 +35,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_final_order);
-
+        backButton = (Button) findViewById(R.id.backButtonConfirm);
         totalAmount = getIntent().getStringExtra("Total Price");
         confirmOrderBtn=(Button) findViewById(R.id.confirm_final_order);
         nameEditText=(EditText) findViewById(R.id.shipment_name);
@@ -43,6 +43,13 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         addressEditText=(EditText) findViewById(R.id.shipment_address);
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         confirmOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override

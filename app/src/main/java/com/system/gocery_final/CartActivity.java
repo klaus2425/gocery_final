@@ -71,7 +71,6 @@ public class CartActivity extends AppCompatActivity {
                 intent.putExtra("Total Price", String.valueOf(overTotalPrice));
                 intent.putExtra("session", getIntent().getExtras().get("session").toString());
                 startActivity(intent);
-                finish();
             }
         });
 
