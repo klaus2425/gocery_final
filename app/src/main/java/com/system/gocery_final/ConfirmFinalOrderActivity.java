@@ -41,7 +41,6 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         nameEditText=(EditText) findViewById(R.id.shipment_name);
         numberEditText=(EditText) findViewById(R.id.shipment_phone_number);
         addressEditText=(EditText) findViewById(R.id.shipment_address);
-        cityEditText=(EditText) findViewById(R.id.shipment_city);
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
 
@@ -91,7 +90,6 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         ordersMap.put("name", nameEditText.getText().toString());
         ordersMap.put("number", numberEditText.getText().toString());
         ordersMap.put("address", addressEditText.getText().toString());
-        ordersMap.put("city", cityEditText.getText().toString());
         ordersMap.put("date", saveCurrentDate);
         ordersMap.put("time", saveCurrentTime);
         ordersMap.put("state","not shipped");

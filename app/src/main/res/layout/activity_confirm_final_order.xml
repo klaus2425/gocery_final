@@ -21,62 +21,112 @@
         android:textColor="@color/gray"
         android:textSize="30sp"
         android:textStyle="normal" />
+    <TextView
+
+        android:id="@+id/txt_name_shape"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt"
+        android:text="Name"
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="22dp"
+        android:textSize="16sp"
+        />
     <EditText
         android:id="@+id/shipment_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txt"
-        android:layout_marginTop="60dp"
+        android:layout_below="@id/txt_name_shape"
+        android:background="@drawable/edit_text_bg"
+        android:padding="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:hint="Name"
+        />
+    <TextView
+
+        android:id="@+id/txt_name_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/shipment_name"
+        android:text="Phone Number"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="22dp"
+        android:textSize="16sp"
         />
     <EditText
         android:id="@+id/shipment_phone_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/shipment_name"
+        android:layout_below="@id/txt_name_phone"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:hint="Phone Number"
+        android:background="@drawable/edit_text_bg"
+        android:padding="10dp"
+        />
+
+    <TextView
+
+        android:id="@+id/txt_name_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/shipment_phone_number"
+        android:text="Address"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="22dp"
+        android:textSize="16sp"
         />
     <EditText
         android:id="@+id/shipment_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/shipment_phone_number"
+        android:layout_below="@id/txt_name_address"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:hint="Address"
+        android:background="@drawable/edit_text_bg"
+        android:padding="10dp"
         />
 
-    <EditText
-        android:id="@+id/shipment_city"
+
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/shipment_address"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:hint="Enter Your City"
-        />
+        android:layout_height="130dp"
+        android:layout_alignParentBottom="true"
+        >
 
-    <Button
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total: "
+            android:textSize="15sp"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/gray"
+            />
+
+        <Button
         android:id="@+id/confirm_final_order"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="20dp"
 
-        android:layout_marginBottom="20dp"
-        android:text="Confirm"
+        android:text="Place Order"
         android:textColor="@color/white"
-        android:textSize="25dp" />
-
+        android:textSize="20dp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
 
 </RelativeLayout>

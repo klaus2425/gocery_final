@@ -58,7 +58,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 holder.userPhoneNumber.setText("Phone: " + model.getNumber());
                 holder.userTotalPrice.setText("Total Amount: = Php " + model.getTotalAmount());
                 holder.userDateTime.setText("Order at: " + model.getDate() + " " + model.getTime());
-                holder.userShippingAddress.setText("Shipping Address: " + model.getAddress() + ", " + model.getCity());
+                holder.userShippingAddress.setText("Shipping Address: " + model.getAddress());
                 holder.showOrderButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
