@@ -9,8 +9,6 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/lightgray"
-
         android:theme="@style/Theme.Gocery_Final.AppBarOverlay">
 
         <RelativeLayout
@@ -54,7 +52,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/bottom_bar"
-            android:backgroundTint="@color/purple"
             android:layout_gravity="bottom"
             app:fabAnchorMode="cradle"
             app:fabAlignmentMode="center"
@@ -63,9 +60,9 @@
             >
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:layout_width="wrap_content"
-                app:itemIconTint="@color/white"
+                app:itemIconTint="@color/purple"
                 app:itemRippleColor="@null"
-                app:itemTextColor="@color/white"
+                app:itemTextColor="@color/purple"
                 android:layout_height="wrap_content"
                 android:id="@+id/bottom_nav_view"
                 app:labelVisibilityMode="labeled"
