@@ -2,5 +2,11 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/aclonica</item>
+        <item>@font/allerta</item>
+        <item>@font/bad_script</item>
+        <item>@font/beth_ellen</item>
+        <item>@font/caveat_bold</item>
+        <item>@font/homemade_apple</item>
+        <item>@font/lacquer</item>
     </array>
 </resources>
