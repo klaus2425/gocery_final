@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
                 if(user!=null){
                     loadingBar.setTitle("Logging in");
                     loadingBar.setMessage("Please wait while we are checking credentials.");
-                    loadingBar.setCanceledOnTouchOutside(false);
                     loadingBar.show();
                     AllowAccess(UserEmailKey,UserPasswordKey, parentDbName);
 

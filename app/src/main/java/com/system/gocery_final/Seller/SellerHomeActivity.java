@@ -17,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.navigation.ui.AppBarConfiguration;
 
+import io.paperdb.Paper;
+
 
 public class SellerHomeActivity extends AppCompatActivity {
 
@@ -44,7 +46,7 @@ public class SellerHomeActivity extends AppCompatActivity {
                 final FirebaseAuth mAuth;
                 mAuth = FirebaseAuth.getInstance();
                 mAuth.signOut();
-
+                Paper.book().destroy();
                 Intent intent = new Intent(SellerHomeActivity.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);

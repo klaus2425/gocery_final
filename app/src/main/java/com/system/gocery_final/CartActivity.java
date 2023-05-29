@@ -109,7 +109,6 @@ public class CartActivity extends AppCompatActivity {
                         CharSequence options[] = new CharSequence[]{
                                 "Edit",
                                 "Remove"
-
                         };
                         AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
                         builder.setTitle("Cart Options");
@@ -162,38 +161,37 @@ public class CartActivity extends AppCompatActivity {
     private void CheckOrderState(){
         DatabaseReference ordersRef;
         ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(user.getUid());
-        ordersRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    String shippingState = snapshot.child("state").getValue().toString();
-                    String userName = snapshot.child("name").getValue().toString();
-
-                    if (shippingState.equals("shipped")){
-                        txtTotalAmount.setText("Order is now in transit");
-                        recyclerView.setVisibility(View.GONE);
-                        txtMsg1.setVisibility(View.VISIBLE);
-                        nextProcessButton.setVisibility(View.GONE);
-                        empty.setVisibility(View.GONE);
-                        Toast.makeText(CartActivity.this, "Please wait for your order to arrive.",Toast.LENGTH_SHORT).show();
-                    } else if (shippingState.equals("not shipped")) {
-                        txtTotalAmount.setText("Order is still processing");
-                        recyclerView.setVisibility(View.GONE);
-                        txtMsg1.setVisibility(View.VISIBLE);
-                        txtMsg1.setText("Your order is still being verified. Wait for your order to arrive before ordering again.");
-                        nextProcessButton.setVisibility(View.GONE);
-                        empty.setVisibility(View.GONE);
-                        Toast.makeText(CartActivity.this, "Please wait for your order to be verified.",Toast.LENGTH_SHORT).show();
-                    }
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+//        ordersRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if(snapshot.exists()){
+//                    String shippingState = snapshot.child("state").getValue().toString();
+//                    String userName = snapshot.child("name").getValue().toString();
+//
+//                    if (shippingState.equals("shipped")){
+//                        txtTotalAmount.setText("Order is now in transit");
+//                        recyclerView.setVisibility(View.GONE);
+//                        txtMsg1.setVisibility(View.VISIBLE);
+//                        nextProcessButton.setVisibility(View.GONE);
+//                        empty.setVisibility(View.GONE);
+//                        Toast.makeText(CartActivity.this, "Please wait for your order to arrive.",Toast.LENGTH_SHORT).show();
+//                    } else if (shippingState.equals("not shipped")) {
+//                        txtTotalAmount.setText("Order is still processing");
+//                        recyclerView.setVisibility(View.GONE);
+//                        txtMsg1.setVisibility(View.VISIBLE);
+//                        txtMsg1.setText("Your order is still being verified. Wait for your order to arrive before ordering again.");
+//                        nextProcessButton.setVisibility(View.GONE);
+//                        empty.setVisibility(View.GONE);
+//                        Toast.makeText(CartActivity.this, "Please wait for your order to be verified.",Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
 
     }
 }

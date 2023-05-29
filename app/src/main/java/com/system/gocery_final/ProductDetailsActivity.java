@@ -49,7 +49,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseUser user = auth.getCurrentUser();
     private int databaseQuantity;
-
+    private String name;
     private RecyclerView reviewsRv;
 
     private RatingBar ratingBar;
@@ -193,7 +193,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        CheckOrderState();
     }
 
     private void addingToCartList() {
@@ -207,13 +206,29 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
         final DatabaseReference cartListRef2 = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference UserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
+        UserRef.addValueEventListener(new ValueEventListener() {
+                                          @Override
+                                          public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                              if (snapshot.exists()) {
+                                                  if (snapshot.child("image").exists()) {
+                                                      name = snapshot.child("firstName").getValue().toString() + " " + snapshot.child("lastName").getValue().toString();
+                                                  }
+                                              }
+                                          }
 
+                                          @Override
+                                          public void onCancelled(@NonNull DatabaseError error) {
+
+                                          }
+                                      });
         HashMap<String, Object> cartmap = new HashMap<>();
         HashMap<String, Object> cartStatus = new HashMap<>();
         cartmap.put("pid", productID);
         cartmap.put("pname", productName.getText().toString());
         cartmap.put("price", productPrice.getText().toString());
         cartmap.put("date", saveCurrentDate);
+        cartmap.put("name", name);
         cartmap.put("time", saveCurrentTime);
         cartmap.put("quantity", productQuantity.getText().toString());
         cartStatus.put("status", "unconfirmed");
@@ -267,32 +282,31 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     }
 
-    private void CheckOrderState(){
-        DatabaseReference ordersRef;
-        ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(user.getUid());
-        ordersRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    String shippingState = snapshot.child("state").getValue().toString();
-                    String userName = snapshot.child("name").getValue().toString();
-                    addToCartBtn.setVisibility(View.GONE);
-                    if (shippingState.equals("shipped")){
-                        state = "Order Shipped";
-                    } else if (shippingState.equals("not shipped")) {
-                        state = "Order Place";
-                    }
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-    }
+//    private void CheckOrderState(){
+//        DatabaseReference ordersRef;
+//        ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(user.getUid());
+//        ordersRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if(snapshot.exists()){
+//                    String shippingState = snapshot.child("state").getValue().toString();
+//                    String userName = snapshot.child("name").getValue().toString();
+//                    addToCartBtn.setVisibility(View.GONE);
+//                    if (shippingState.equals("shipped")){
+//                        state = "Order Shipped";
+//                    } else if (shippingState.equals("not shipped")) {
+//                        state = "Order Place";
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//
+//    }
 
 //    public void plusBtn(View v){
 //          count++;

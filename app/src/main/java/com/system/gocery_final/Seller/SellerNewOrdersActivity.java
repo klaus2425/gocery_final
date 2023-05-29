@@ -38,7 +38,6 @@ public class SellerNewOrdersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seller_new_orders);
-
         ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders");
         ordersList= findViewById(R.id.orders_list);
         ordersList.setLayoutManager(new LinearLayoutManager(this));

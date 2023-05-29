@@ -24,9 +24,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.system.gocery_final.Model.AdminOrders;
+import com.system.gocery_final.Model.ModelReview;
 import com.system.gocery_final.OrderHistoryActivity;
 import com.system.gocery_final.OrderHistoryDetailsActivity;
 import com.system.gocery_final.R;
+
+import java.util.ArrayList;
 
 public class SellerHistoryActivity extends AppCompatActivity {
 
@@ -35,7 +38,7 @@ public class SellerHistoryActivity extends AppCompatActivity {
     private DatabaseReference ordersRef;
     private FirebaseAuth auth;
     private FirebaseUser user;
-
+    private ArrayList<AdminOrders> orderHistoryArrayList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +48,7 @@ public class SellerHistoryActivity extends AppCompatActivity {
         user = auth.getCurrentUser();
 
         ordersList = findViewById(R.id.seller_history_list);
-        ordersRef = FirebaseDatabase.getInstance().getReference().child("Order History");
+        ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders");
         ordersList.setLayoutManager(new LinearLayoutManager(this));
 
     }
@@ -53,53 +56,45 @@ public class SellerHistoryActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         FirebaseRecyclerOptions<AdminOrders> options = new
                 FirebaseRecyclerOptions.Builder<AdminOrders>()
-                .setQuery(ordersRef, AdminOrders.class)
+                .setQuery(ordersRef.orderByChild("status").startAt("placed").endAt("placed"), AdminOrders.class)
                 .build();
 
-
-        ordersRef.addValueEventListener(new ValueEventListener() {
+        FirebaseRecyclerAdapter<AdminOrders, OrderHistoryActivity.SellerOrdersViewHolder> adapter = new FirebaseRecyclerAdapter<AdminOrders,
+                OrderHistoryActivity.SellerOrdersViewHolder>(options) {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                FirebaseRecyclerAdapter<AdminOrders, SellerHistoryActivity.SellerOrdersViewHolder> adapter = new FirebaseRecyclerAdapter<AdminOrders,
-                        SellerHistoryActivity.SellerOrdersViewHolder>(options) {
+            protected void onBindViewHolder(@NonNull OrderHistoryActivity.SellerOrdersViewHolder holder, @SuppressLint("RecyclerView") int position, @NonNull AdminOrders model) {
+                holder.userName.setText("Name: " + model.getName());
+                holder.userPhoneNumber.setText("Phone: " + model.getNumber());
+                holder.userTotalPrice.setText("Total Amount: = Php " + model.getTotalAmount());
+                holder.userDateTime.setText("Order at: " + model.getDate() + " " + model.getTime());
+                holder.userShippingAddress.setText("Shipping Address: " + model.getAddress());
+                holder.showOrderButton.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    protected void onBindViewHolder(@NonNull SellerHistoryActivity.SellerOrdersViewHolder holder, @SuppressLint("RecyclerView") int position, @NonNull AdminOrders model) {
-                        holder.userName.setText("Name: " + model.getName());
-                        holder.userPhoneNumber.setText("Phone: " + model.getNumber());
-                        holder.userTotalPrice.setText("Total Amount: = Php " + model.getTotalAmount());
-                        holder.userDateTime.setText("Order at: " + model.getDate() + " " + model.getTime());
-                        holder.userShippingAddress.setText("Shipping Address: " + model.getAddress());
-                        holder.showOrderButton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent intent = new Intent(SellerHistoryActivity.this, OrderHistoryDetailsActivity.class);
-                                intent.putExtra("orderid", model.getOrderid());
-                                intent.putExtra("uid", user.getUid());
-                                startActivity(intent);
-                            }
-                        });
+                    public void onClick(View v) {
+                        Intent intent = new Intent(SellerHistoryActivity.this, OrderHistoryDetailsActivity.class);
+                        intent.putExtra("orderid", model.getOrderid());
+                        intent.putExtra("uid", user.getUid());
+                        startActivity(intent);
                     }
-
-
-                    @NonNull
-                    @Override
-                    public SellerHistoryActivity.SellerOrdersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.orders_layout, parent, false);
-                        return new SellerHistoryActivity.SellerOrdersViewHolder(view);
-                    }
-                };
-                ordersList.setAdapter(adapter);
-                adapter.startListening();
+                });
             }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
 
+            @NonNull
+            @Override
+            public OrderHistoryActivity.SellerOrdersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.orders_layout, parent, false);
+                return new OrderHistoryActivity.SellerOrdersViewHolder(view);
             }
-        });
+        };
+        ordersList.setAdapter(adapter);
+        adapter.startListening();
+
+
+
+
 
 
 
