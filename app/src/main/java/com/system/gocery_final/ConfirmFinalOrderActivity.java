@@ -69,9 +69,6 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         else if(TextUtils.isEmpty(addressEditText.getText().toString())){
             Toast.makeText(this, "Please Provide Address", Toast.LENGTH_SHORT).show();
         }
-        else if(TextUtils.isEmpty(cityEditText.getText().toString())){
-            Toast.makeText(this, "Please Provide Your City Name", Toast.LENGTH_SHORT).show();
-        }
         else {
             ConfirmOrder();
         }

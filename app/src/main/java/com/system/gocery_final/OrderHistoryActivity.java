@@ -30,8 +30,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        auth = FirebaseAuth.getInstance();
-        user = auth.getCurrentUser();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history);
         auth = FirebaseAuth.getInstance();
