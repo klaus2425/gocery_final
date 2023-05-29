@@ -73,7 +73,7 @@ public class SellerHistoryActivity extends AppCompatActivity {
                 holder.showOrderButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(SellerHistoryActivity.this, OrderHistoryDetailsActivity.class);
+                        Intent intent = new Intent(SellerHistoryActivity.this, SellerHistoryDetailsActivity.class);
                         intent.putExtra("orderid", model.getOrderid());
                         startActivity(intent);
                     }

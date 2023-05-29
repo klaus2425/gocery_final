@@ -39,7 +39,6 @@ public class OrderHistoryDetailsActivity extends AppCompatActivity {
         productsList.setLayoutManager(layoutManager);
         cartListRef = FirebaseDatabase.getInstance().getReference()
                 .child("Order History").child(userID).child(getIntent().getStringExtra("orderid")).child("products");
-
     }
 
     @Override
