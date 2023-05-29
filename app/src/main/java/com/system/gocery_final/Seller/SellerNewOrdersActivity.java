@@ -33,7 +33,7 @@ public class SellerNewOrdersActivity extends AppCompatActivity {
     private DatabaseReference ordersRef;
     private FirebaseAuth auth;
     private FirebaseUser user;
-
+    private Button btnHistory;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +43,8 @@ public class SellerNewOrdersActivity extends AppCompatActivity {
         ordersList= findViewById(R.id.orders_list);
         ordersList.setLayoutManager(new LinearLayoutManager(this));
 
+        btnHistory = (Button) findViewById(R.id.seller_history_button);
+            
     }
 
 
