@@ -48,7 +48,7 @@ public class SellerNewOrdersActivity extends AppCompatActivity {
         btnHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SellerNewOrdersActivity.this, SellerHistoryActivity.Class);
+                Intent intent = new Intent(SellerNewOrdersActivity.this, SellerHistoryActivity.class);
                 startActivity(intent);
             }
         });
