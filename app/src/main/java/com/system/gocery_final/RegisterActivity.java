@@ -26,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -73,10 +74,14 @@ public class RegisterActivity extends AppCompatActivity {
         String address  = inputAddress.getText().toString();
         String email  = inputEmail.getText().toString();
 
+
         if(TextUtils.isEmpty(firstName) || TextUtils.isEmpty(lastName) || TextUtils.isEmpty(contact) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword) || TextUtils.isEmpty(address) || TextUtils.isEmpty(email) ){
             Toast.makeText(RegisterActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
         } else{
-            auth.createUserWithEmailAndPassword(email, password)
+            if(password.equals(confirmPassword)){
+                if(password.length() >= 8&&password.matches("(.*[A-Z].*)") && password.matches("(.*[0-9].*)")  ){
+//                    && password.matches("^(?=.*[_.()]).*$")
+                    auth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -90,6 +95,18 @@ public class RegisterActivity extends AppCompatActivity {
                                     }
                                 }
                             });
+
+                }else{
+                    Toast.makeText(RegisterActivity.this, "Password mus be 8 characters longs and contains at least one capital letter, numbers, and symbols", Toast.LENGTH_SHORT).show();
+                }
+            }else{
+                Toast.makeText(RegisterActivity.this, "Password do not Match", Toast.LENGTH_SHORT).show();
+            }
+
+
+
+
+
 
         }
 
