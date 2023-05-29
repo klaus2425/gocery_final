@@ -8,4 +8,5 @@ public class Prevalent {
 
     public static final String userEmail = "UserEmail";
     public static final String userPasswordKey = "UserPassword";
+    public static final String userType = "userType";
 }

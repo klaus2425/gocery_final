@@ -144,6 +144,8 @@ public class LoginActivity extends AppCompatActivity {
         if(chkBoxRememberMe.isChecked()){
             Paper.book().write(Prevalent.userEmail,email);
             Paper.book().write(Prevalent.userPasswordKey,password);
+            Paper.book().write(Prevalent.userType,parentDbName);
+
         }
         final DatabaseReference RootRef;
         RootRef = FirebaseDatabase.getInstance().getReference();
