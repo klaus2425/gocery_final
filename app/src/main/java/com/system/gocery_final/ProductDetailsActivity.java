@@ -51,7 +51,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private int databaseQuantity;
     private String name;
     private RecyclerView reviewsRv;
-
+    private String sessionID = "";
     private RatingBar ratingBar;
     private ArrayList<ModelReview> reviewArrayList;
     private AdapterReview adapterReview;
@@ -77,7 +77,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productQuantity.setText("1");
         getProductDetails(productID);
         loadReviews();
-
+        sessionID = getIntent().getExtras().get("session").toString();
 
 
         plusBtn.setOnClickListener(new View.OnClickListener() {
@@ -240,7 +240,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
-                            cartListRef.child("Admin View").child(user.getUid()).child("Products").child(productID)
+                            cartListRef.child("Admin View").child(sessionID).child("Products").child(productID)
                                     .updateChildren(cartmap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {

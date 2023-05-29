@@ -58,13 +58,13 @@ public class SellerHistoryActivity extends AppCompatActivity {
         super.onStart();
         FirebaseRecyclerOptions<AdminOrders> options = new
                 FirebaseRecyclerOptions.Builder<AdminOrders>()
-                .setQuery(ordersRef.orderByChild("status").startAt("placed").endAt("placed"), AdminOrders.class)
+                .setQuery(ordersRef.orderByChild("state").startAt("shipped").endAt("shipped"), AdminOrders.class)
                 .build();
 
-        FirebaseRecyclerAdapter<AdminOrders, OrderHistoryActivity.SellerOrdersViewHolder> adapter = new FirebaseRecyclerAdapter<AdminOrders,
-                OrderHistoryActivity.SellerOrdersViewHolder>(options) {
+        FirebaseRecyclerAdapter<AdminOrders, SellerHistoryActivity.SellerOrdersViewHolder> adapter = new FirebaseRecyclerAdapter<AdminOrders,
+                SellerHistoryActivity.SellerOrdersViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull OrderHistoryActivity.SellerOrdersViewHolder holder, @SuppressLint("RecyclerView") int position, @NonNull AdminOrders model) {
+            protected void onBindViewHolder(@NonNull SellerHistoryActivity.SellerOrdersViewHolder holder, @SuppressLint("RecyclerView") int position, @NonNull AdminOrders model) {
                 holder.userName.setText("Name: " + model.getName());
                 holder.userPhoneNumber.setText("Phone: " + model.getNumber());
                 holder.userTotalPrice.setText("Total Amount: = Php " + model.getTotalAmount());
@@ -75,7 +75,6 @@ public class SellerHistoryActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent intent = new Intent(SellerHistoryActivity.this, OrderHistoryDetailsActivity.class);
                         intent.putExtra("orderid", model.getOrderid());
-                        intent.putExtra("uid", user.getUid());
                         startActivity(intent);
                     }
                 });
@@ -84,20 +83,13 @@ public class SellerHistoryActivity extends AppCompatActivity {
 
             @NonNull
             @Override
-            public OrderHistoryActivity.SellerOrdersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            public SellerHistoryActivity.SellerOrdersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.orders_layout, parent, false);
-                return new OrderHistoryActivity.SellerOrdersViewHolder(view);
+                return new SellerHistoryActivity.SellerOrdersViewHolder(view);
             }
         };
         ordersList.setAdapter(adapter);
         adapter.startListening();
-
-
-
-
-
-
-
 
     }
 
@@ -115,9 +107,6 @@ public class SellerHistoryActivity extends AppCompatActivity {
             userShippingAddress = itemView.findViewById(R.id.order_address_city);
             showOrderButton = itemView.findViewById(R.id.show_all_products);
             showOrderButton.setText("More Details");
-            userPhoneNumber.setVisibility(View.GONE);
-            userName.setVisibility(View.GONE);
-
         }
     }
 }

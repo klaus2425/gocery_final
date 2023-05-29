@@ -30,7 +30,7 @@ public class SellerUserProductsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seller_user_products);
 
-        userID = getIntent().getStringExtra("uid");
+        userID = getIntent().getStringExtra("orderID");
 
         productsList = findViewById(R.id.products_list);
         productsList.setHasFixedSize(true);

@@ -30,6 +30,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseUser user;
     private String totalAmount = "";
+    private String sessionID= "";
     public static final String SHARED_PREFS = "sharedPrefs";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         addressEditText=(EditText) findViewById(R.id.shipment_address);
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
-
+        sessionID = getIntent().getExtras().get("session").toString();
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +84,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
         saveCurrentTime = currentTime.format(calForDate.getTime());
 
-        final DatabaseReference ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(user.getUid());
+        final DatabaseReference ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(sessionID   );
         final DatabaseReference ordersHistory = FirebaseDatabase.getInstance().getReference().child("Order History").child(user.getUid())
                 .child(getIntent().getExtras().get("session").toString());
         final DatabaseReference ordersStatusRef = FirebaseDatabase.getInstance().getReference().child("Order History").child(user.getUid())

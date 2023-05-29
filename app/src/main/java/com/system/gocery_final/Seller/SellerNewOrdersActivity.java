@@ -60,7 +60,7 @@ public class SellerNewOrdersActivity extends AppCompatActivity {
 
        FirebaseRecyclerOptions<AdminOrders> options = new
                FirebaseRecyclerOptions.Builder<AdminOrders>()
-               .setQuery(ordersRef, AdminOrders.class)
+               .setQuery(ordersRef.orderByChild("state").startAt("not shipped").endAt("not shipped"), AdminOrders.class)
                .build();
        FirebaseRecyclerAdapter<AdminOrders, AdminOrdersViewHolder> adapter = new FirebaseRecyclerAdapter<AdminOrders, AdminOrdersViewHolder>(options) {
            @Override
@@ -76,7 +76,7 @@ public class SellerNewOrdersActivity extends AppCompatActivity {
                    @Override
                    public void onClick(View v) {
                        Intent intent = new Intent(SellerNewOrdersActivity.this, SellerUserProductsActivity.class);
-                       intent.putExtra("uid", model.getUid());
+                       intent.putExtra("orderID ", model.getOrderid());
                        startActivity(intent);
                    }
                });
@@ -95,7 +95,7 @@ public class SellerNewOrdersActivity extends AppCompatActivity {
                            @Override
                            public void onClick(DialogInterface dialog, int which) {
                                 DatabaseReference orderHistory = FirebaseDatabase.getInstance().getReference().child("Order History").child(model.getUid())
-                                        .child(model.getOrderid());
+                                                .child(model.getOrderid());
                                if(which == 0)
                                {
                                    String uid = getRef(position).getKey();
@@ -106,8 +106,9 @@ public class SellerNewOrdersActivity extends AppCompatActivity {
                                    ordersMap.put("uid", model.getUid());
                                    ordersMap.put("address", model.getAddress());
                                    ordersMap.put("orderid", model.getOrderid());
+                                   ordersMap.put("state", "shipped");
                                    orderHistory.updateChildren(ordersMap);
-                                   ordersRef.child(uid).removeValue();
+                                   ordersRef.child(model.getOrderid()).updateChildren(ordersMap);
                                }
                                else
                                {
