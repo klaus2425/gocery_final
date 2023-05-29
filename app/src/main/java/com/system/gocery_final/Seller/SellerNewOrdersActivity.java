@@ -44,7 +44,14 @@ public class SellerNewOrdersActivity extends AppCompatActivity {
         ordersList.setLayoutManager(new LinearLayoutManager(this));
 
         btnHistory = (Button) findViewById(R.id.seller_history_button);
-            
+
+        btnHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SellerNewOrdersActivity.this, SellerHistoryActivity.Class);
+                startActivity(intent);
+            }
+        });
     }
 
 
