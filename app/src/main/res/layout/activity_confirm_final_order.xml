@@ -114,6 +114,7 @@
         android:orientation="horizontal"
         android:layout_below="@+id/shipment_address"
         android:gravity="center_horizontal"
+        android:padding="2dp"
         >
         <RadioButton
             android:id="@+id/confirm_radio_custom"
