@@ -118,7 +118,7 @@
             android:background="@drawable/edit_text_bg"
             android:text="Custom Address"
             android:padding="10dp"
-
+            android:layout_marginEnd="30dp"
             />
 
         <RadioButton
