@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,6 +30,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
     private Button confirmOrderBtn, backButton;
     private FirebaseAuth auth;
     private FirebaseUser user;
+    private TextView confirmTotal;
     private String totalAmount = "";
     private String sessionID= "";
     public static final String SHARED_PREFS = "sharedPrefs";
@@ -44,6 +46,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         addressEditText=(EditText) findViewById(R.id.shipment_address);
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
+        confirmTotal = (TextView) findViewById(R.id.confirm_total_text);
         sessionID = getIntent().getExtras().get("session").toString();
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +61,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                 Check();
             }
         });
+        confirmTotal.setText("Total: ₱" + getIntent().getStringExtra("Total Price"));
     }
 
     private void Check() {
