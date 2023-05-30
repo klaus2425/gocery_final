@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -60,7 +61,9 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         confirmGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-
+                if(checkedId == R.id.confirm_radio_custom){
+                    
+                }
             }
         });
         sessionID = getIntent().getExtras().get("session").toString();
