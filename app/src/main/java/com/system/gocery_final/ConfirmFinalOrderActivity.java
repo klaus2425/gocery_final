@@ -10,6 +10,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +35,8 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
     private TextView confirmTotal;
     private String totalAmount = "";
     private String sessionID= "";
+    private RadioGroup confirmGroup;
+    private RadioButton confirmCustom, confirmAccount;
     public static final String SHARED_PREFS = "sharedPrefs";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +50,19 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         addressEditText=(EditText) findViewById(R.id.shipment_address);
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
+        confirmGroup = (RadioGroup) findViewById(R.id.confirm_radio_group);
+        confirmCustom = (RadioButton) findViewById(R.id.confirm_radio_custom);
+        confirmAccount = (RadioButton) findViewById(R.id.confirm_radio_account);
+
+        confirmGroup.check(R.id.confirm_radio_custom);
         confirmTotal = (TextView) findViewById(R.id.confirm_total_text);
+
+        confirmGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+            }
+        });
         sessionID = getIntent().getExtras().get("session").toString();
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
