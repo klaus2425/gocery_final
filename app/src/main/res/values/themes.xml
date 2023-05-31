@@ -28,4 +28,8 @@
         <item name="colorControlActivated">@color/purple</item>
         <item name="colorControlNormal">@color/lightpurple</item>
     </style>
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/lightpurple</item>
+        <item name="colorControlActivated">@color/orange</item>
+    </style>
 </resources>
