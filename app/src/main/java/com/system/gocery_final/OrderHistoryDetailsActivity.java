@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -23,7 +24,7 @@ public class OrderHistoryDetailsActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     private DatabaseReference cartListRef;
     private String userID = "";
-
+    private ImageButton imgBtnBack;
 
 
     @Override
@@ -32,7 +33,7 @@ public class OrderHistoryDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_order_history_details);
 
         userID = getIntent().getStringExtra("uid");
-
+        imgBtnBack = (ImageButton) findViewById(R.id.order_history_backBtn);
         productsList = findViewById(R.id.history_details_list);
         productsList.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
@@ -65,6 +66,13 @@ public class OrderHistoryDetailsActivity extends AppCompatActivity {
                 return holder;
             }
         };
+
+        imgBtnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         productsList.setAdapter(adapter);
         adapter.startListening();

@@ -56,6 +56,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private RatingBar ratingBar;
     private ArrayList<ModelReview> reviewArrayList;
     private AdapterReview adapterReview;
+    private ImageButton back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +80,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
         getProductDetails(productID);
         loadReviews();
         sessionID = getIntent().getExtras().get("session").toString();
-
+        back = findViewById(R.id.backBtn);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         plusBtn.setOnClickListener(new View.OnClickListener() {
             @Override

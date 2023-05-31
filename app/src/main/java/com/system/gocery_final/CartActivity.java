@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -45,6 +46,7 @@ public class CartActivity extends AppCompatActivity {
     private FirebaseUser user;
     private ImageView empty;
     private FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter;
+    private ImageButton back;
 
     private int overTotalPrice = 0;
     @Override
@@ -62,7 +64,13 @@ public class CartActivity extends AppCompatActivity {
         empty = (ImageView) findViewById(R.id.empty_logo);
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
-
+        back = findViewById(R.id.backBtn);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         nextProcessButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,12 +99,12 @@ public class CartActivity extends AppCompatActivity {
         adapter = new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull CartViewHolder holder, int position, @NonNull Cart model) {
-                holder.txtProductPrice.setText("Price = Php " + model.getPrice());
+                holder.txtProductPrice.setText("Price: ₱ " + model.getPrice());
                 holder.txtProductName.setText(model.getPname());
                 holder.txtProductQuantity.setText(model.getQuantity());
                 int oneTypeProductPrice = ((Integer.valueOf(model.getPrice()))) * ((Integer.valueOf(model.getQuantity())));
                 overTotalPrice = overTotalPrice+ oneTypeProductPrice;
-                txtTotalAmount.setText("Total Price = Php " + overTotalPrice );
+                txtTotalAmount.setText("Price: ₱ " + overTotalPrice );
 
                 if(!txtTotalAmount.getText().toString().equals("Cart is Empty")){
                     nextProcessButton.setVisibility(View.VISIBLE);

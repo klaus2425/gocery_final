@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -27,7 +28,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
     private DatabaseReference ordersRef;
     private FirebaseAuth auth;
     private FirebaseUser user;
-
+    private ImageButton back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -38,7 +39,13 @@ public class OrderHistoryActivity extends AppCompatActivity {
         ordersRef = FirebaseDatabase.getInstance().getReference().child("Order History").child(user.getUid());
         ordersList= findViewById(R.id.history_list);
         ordersList.setLayoutManager(new LinearLayoutManager(this));
-
+        back = findViewById(R.id.backBtn);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
