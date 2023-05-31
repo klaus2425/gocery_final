@@ -20,8 +20,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.system.gocery_final.Prevalent.Prevalent;
 
 import java.text.SimpleDateFormat;
@@ -33,6 +36,8 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
     private Button confirmOrderBtn, backButton;
     private FirebaseAuth auth;
     private FirebaseUser user;
+    DatabaseReference shippingRef;
+
     private TextView confirmTotal;
     private String totalAmount = "";
     private String sessionID= "";
@@ -50,6 +55,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         numberEditText=(EditText) findViewById(R.id.shipment_phone_number);
         addressEditText=(EditText) findViewById(R.id.shipment_address);
         auth = FirebaseAuth.getInstance();
+        shippingRef = FirebaseDatabase.getInstance().getReference().child("Users");
         user = auth.getCurrentUser();
         confirmGroup = (RadioGroup) findViewById(R.id.confirm_radio_group);
         confirmCustom = (RadioButton) findViewById(R.id.confirm_radio_custom);
@@ -58,12 +64,48 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         confirmGroup.check(R.id.confirm_radio_custom);
         confirmTotal = (TextView) findViewById(R.id.confirm_total_text);
 
+
         confirmGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if(checkedId == R.id.confirm_radio_custom){
+                    nameEditText.setText("");
+                    addressEditText.setText("");
+                    numberEditText.setText("");
+                }
 
+                if(checkedId == R.id.confirm_radio_account){
+                    shippingRef.child(user.getUid()).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.exists()){
+                                shippingRef.child(user.getUid()).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        if(snapshot.exists()){
+                                            String name = snapshot.child("firstName").getValue().toString() + " " + snapshot.child("lastName").getValue().toString();
+                                            String address = snapshot.child("address").getValue().toString();
+                                            String contactNum = snapshot.child("contact").getValue().toString();
 
+                                            nameEditText.setText(name);
+                                            addressEditText.setText(address);
+                                            numberEditText.setText(contactNum);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }
             }
         });
