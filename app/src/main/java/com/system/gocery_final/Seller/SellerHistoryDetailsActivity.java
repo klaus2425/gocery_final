@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -24,7 +25,7 @@ public class SellerHistoryDetailsActivity extends AppCompatActivity {
     private String orderId = "";
     private RecyclerView productsList;
     RecyclerView.LayoutManager layoutManager;
-
+    private ImageButton back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +43,13 @@ public class SellerHistoryDetailsActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
+        back = findViewById(R.id.backBtn);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         FirebaseRecyclerOptions<Cart> options = new FirebaseRecyclerOptions.Builder<Cart>()
                 .setQuery(cartListRef, Cart.class)
                 .build();

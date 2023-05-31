@@ -2,12 +2,10 @@
 <resources>
     <color name="black">#212121</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="pink">#FFC0CB</color>
     <color name="orange">#FA8128</color>
     <color name="purple">#723ead</color>
     <color name="green">#50C878</color>
     <color name="gray">#757575</color>
-    <color name="gold">#f0b83e</color>
     <color name="lightgray">#FDFDFD</color>
     <color name="lightpurple">#f2ecf6</color>
 

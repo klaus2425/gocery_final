@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.Menu;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.google.android.material.bottomappbar.BottomAppBar;
@@ -52,7 +51,7 @@ public class HomeActivity extends AppCompatActivity{
     public static final String SESSION = "session";
     public static final String ONGOING = "ongoing";
     private String session;
-
+    private BottomAppBar bottomAppBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +59,8 @@ public class HomeActivity extends AppCompatActivity{
 
 
 
+        searchHome = (EditText) findViewById(R.id.search_home);
+        searchHome.setFocusable(false);
         loadData();
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -68,7 +69,7 @@ public class HomeActivity extends AppCompatActivity{
             type = getIntent().getExtras().get("Admin").toString();
         }
 
-
+        bottomAppBar = findViewById(R.id.bottom_bar);
         //Verification Check
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
@@ -81,7 +82,9 @@ public class HomeActivity extends AppCompatActivity{
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         if(type.equals("Admin")){
             fab.setVisibility(View.GONE);
-
+            searchHome.setVisibility(View.GONE);
+            searchHome.setHeight(0);
+            bottomAppBar.setVisibility(View.GONE);
         }
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,13 +97,14 @@ public class HomeActivity extends AppCompatActivity{
             }
         });
 
+
+
         recyclerView = findViewById(R.id.recycler_menu);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
-        searchHome = (EditText) findViewById(R.id.search_home);
-        searchHome.setFocusable(false);
+
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_nav_view);
         bottomNavigationView.getMenu().getItem(0).setChecked(false);
         bottomNavigationView.setOnNavigationItemSelectedListener(bNavListener);
