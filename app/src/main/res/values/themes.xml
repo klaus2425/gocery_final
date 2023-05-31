@@ -24,4 +24,8 @@
         <item name="cornerRadius">10dp</item>
         <item name="cornerSize">50%</item>
     </style>
+    <style name="RadioButtonTheme" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/purple</item>
+        <item name="colorControlNormal">@color/lightpurple</item>
+    </style>
 </resources>

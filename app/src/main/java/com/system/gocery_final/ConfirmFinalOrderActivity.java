@@ -62,7 +62,8 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if(checkedId == R.id.confirm_radio_custom){
-                    
+
+
                 }
             }
         });

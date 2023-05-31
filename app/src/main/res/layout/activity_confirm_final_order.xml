@@ -114,6 +114,7 @@
         android:orientation="horizontal"
         android:layout_below="@+id/shipment_address"
         android:gravity="center_horizontal"
+
         android:padding="2dp"
         >
         <RadioButton
@@ -122,8 +123,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/radio_button_bg"
             android:text="Custom Address"
-            android:padding="10dp"
+            android:padding="15dp"
             android:layout_marginEnd="30dp"
+            android:theme="@style/RadioButtonTheme"
             />
 
         <RadioButton
@@ -132,7 +134,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/radio_button_bg"
             android:text="Account Address"
-            android:padding="10dp"
+            android:padding="15dp"
+            android:theme="@style/RadioButtonTheme"
 
             />
     </RadioGroup>
