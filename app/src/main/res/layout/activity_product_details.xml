@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
     tools:context=".ProductDetailsActivity">
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
     <androidx.cardview.widget.CardView
         android:id="@+id/details_card"
         android:layout_width="match_parent"
@@ -51,7 +55,7 @@
 
                 android:text="₱ "
                 android:textColor="@color/purple"
-                android:textSize="16sp"
+                android:textSize="17sp"
                 />
 
                 <TextView
@@ -60,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:text="Product Price"
                     android:textColor="@color/purple"
-                    android:textSize="16sp"
+                    android:textSize="17sp"
                     />
 
             </LinearLayout>
@@ -85,6 +89,7 @@
                     android:layout_marginEnd="5dp"
                     android:isIndicator="true"
                     style="?android:attr/ratingBarStyleSmall"
+                    android:theme="@style/RatingBar"
                     />
 
                 <TextView
@@ -187,12 +192,23 @@
                 android:layout_marginTop="10dp"/>
 
 
+            <TextView
+                android:id="@+id/product_reviews_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Customer Reviews"
+                android:textColor="@color/purple"
+                android:textSize="16sp"
+                android:paddingStart="10dp"
+                android:layout_below="@+id/product_description_details"
+                android:layout_marginTop="10dp"/>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/reviewsRv"
                     android:padding="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/product_description_details"
+                    android:layout_below="@+id/product_reviews_title"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/row_reviews"
 
@@ -230,9 +246,9 @@
         app:fab_iconSrc="@drawable/baseline_comment_24"
         />
 
-
-
-
 </RelativeLayout>
+
+
+</androidx.core.widget.NestedScrollView>
 
 
