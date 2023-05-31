@@ -41,6 +41,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
         />
 
 
@@ -77,11 +78,15 @@
         android:layout_margin="20dp"
         />
 
-    <com.rey.material.widget.FloatingActionButton
+    <Button
+
         android:id="@+id/submitComment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end"
+        android:text="Submit Review"
+        android:layout_gravity="center_horizontal"
+        android:textSize="15sp"
+        android:backgroundTint="@color/orange"
         android:src="@drawable/baseline_check_24"
         />
 
