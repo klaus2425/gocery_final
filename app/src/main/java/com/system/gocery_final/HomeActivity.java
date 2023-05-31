@@ -239,8 +239,6 @@ public class HomeActivity extends AppCompatActivity{
         editor.putString(SESSION, session);
         editor.putBoolean(ONGOING, true);
         editor.commit();
-        Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
-
     }
 
     public void loadData(){
@@ -249,8 +247,6 @@ public class HomeActivity extends AppCompatActivity{
             saveData();
         }
         else {
-            Toast.makeText(this, "Loaded", Toast.LENGTH_SHORT).show();
-
             session = sharedPreferences.getString(SESSION, "session");
         }
     }
