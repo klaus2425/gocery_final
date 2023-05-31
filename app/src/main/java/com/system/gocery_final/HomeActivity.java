@@ -83,7 +83,6 @@ public class HomeActivity extends AppCompatActivity{
         if(type.equals("Admin")){
             fab.setVisibility(View.GONE);
             searchHome.setVisibility(View.GONE);
-            searchHome.setHeight(0);
             bottomAppBar.setVisibility(View.GONE);
         }
         fab.setOnClickListener(new View.OnClickListener() {
