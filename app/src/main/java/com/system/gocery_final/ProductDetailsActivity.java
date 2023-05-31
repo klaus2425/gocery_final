@@ -33,6 +33,7 @@ import com.system.gocery_final.Model.ModelReview;
 import com.system.gocery_final.Model.Products;
 import com.system.gocery_final.ViewHolder.AdapterReview;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -40,7 +41,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class ProductDetailsActivity extends AppCompatActivity {
-    private FloatingActionButton addToCartBtn, writeComment;
+    private Button addToCartBtn, writeComment;
     private ImageButton plusBtn, minusBtn;
     private ImageView productImage;
     private TextView productPrice, productDescription, productName, ratingsTv;
@@ -65,8 +66,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
         ratingBar=(RatingBar) findViewById(R.id.ratingBar);
         ratingsTv = (TextView) findViewById(R.id.ratingsTv);
         productID = getIntent().getStringExtra("pid");
-        writeComment =(FloatingActionButton) findViewById(R.id.pd_add_comment);
-        addToCartBtn =(FloatingActionButton) findViewById(R.id.pd_add_product_to_cart_btn);
+        writeComment =(Button) findViewById(R.id.pd_add_comment);
+        addToCartBtn =(Button) findViewById(R.id.pd_add_product_to_cart_btn);
         minusBtn =(ImageButton) findViewById(R.id.product_minus);
         plusBtn =(ImageButton) findViewById(R.id.product_add);
         productImage=(ImageView) findViewById(R.id.product_image_details);
@@ -175,9 +176,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     reviewsRv.setAdapter(adapterReview);
                     long numberOfReviews = snapshot.getChildrenCount();
                     float avgRating = ratingSum / numberOfReviews;
-
                     ratingBar.setRating(avgRating);
-                    if(snapshot.exists()) ratingsTv.setText(String.valueOf(avgRating));
+                    NumberFormat nf= NumberFormat.getInstance();
+                    nf.setMaximumFractionDigits(2);
+                    if(snapshot.exists()) ratingsTv.setText(nf.format(avgRating));
                     else ratingsTv.setText("No Ratings Yet");
             }
 

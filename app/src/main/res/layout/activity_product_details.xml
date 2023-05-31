@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".ProductDetailsActivity">
+
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    >
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -211,44 +216,47 @@
                     android:layout_below="@+id/product_reviews_title"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/row_reviews"
-
+                    android:layout_marginBottom="60dp"
                     />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
-
-    <com.rey.material.widget.FloatingActionButton
-        android:id="@+id/pd_add_product_to_cart_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        android:backgroundTint="@color/white"
-        android:elevation="6dp"
-        app:fab_iconSrc="@drawable/nav_cart" />
-
-
-    <com.rey.material.widget.FloatingActionButton
-        android:id="@+id/pd_add_comment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        android:elevation="6dp"
-        app:fab_iconSrc="@drawable/baseline_comment_24"
-        />
-
 </RelativeLayout>
-
-
 </androidx.core.widget.NestedScrollView>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="2"
+    android:layout_alignParentBottom="true"
+    >
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pd_add_comment"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:background="@color/orange"
+        android:text="Write a Review"
+        android:textColor="@color/white"
+        android:drawableStart="@drawable/baseline_rate_review_24"
+        android:drawableTint="@color/white"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pd_add_product_to_cart_btn"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/purple"
+        android:text="Add to Cart"
+        android:textColor="@color/white"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:drawableTint="@color/white"
+        android:drawableStart="@drawable/baseline_add_shopping_cart_24"
+ />
+</LinearLayout>
+</RelativeLayout>
 
 
