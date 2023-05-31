@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -35,7 +36,7 @@ public class WriteReviewActivity extends AppCompatActivity {
     private TextView prodName;
     private RatingBar ratingBar;
     private EditText reviewEt;
-    private FloatingActionButton submitComment;
+    private Button submitComment;
 
     private FirebaseUser user;
     private FirebaseAuth firebaseauth;
@@ -52,7 +53,7 @@ public class WriteReviewActivity extends AppCompatActivity {
         prodName = findViewById(R.id.product_name_details);
         ratingBar = findViewById(R.id.ratingBar);
         reviewEt = findViewById(R.id.reviewEt);
-        submitComment = findViewById(R.id.submitComment);
+        submitComment = (Button) findViewById(R.id.submitComment);
 
         pid = getIntent().getStringExtra("pid");
         firebaseauth = FirebaseAuth.getInstance();
@@ -143,6 +144,7 @@ public class WriteReviewActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(WriteReviewActivity.this,"Review Published Successfuly",Toast.LENGTH_SHORT).show();
+                finish();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
