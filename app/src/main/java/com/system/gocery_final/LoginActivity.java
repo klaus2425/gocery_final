@@ -32,7 +32,6 @@ import io.paperdb.Paper;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private String email,password;
     private TextView forgotPasswordLink;
     private Button sellerButton; // adminLink
     private Button customerButton; // notAdminLink
@@ -127,12 +126,11 @@ public class LoginActivity extends AppCompatActivity {
                                     allowAccessToAccount(email, password);
                                 }else {
                                     Toast.makeText(LoginActivity.this, "Please verify your email.", Toast.LENGTH_SHORT).show();
-                                    Toast.makeText(LoginActivity.this, "Seller Selected", Toast.LENGTH_SHORT).show();
                                     loadingBar.dismiss();
                                     user.sendEmailVerification();
                                 }
                             } else {
-                                Toast.makeText(LoginActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
 
                             }
