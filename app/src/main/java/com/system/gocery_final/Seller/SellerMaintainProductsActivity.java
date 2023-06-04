@@ -29,14 +29,16 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.squareup.picasso.Picasso;
 import com.system.gocery_final.Prevalent.Prevalent;
+import com.system.gocery_final.ProductDetailsActivity;
 import com.system.gocery_final.R;
 import com.system.gocery_final.SettingsActivity;
+import com.system.gocery_final.WriteReviewActivity;
 
 import java.util.HashMap;
 
 public class SellerMaintainProductsActivity extends AppCompatActivity {
 
-    private Button applyChangesBtn, deleteBtn;
+    private Button applyChangesBtn, deleteBtn,checkRv;
     private EditText name, price, description, quantity;
     private ImageView imageView;
     private String productID ="";
@@ -54,6 +56,7 @@ public class SellerMaintainProductsActivity extends AppCompatActivity {
         productID = getIntent().getStringExtra("pid");
         productsRef = FirebaseDatabase.getInstance().getReference().child("Products").child(productID);
 
+        checkRv = findViewById(R.id.check_product_rv_btn);
         applyChangesBtn = findViewById(R.id.apply_changes_button);
         name = findViewById(R.id.product_name_maintain);
         price = findViewById(R.id.product_price_maintain);
@@ -63,6 +66,16 @@ public class SellerMaintainProductsActivity extends AppCompatActivity {
         deleteBtn = findViewById(R.id.delete_product_btn);
 
         displaySpecificProductInfo();
+
+        checkRv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SellerMaintainProductsActivity.this, SellerShowProductReviewsActivity.class);
+                intent.putExtra("pid",productID);
+                startActivity(intent);
+            }
+        });
+
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
