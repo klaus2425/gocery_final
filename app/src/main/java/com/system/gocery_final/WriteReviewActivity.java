@@ -74,6 +74,8 @@ public class WriteReviewActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
     private void loadShopInfo() {
