@@ -31,6 +31,7 @@ public class SellerShowProductReviewsActivity extends AppCompatActivity {
 
 
     private FirebaseUser user;
+
     private FirebaseAuth firebaseauth;
     private ImageView prodImage;
     private ImageButton backBtn;
@@ -104,7 +105,6 @@ public class SellerShowProductReviewsActivity extends AppCompatActivity {
                 for (DataSnapshot s : snapshot.getChildren()) {
                     float rating = Float.parseFloat(s.child("ratings").getValue().toString());
                     ratingSum = ratingSum + rating;
-
                     ModelReview modelReview = s.getValue(ModelReview.class);
                     reviewArrayList.add(modelReview);
                 }
