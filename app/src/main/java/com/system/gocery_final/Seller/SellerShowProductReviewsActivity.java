@@ -63,7 +63,7 @@ public class SellerShowProductReviewsActivity extends AppCompatActivity {
             }
         });
         loadProdInfo();
-
+        loadReviews();
 
     }
     private void loadProdInfo() {
