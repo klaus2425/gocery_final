@@ -85,7 +85,7 @@ public class SellerNewOrdersActivity extends AppCompatActivity {
                    @Override
                    public void onClick(View v) {
                        Intent intent = new Intent(SellerNewOrdersActivity.this, SellerUserProductsActivity.class);
-                       intent.putExtra("orderID ", model.getOrderid());
+                       intent.putExtra("orderID", model.getOrderid());
                        startActivity(intent);
                    }
                });
