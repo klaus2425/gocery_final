@@ -55,7 +55,6 @@ public class SellerMaintainProductsActivity extends AppCompatActivity {
         storageProductPictureRef = FirebaseStorage.getInstance().getReference().child("Product Images");
         productID = getIntent().getStringExtra("pid");
         productsRef = FirebaseDatabase.getInstance().getReference().child("Products").child(productID);
-
         checkRv = findViewById(R.id.check_product_rv_btn);
         applyChangesBtn = findViewById(R.id.apply_changes_button);
         name = findViewById(R.id.product_name_maintain);
