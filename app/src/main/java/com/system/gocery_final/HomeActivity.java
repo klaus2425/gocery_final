@@ -81,9 +81,9 @@ public class HomeActivity extends AppCompatActivity{
         Paper.init(this);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         if(type.equals("Admin")){
-            fab.setVisibility(View.GONE);
-            searchHome.setVisibility(View.GONE);
-            bottomAppBar.setVisibility(View.GONE);
+            ((ViewGroup) fab.getParent()).removeView(fab);
+            View bottomAppBar = findViewById(R.id.bottom_bar);
+            ((ViewGroup) bottomAppBar.getParent()).removeView(bottomAppBar);
         }
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,15 +104,14 @@ public class HomeActivity extends AppCompatActivity{
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_nav_view);
-        bottomNavigationView.getMenu().getItem(0).setChecked(false);
-        bottomNavigationView.setOnNavigationItemSelectedListener(bNavListener);
+
 
 
         searchHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, SearchProductsActivity.class);
+                intent.putExtra("type", type);
                 startActivity(intent);
                 Animatoo.INSTANCE.animateFade(HomeActivity.this);
             }

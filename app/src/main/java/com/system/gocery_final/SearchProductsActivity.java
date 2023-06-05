@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 import com.system.gocery_final.Model.Products;
+import com.system.gocery_final.Seller.SellerMaintainProductsActivity;
 import com.system.gocery_final.ViewHolder.ProductViewHolder;
 
 public class SearchProductsActivity extends AppCompatActivity {
@@ -27,7 +28,7 @@ public class SearchProductsActivity extends AppCompatActivity {
     private EditText inputText;
     private RecyclerView searchList;
     private String searchInput;
-
+    private String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class SearchProductsActivity extends AppCompatActivity {
         inputText= (EditText) findViewById(R.id.search_product_name);
         SearchBtn = (ImageView) findViewById(R.id.search_button);
         searchList = findViewById(R.id.search_list);
-
+        type = getIntent().getStringExtra("type");
         searchList.setLayoutManager(new LinearLayoutManager(SearchProductsActivity.this));
 
         SearchBtn.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +70,11 @@ public class SearchProductsActivity extends AppCompatActivity {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if(type.equals("Admin")){
+                            Intent intent = new Intent(SearchProductsActivity.this, SellerMaintainProductsActivity.class);
+                            intent.putExtra("pid",model.getPid());
+                            startActivity(intent);
+                        }
                         Intent intent = new Intent(SearchProductsActivity.this,ProductDetailsActivity.class);
                         intent.putExtra("pid",model.getPid());
                         startActivity(intent);
