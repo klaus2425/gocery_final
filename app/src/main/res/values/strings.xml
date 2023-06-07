@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Gocery_Final</string>
+    <string name="app_name">Gocery</string>
     <string name="title_activity_home">HomeActivity</string>
 
     <string name="title_activity_admin_home">AdminHomeActivity</string>
