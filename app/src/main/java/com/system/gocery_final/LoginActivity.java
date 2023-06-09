@@ -176,6 +176,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
                 else {
+                    loadingBar.dismiss();
                     Toast.makeText(LoginActivity.this, "Account " + email +  " does not exist.", Toast.LENGTH_SHORT).show();
                 }
             }
