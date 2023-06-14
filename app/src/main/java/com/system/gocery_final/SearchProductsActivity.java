@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -48,7 +49,7 @@ public class SearchProductsActivity extends AppCompatActivity {
                 onStart();
             }
         });
-
+        Toast.makeText(this, type, Toast.LENGTH_SHORT).show();
 
 
     }
@@ -74,10 +75,11 @@ public class SearchProductsActivity extends AppCompatActivity {
                             Intent intent = new Intent(SearchProductsActivity.this, SellerMaintainProductsActivity.class);
                             intent.putExtra("pid",model.getPid());
                             startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(SearchProductsActivity.this, ProductDetailsActivity.class);
+                            intent.putExtra("pid", model.getPid());
+                            startActivity(intent);
                         }
-                        Intent intent = new Intent(SearchProductsActivity.this,ProductDetailsActivity.class);
-                        intent.putExtra("pid",model.getPid());
-                        startActivity(intent);
                     }
                 });
             }

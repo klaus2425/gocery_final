@@ -84,6 +84,11 @@ public class HomeActivity extends AppCompatActivity{
             ((ViewGroup) fab.getParent()).removeView(fab);
             View bottomAppBar = findViewById(R.id.bottom_bar);
             ((ViewGroup) bottomAppBar.getParent()).removeView(bottomAppBar);
+        } else {
+            BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_nav_view);
+            bottomNavigationView.getMenu().getItem(0).setChecked(false);
+            bottomNavigationView.setOnNavigationItemSelectedListener(bNavListener);
+
         }
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,9 +110,7 @@ public class HomeActivity extends AppCompatActivity{
         recyclerView.setLayoutManager(gridLayoutManager);
 
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_nav_view);
-        bottomNavigationView.getMenu().getItem(0).setChecked(false);
-        bottomNavigationView.setOnNavigationItemSelectedListener(bNavListener);
+
         searchHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
