@@ -46,6 +46,7 @@
         android:layout_marginRight="45dp"
         android:background="@drawable/edit_text_bg"
         android:elevation="2dp"
+        android:maxLength="10"
         />
 
     <EditText
