@@ -49,7 +49,6 @@ public class SearchProductsActivity extends AppCompatActivity {
                 onStart();
             }
         });
-        Toast.makeText(this, type, Toast.LENGTH_SHORT).show();
 
 
     }
