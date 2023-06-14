@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.google.android.material.bottomappbar.BottomAppBar;
@@ -51,7 +52,7 @@ public class HomeActivity extends AppCompatActivity{
     public static final String SESSION = "session";
     public static final String ONGOING = "ongoing";
     private String session;
-    private BottomAppBar bottomAppBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +70,6 @@ public class HomeActivity extends AppCompatActivity{
             type = getIntent().getExtras().get("Admin").toString();
         }
 
-        bottomAppBar = findViewById(R.id.bottom_bar);
         //Verification Check
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
@@ -105,8 +105,9 @@ public class HomeActivity extends AppCompatActivity{
         recyclerView.setLayoutManager(gridLayoutManager);
 
 
-
-
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_nav_view);
+        bottomNavigationView.getMenu().getItem(0).setChecked(false);
+        bottomNavigationView.setOnNavigationItemSelectedListener(bNavListener);
         searchHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

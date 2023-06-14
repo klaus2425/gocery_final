@@ -37,7 +37,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseUser user;
     DatabaseReference shippingRef;
-
+    private int totalDelivery;
     private TextView confirmTotal;
     private String totalAmount = "";
     private String sessionID= "";
@@ -55,6 +55,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         numberEditText=(EditText) findViewById(R.id.shipment_phone_number);
         addressEditText=(EditText) findViewById(R.id.shipment_address);
         auth = FirebaseAuth.getInstance();
+        totalDelivery = Integer.parseInt(getIntent().getStringExtra("Total Price")) + 30;
         shippingRef = FirebaseDatabase.getInstance().getReference().child("Users");
         user = auth.getCurrentUser();
         confirmGroup = (RadioGroup) findViewById(R.id.confirm_radio_group);
@@ -123,7 +124,8 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                 Check();
             }
         });
-        confirmTotal.setText("Total: ₱" + getIntent().getStringExtra("Total Price"));
+
+        confirmTotal.setText("Total: ₱" + String.valueOf(totalDelivery) + " (₱30 Delivery Fee included)");
     }
 
     private void Check() {
