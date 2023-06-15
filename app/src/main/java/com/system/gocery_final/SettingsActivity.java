@@ -181,7 +181,7 @@ public class SettingsActivity extends AppCompatActivity {
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
         if(imageUri != null){
-            final StorageReference fileRef = storageProfilePictureRef.child(Prevalent.currentOnlineUser.getEmail()+ ".jpg");
+            final StorageReference fileRef = storageProfilePictureRef.child(userEmailEditText.getText().toString()+ ".jpg");
             uploadTask = fileRef.putFile(imageUri);
 
             uploadTask.continueWithTask(new Continuation() {
@@ -223,7 +223,6 @@ public class SettingsActivity extends AppCompatActivity {
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
                                                     Log.d(TAG, "User email address updated.");
-                                                    user.sendEmailVerification();
                                                 }
                                             }
                                         });
@@ -238,8 +237,8 @@ public class SettingsActivity extends AppCompatActivity {
                             }
                         });
 
-                        Paper.book().destroy();
-                        FirebaseAuth.getInstance().signOut();
+//                        Paper.book().destroy();
+//                        FirebaseAuth.getInstance().signOut();
                         Toast.makeText(SettingsActivity.this,"Profile Info Update Successfully",Toast.LENGTH_SHORT);
                         startActivity(new Intent(SettingsActivity.this,MainActivity.class));
                         finish();
@@ -262,13 +261,11 @@ public class SettingsActivity extends AppCompatActivity {
         userMap.put("contact",userPhoneEditText.getText().toString());
         userMap.put("email",userEmailEditText.getText().toString());
         ref.child(user.getUid()).updateChildren(userMap);
-        credential = EmailAuthProvider.getCredential(Prevalent.currentOnlineUser.getEmail(), userPasswordEditText.getText().toString());
+        credential = EmailAuthProvider.getCredential(userEmailEditText.getText().toString(), userPasswordEditText.getText().toString());
         user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 Log.d(TAG, "User Re-authenticated.");
-
-
                 user.updateEmail(userEmailEditText.getText().toString())
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
@@ -287,12 +284,10 @@ public class SettingsActivity extends AppCompatActivity {
                         }
                     }
                 });
-                Paper.book().destroy();
             }
         });
 
 
-        FirebaseAuth.getInstance().signOut();
         Toast.makeText(SettingsActivity.this,"Profile Info Update Successfully",Toast.LENGTH_SHORT).show();
         startActivity(new Intent(SettingsActivity.this,MainActivity.class));
         finish();
@@ -317,7 +312,6 @@ public class SettingsActivity extends AppCompatActivity {
                        firstNameEditText.setText(firsName);
                        lastNameEditText.setText(lastName);
                        userEmailEditText.setText(email);
-                       userPasswordEditText.setText("");
                        userPhoneEditText.setText(phone);
                        addressEditText.setText(address);
                    }
