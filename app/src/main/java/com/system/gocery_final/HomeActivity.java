@@ -73,9 +73,7 @@ public class HomeActivity extends AppCompatActivity{
         //Verification Check
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
-        if(user.isEmailVerified()){
-            System.out.println("Email is verified");
-        } else System.out.println("Email is not verified");
+
 
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
         Paper.init(this);

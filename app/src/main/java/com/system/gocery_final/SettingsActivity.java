@@ -237,8 +237,8 @@ public class SettingsActivity extends AppCompatActivity {
                             }
                         });
 
-//                        Paper.book().destroy();
-//                        FirebaseAuth.getInstance().signOut();
+                        Paper.book().destroy();
+                        FirebaseAuth.getInstance().signOut();
                         Toast.makeText(SettingsActivity.this,"Profile Info Update Successfully",Toast.LENGTH_SHORT);
                         startActivity(new Intent(SettingsActivity.this,MainActivity.class));
                         finish();
@@ -287,7 +287,8 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-
+        Paper.book().destroy();
+        FirebaseAuth.getInstance().signOut();
         Toast.makeText(SettingsActivity.this,"Profile Info Update Successfully",Toast.LENGTH_SHORT).show();
         startActivity(new Intent(SettingsActivity.this,MainActivity.class));
         finish();
