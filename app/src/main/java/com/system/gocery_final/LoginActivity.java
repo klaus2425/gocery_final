@@ -123,7 +123,42 @@ public class LoginActivity extends AppCompatActivity {
                                     loadingBar.setMessage("Please wait while we are checking credentials.");
                                     loadingBar.setCanceledOnTouchOutside(false);
                                     loadingBar.show();
-                                    allowAccessToAccount(email, password);
+                                    final DatabaseReference RootRef;
+                                    RootRef = FirebaseDatabase.getInstance().getReference();
+                                    RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            if(snapshot.child(parentDbName).child(user.getUid()).exists()) {
+
+                                                Users userData = snapshot.child(parentDbName).child(user.getUid()).getValue(Users.class);
+                                                if(chkBoxRememberMe.isChecked()){
+                                                    Paper.book().write(Prevalent.userEmail,email);
+                                                    Paper.book().write(Prevalent.userPasswordKey,password);
+                                                    Paper.book().write(Prevalent.userType,parentDbName);
+
+                                                }
+                                                if(parentDbName.equals("Seller")){
+                                                    Toast.makeText(LoginActivity.this, "Seller Login Successful", Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(LoginActivity.this, SellerHomeActivity.class);
+                                                    startActivity(intent);
+                                                    finish();
+                                                } else if (parentDbName.equals("Users")) {
+
+                                                    Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                                    Prevalent.currentOnlineUser = userData;
+                                                    startActivity(intent);
+                                                    finish();
+                                                }
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+
                                 }else {
                                     Toast.makeText(LoginActivity.this, "Please verify your email.", Toast.LENGTH_SHORT).show();
                                     loadingBar.dismiss();
@@ -139,53 +174,37 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
     private void allowAccessToAccount(final String email, final String password){
-        if(chkBoxRememberMe.isChecked()){
-            Paper.book().write(Prevalent.userEmail,email);
-            Paper.book().write(Prevalent.userPasswordKey,password);
-            Paper.book().write(Prevalent.userType,parentDbName);
-
-        }
-        final DatabaseReference RootRef;
-        RootRef = FirebaseDatabase.getInstance().getReference();
-        RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.child(parentDbName).child(user.getUid()).exists()){
-
-                    Users userData = snapshot.child(parentDbName).child(user.getUid()).getValue(Users.class);
-                    if(userData.getEmail().equals(email)){
-
-                        if (userData.getPassword().equals(password)) {
-                            if(parentDbName.equals("Seller")){
-                                Toast.makeText(LoginActivity.this, "Seller Login Successful", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginActivity.this, SellerHomeActivity.class);
-                                startActivity(intent);
-                                finish();
-                            } else if (parentDbName.equals("Users")) {
-
-                                Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                                Prevalent.currentOnlineUser = userData;
-                                startActivity(intent);
-                                finish();
-                            }
-                        } else {
-                                loadingBar.dismiss();
-                                Toast.makeText(LoginActivity.this, "Password is incorrect", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-                else {
-                    loadingBar.dismiss();
-                    Toast.makeText(LoginActivity.this, "Account " + email +  " does not exist.", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+//
+//
+//        RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//
+//                    if(userData.getEmail().equals(email)){
+//
+//                        if (userData.getPassword().equals(password)) {
+//                            if(parentDbName.equals("Seller")){
+//
+//                            } else if (parentDbName.equals("Users")) {
+//
+//                            }
+//                        } else {
+//                                loadingBar.dismiss();
+//                                Toast.makeText(LoginActivity.this, "Password is incorrect", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                }
+//                else {
+//                    loadingBar.dismiss();
+//                    Toast.makeText(LoginActivity.this, "Account " + email +  " does not exist.", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
 
     }
 }

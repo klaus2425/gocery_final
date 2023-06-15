@@ -12,6 +12,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -84,43 +87,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void AllowAccess(final String email, final String password, final String userType) {
-        final DatabaseReference RootRef;
-        RootRef = FirebaseDatabase.getInstance().getReference();
-        RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.child(userType).child(user.getUid()).exists()){
-
-                    Users userData = snapshot.child(userType).child(user.getUid()).getValue(Users.class);
-                    if(userData.getEmail().equals(email)){
-
-                        if (userData.getPassword().equals(password)) {
-                            if(userType.equals("Seller")){
-                                loadingBar.dismiss();
-                                Toast.makeText(MainActivity.this, "Seller Login Successful", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(MainActivity.this, SellerHomeActivity.class);
-                                startActivity(intent);
-                                finish();
-                            } else if (userType .equals("Users")) {
-                                loadingBar.dismiss();
-                                Toast.makeText(MainActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                                Prevalent.currentOnlineUser = userData;
-                                startActivity(intent);
-                                finish();
-                            }
-                        } else {
-                            Toast.makeText(MainActivity.this, "Password is incorrect", Toast.LENGTH_SHORT).show();
-                        }
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    loadingBar.dismiss();
+                    if(userType.equals("Seller")){
+                        Toast.makeText(MainActivity.this, "Seller Login Successful", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this, SellerHomeActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else if (userType.equals("Users")) {
+                        Toast.makeText(MainActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
-                }
-                else {
-                    Toast.makeText(MainActivity.this, "Account " + email +  " does not exist.", Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
 
+                }
+                loadingBar.dismiss();
             }
         });
 

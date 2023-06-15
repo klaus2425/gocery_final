@@ -120,7 +120,6 @@ public class RegisterActivity extends AppCompatActivity {
                 if(!(snapshot.child("Users").child(user.getUid()).exists())){
                     HashMap<String, Object> userdataMap = new HashMap<>();
                     userdataMap.put("email", email);
-                    userdataMap.put("password", password);
                     userdataMap.put("firstName", firstName);
                     userdataMap.put("lastName", lastName);
                     userdataMap.put("address", address);

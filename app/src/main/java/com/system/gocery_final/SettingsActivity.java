@@ -55,7 +55,7 @@ public class SettingsActivity extends AppCompatActivity {
     private CircleImageView profileImageView;
     private EditText firstNameEditText, lastNameEditText, userPhoneEditText, addressEditText, userEmailEditText, userPasswordEditText;
     private TextView closeTextBtn, saveTextButton;
-    private Button profileChangeTextBtn, securityQuestionBtn, logoutBtn;
+    private Button profileChangeTextBtn, logoutBtn;
     private AuthCredential credential;
     private Uri imageUri;
     private String myUrl = "";
@@ -81,8 +81,6 @@ public class SettingsActivity extends AppCompatActivity {
         saveTextButton = (TextView) findViewById(R.id.update_settings);
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
-        credential = EmailAuthProvider.getCredential(Prevalent.currentOnlineUser.getEmail(), Prevalent.currentOnlineUser.getPassword());
-        securityQuestionBtn = (Button) findViewById(R.id.security_questions_btn);
         userInfoDisplay(profileImageView,firstNameEditText, lastNameEditText,userPhoneEditText,addressEditText);
 
         closeTextBtn.setOnClickListener(new View.OnClickListener() {
@@ -92,16 +90,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        securityQuestionBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SettingsActivity.this, ResetPasswordActivity.class);
-                intent.putExtra("check", "settings");
-                startActivity(intent);
-                finish();
 
-            }
-        });
 
         saveTextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,6 +152,7 @@ public class SettingsActivity extends AppCompatActivity {
     );
 
 
+
     private void userInfoSaved() {
         if(TextUtils.isEmpty(firstNameEditText.getText().toString())){
             Toast.makeText(this,"First Name Should Not Be Empty",Toast.LENGTH_SHORT).show();
@@ -175,8 +165,10 @@ public class SettingsActivity extends AppCompatActivity {
         }
         else if(TextUtils.isEmpty(userPhoneEditText.getText().toString())){
             Toast.makeText(this,"Contact Number Not Be Empty",Toast.LENGTH_SHORT).show();
-        }
-        else if(checker.equals("clicked")){
+        } else if (TextUtils.isEmpty(userPasswordEditText.getText().toString())) {
+            Toast.makeText(this,"Password Cannot Be Empty",Toast.LENGTH_SHORT).show();
+
+        } else if(checker.equals("clicked")){
             uploadImage();
         }
 
@@ -217,10 +209,9 @@ public class SettingsActivity extends AppCompatActivity {
                         userMap.put("address",addressEditText.getText().toString());
                         userMap.put("contact",userPhoneEditText.getText().toString());
                         userMap.put("email",userEmailEditText.getText().toString());
-                        userMap.put("password", userPasswordEditText.getText().toString());
                         userMap. put("image", myUrl);
                         ref.child(user.getUid()).updateChildren(userMap);
-
+                        credential = EmailAuthProvider.getCredential(Prevalent.currentOnlineUser.getEmail(), userPasswordEditText.getText().toString());
                         user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
@@ -270,10 +261,8 @@ public class SettingsActivity extends AppCompatActivity {
         userMap.put("address",addressEditText.getText().toString());
         userMap.put("contact",userPhoneEditText.getText().toString());
         userMap.put("email",userEmailEditText.getText().toString());
-        userMap.put("password", userPasswordEditText.getText().toString());
         ref.child(user.getUid()).updateChildren(userMap);
-
-
+        credential = EmailAuthProvider.getCredential(Prevalent.currentOnlineUser.getEmail(), userPasswordEditText.getText().toString());
         user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -324,12 +313,11 @@ public class SettingsActivity extends AppCompatActivity {
                        String phone = snapshot.child("contact").getValue().toString();
                        String address = snapshot.child("address").getValue().toString();
                        String email = snapshot.child("email").getValue().toString();
-                       String password = snapshot.child("password").getValue().toString();
                        Picasso.get().load(image).into(profileImageView);
                        firstNameEditText.setText(firsName);
                        lastNameEditText.setText(lastName);
                        userEmailEditText.setText(email);
-                       userPasswordEditText.setText(password);
+                       userPasswordEditText.setText("");
                        userPhoneEditText.setText(phone);
                        addressEditText.setText(address);
                    }
