@@ -223,7 +223,7 @@ public class SellerAddNewProductActivity extends AppCompatActivity {
                                 Intent intent = new Intent(SellerAddNewProductActivity.this, SellerCategoryActivity.class);
                                 startActivity(intent);
                                 loadingBar.dismiss();
-
+                                finish();
                             Toast.makeText(SellerAddNewProductActivity.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
                         }
                         else
