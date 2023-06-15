@@ -189,30 +189,19 @@
                 android:paddingStart="10dp"
                 android:layout_marginTop="10dp"/>
 
-            <com.ms.square.android.expandabletextview.ExpandableTextView
+
+
+
+                 <TextView
                 android:id="@+id/product_description_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/product_description_title"
-                app:maxCollapsedLines="2"
-                app:animDuration="2000"
                 android:text="Product Description"
                 android:textColor="@color/gray"
                 android:textSize="16sp"
                 android:paddingStart="10dp"
                 android:layout_marginTop="10dp"/>
-
-
-<!--                 <TextView&ndash;&gt;-->
-<!--                android:id="@+id/product_description_details"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@id/product_description_title"-->
-<!--                android:text="Product Description"-->
-<!--                android:textColor="@color/gray"-->
-<!--                android:textSize="16sp"-->
-<!--                android:paddingStart="10dp"-->
-<!--                android:layout_marginTop="10dp"/>-->
 
 
             <TextView
