@@ -156,6 +156,7 @@ public class HomeActivity extends AppCompatActivity{
                                     Intent intent = new Intent(HomeActivity.this,ProductDetailsActivity.class);
                                     intent.putExtra("pid",model.getPid());
                                     intent.putExtra("session", session);
+                                    intent.putExtra("allow", "false");
                                     startActivity(intent);
                                 }
                             }
@@ -214,6 +215,7 @@ public class HomeActivity extends AppCompatActivity{
             }
             else if(id == R.id.nav_history){
                 Intent intent = new Intent(HomeActivity.this, OrderHistoryActivity.class);
+                intent.putExtra("session", session);
                 startActivity(intent);
             }
             return true;

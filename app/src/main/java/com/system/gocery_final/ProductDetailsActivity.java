@@ -10,6 +10,7 @@ import android.media.Image;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -41,7 +42,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class ProductDetailsActivity extends AppCompatActivity {
-    private Button addToCartBtn, writeComment;
+    private Button addToCartBtn, writeComment, addToCartBtn2;
     private ImageButton plusBtn, minusBtn;
     private ImageView productImage;
     private TextView productPrice, productDescription, productName, ratingsTv;
@@ -54,6 +55,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private RecyclerView reviewsRv;
     private String sessionID = "";
     private RatingBar ratingBar;
+    private String allowReview = "";
     private ArrayList<ModelReview> reviewArrayList;
     private AdapterReview adapterReview;
     private ImageButton back;
@@ -62,10 +64,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
-
+        allowReview = getIntent().getStringExtra("allow");
         reviewsRv = findViewById(R.id.reviewsRv);
         ratingBar=(RatingBar) findViewById(R.id.ratingBar);
         ratingsTv = (TextView) findViewById(R.id.ratingsTv);
+        addToCartBtn2 = (Button) findViewById(R.id.pd_add_product_to_cart_btn2);
         productID = getIntent().getStringExtra("pid");
         writeComment =(Button) findViewById(R.id.pd_add_comment);
         addToCartBtn =(Button) findViewById(R.id.pd_add_product_to_cart_btn);
@@ -114,10 +117,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
             }
         });
-
+        if(allowReview.equals("true")){
+            addToCartBtn2.setVisibility(View.GONE);
+        }else addToCartBtn2.setVisibility(View.VISIBLE);
         writeComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(ProductDetailsActivity.this, WriteReviewActivity.class);
                 intent.putExtra("pid",productID);
                 startActivity(intent);
@@ -127,6 +133,40 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
 
         addToCartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final DatabaseReference addRef = FirebaseDatabase.getInstance().getReference("Products").child(productID);
+
+
+                addRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        databaseQuantity = Integer.parseInt(snapshot.child("quantity").getValue().toString());
+                        if(state.equals("Order Placed") || state.equals("Order Shipped")){
+                            Toast.makeText(ProductDetailsActivity.this, "You can purchase more products when it is shipped", Toast.LENGTH_LONG).show();
+                        } else if (productQuantity.getText().toString().equals("0")) {
+                            Toast.makeText(ProductDetailsActivity.this, "Quantity cannot be 0", Toast.LENGTH_SHORT).show();
+                        } else if (databaseQuantity == 0) {
+                            Toast.makeText(ProductDetailsActivity.this, "Product out of stock.", Toast.LENGTH_SHORT).show();
+                        } else if (Integer.parseInt(productQuantity.getText().toString()) > databaseQuantity) {
+                            Toast.makeText(ProductDetailsActivity.this, "Order quantity cannot be greater than stock.", Toast.LENGTH_SHORT).show();
+
+                        } else {
+                            addingToCartList();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+            }
+
+        });
+        addToCartBtn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final DatabaseReference addRef = FirebaseDatabase.getInstance().getReference("Products").child(productID);
@@ -290,42 +330,5 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
 
     }
-
-//    private void CheckOrderState(){
-//        DatabaseReference ordersRef;
-//        ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(user.getUid());
-//        ordersRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if(snapshot.exists()){
-//                    String shippingState = snapshot.child("state").getValue().toString();
-//                    String userName = snapshot.child("name").getValue().toString();
-//                    addToCartBtn.setVisibility(View.GONE);
-//                    if (shippingState.equals("shipped")){
-//                        state = "Order Shipped";
-//                    } else if (shippingState.equals("not shipped")) {
-//                        state = "Order Place";
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//
-//    }
-
-//    public void plusBtn(View v){
-//          count++;
-//        productQuantity.setText(count);
-//    }
-//
-//    public void minusBtn(View v){
-//        if(count<=0) {count = 0;}
-//        else {count--;}
-//        productQuantity.setText(count);
-//    }
 
 }

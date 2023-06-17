@@ -30,12 +30,13 @@ public class SearchProductsActivity extends AppCompatActivity {
     private RecyclerView searchList;
     private String searchInput;
     private String type;
-
+    private String sessionID = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_products);
         searchInput = "";
+        sessionID = getIntent().getStringExtra("session");
         inputText= (EditText) findViewById(R.id.search_product_name);
         SearchBtn = (ImageView) findViewById(R.id.search_button);
         searchList = findViewById(R.id.search_list);
@@ -79,6 +80,8 @@ public class SearchProductsActivity extends AppCompatActivity {
                             Intent intent = new Intent(SearchProductsActivity.this, ProductDetailsActivity.class);
                             intent.putExtra("pid", model.getPid());
                             intent.putExtra("session", session);
+                            intent.putExtra("session", sessionID);
+                            intent.putExtra("allow", "false");
                             startActivity(intent);
                         }
                     }

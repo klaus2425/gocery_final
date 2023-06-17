@@ -273,6 +273,21 @@
         android:drawableStart="@drawable/baseline_add_shopping_cart_24"
  />
 </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pd_add_product_to_cart_btn2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@color/purple"
+        android:text="Add to Cart"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:drawableTint="@color/white"
+        android:drawableStart="@drawable/baseline_add_shopping_cart_24"
+        />
 </RelativeLayout>
 
 

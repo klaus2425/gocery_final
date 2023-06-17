@@ -1,10 +1,13 @@
 package com.system.gocery_final;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +21,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.system.gocery_final.Model.Cart;
 import com.system.gocery_final.ViewHolder.CartViewHolder;
 
+import java.util.HashMap;
+
 public class OrderHistoryDetailsActivity extends AppCompatActivity {
 
     private RecyclerView productsList;
@@ -25,13 +30,13 @@ public class OrderHistoryDetailsActivity extends AppCompatActivity {
     private DatabaseReference cartListRef;
     private String userID = "";
     private ImageButton imgBtnBack;
-
+    private String sessionID = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history_details);
-
+        sessionID = getIntent().getStringExtra("session");
         userID = getIntent().getStringExtra("uid");
         imgBtnBack = (ImageButton) findViewById(R.id.order_history_backBtn);
         productsList = findViewById(R.id.history_details_list);
@@ -56,6 +61,34 @@ public class OrderHistoryDetailsActivity extends AppCompatActivity {
                 holder.txtProductPrice.setText("Price = Php " + model.getPrice());
                 holder.txtProductName.setText(model.getPname());
                 holder.txtProductQuantity.setText(model.getQuantity());
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        CharSequence option[] = new CharSequence[]{
+                                "Yes",
+                                "No"
+                        };
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(OrderHistoryDetailsActivity.this);
+                        builder.setTitle("Review this product?");
+                        builder.setItems(option, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                if(which == 0)
+                                {
+                                    Intent intent = new Intent(OrderHistoryDetailsActivity.this, ProductDetailsActivity.class);
+                                    intent.putExtra("pid",model.getPid());
+                                    intent.putExtra("session", sessionID);
+                                    intent.putExtra("allow", "true");
+                                    startActivity(intent);
+                                }
+                            }
+                        });
+                        builder.show();
+                    }
+                });
             }
 
             @NonNull

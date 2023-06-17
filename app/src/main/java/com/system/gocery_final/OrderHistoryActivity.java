@@ -34,12 +34,14 @@ public class OrderHistoryActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseUser user;
     private ImageButton back;
+    private String sessionID = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history);
         auth = FirebaseAuth.getInstance();
+        sessionID = getIntent().getStringExtra("session");
         user = auth.getCurrentUser();
         ordersRef = FirebaseDatabase.getInstance().getReference().child("Order History").child(user.getUid());
         ordersList= findViewById(R.id.history_list);
@@ -77,6 +79,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
                         Intent intent = new Intent(OrderHistoryActivity.this, OrderHistoryDetailsActivity.class);
                         intent.putExtra("orderid", model.getOrderid());
                         intent.putExtra("uid", user.getUid());
+                        intent.putExtra("session", sessionID);
                         startActivity(intent);
                     }
                 });
