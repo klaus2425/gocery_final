@@ -67,7 +67,7 @@ public class SellerHistoryActivity extends AppCompatActivity {
         super.onStart();
         FirebaseRecyclerOptions<AdminOrders> options = new
                 FirebaseRecyclerOptions.Builder<AdminOrders>()
-                .setQuery(ordersRef.orderByChild("state").startAt("shipped").endAt("shipped"), AdminOrders.class)
+                .setQuery(ordersRef.orderByChild("state"), AdminOrders.class)
                 .build();
 
         FirebaseRecyclerAdapter<AdminOrders, SellerHistoryActivity.SellerOrdersViewHolder> adapter = new FirebaseRecyclerAdapter<AdminOrders,
@@ -76,9 +76,10 @@ public class SellerHistoryActivity extends AppCompatActivity {
             protected void onBindViewHolder(@NonNull SellerHistoryActivity.SellerOrdersViewHolder holder, @SuppressLint("RecyclerView") int position, @NonNull AdminOrders model) {
                 holder.userName.setText("Name: " + model.getName());
                 holder.userPhoneNumber.setText("Phone: " + model.getNumber());
-                holder.userTotalPrice.setText("Total Amount: = Php " + model.getTotalAmount());
+                holder.userTotalPrice.setText("Total Amount: ₱ " + model.getTotalAmount());
                 holder.userDateTime.setText("Order at: " + model.getDate() + " " + model.getTime());
                 holder.userShippingAddress.setText("Shipping Address: " + model.getAddress());
+                holder.userOrderStatus.setText("Order Status: " + model.getState());
                 holder.showOrderButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -104,7 +105,7 @@ public class SellerHistoryActivity extends AppCompatActivity {
 
     public static class SellerOrdersViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView userName, userPhoneNumber, userTotalPrice, userDateTime, userShippingAddress;
+        public TextView userName, userPhoneNumber, userTotalPrice, userDateTime, userShippingAddress, userOrderStatus;
         public Button showOrderButton;
         public SellerOrdersViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -116,6 +117,7 @@ public class SellerHistoryActivity extends AppCompatActivity {
             userShippingAddress = itemView.findViewById(R.id.order_address_city);
             showOrderButton = itemView.findViewById(R.id.show_all_products);
             showOrderButton.setText("More Details");
+            userOrderStatus = itemView.findViewById(R.id.status_order);
         }
     }
 }

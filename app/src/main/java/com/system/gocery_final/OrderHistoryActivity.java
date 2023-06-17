@@ -1,11 +1,13 @@
 package com.system.gocery_final;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,6 +24,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.system.gocery_final.Model.AdminOrders;
+import com.system.gocery_final.Seller.SellerNewOrdersActivity;
+
+import java.util.HashMap;
 
 public class OrderHistoryActivity extends AppCompatActivity {
     private RecyclerView ordersList;
@@ -65,6 +70,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 holder.userTotalPrice.setText("Total Amount: = Php " + model.getTotalAmount());
                 holder.userDateTime.setText("Order at: " + model.getDate() + " " + model.getTime());
                 holder.userShippingAddress.setText("Shipping Address: " + model.getAddress());
+                holder.userOrderStatus.setText("Order Status: " + model.getState());
                 holder.showOrderButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -72,6 +78,33 @@ public class OrderHistoryActivity extends AppCompatActivity {
                         intent.putExtra("orderid", model.getOrderid());
                         intent.putExtra("uid", user.getUid());
                         startActivity(intent);
+                    }
+                });
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        CharSequence option[] = new CharSequence[]{
+                                "Yes",
+                                "No"
+                        };
+                        AlertDialog.Builder builder = new AlertDialog.Builder(OrderHistoryActivity.this);
+                        builder.setTitle("Have you received this order?");
+                        builder.setItems(option, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                DatabaseReference orderHistory = FirebaseDatabase.getInstance().getReference().child("Order History").child(model.getUid())
+                                        .child(model.getOrderid());
+                                if(which == 0)
+                                {
+                                    HashMap<String, Object> ordersMap = new HashMap<>();
+                                    ordersMap.put("state", "Delivered");
+                                    orderHistory.updateChildren(ordersMap);
+                                    ordersRef.child(model.getOrderid()).updateChildren(ordersMap);
+                                }
+                            }
+                        });
+                        builder.show();
+
                     }
                 });
             }
@@ -89,7 +122,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
     }
     public static class SellerOrdersViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView userName, userPhoneNumber, userTotalPrice, userDateTime, userShippingAddress;
+        public TextView userName, userPhoneNumber, userTotalPrice, userDateTime, userOrderStatus,userShippingAddress;
         public Button showOrderButton;
         public SellerOrdersViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -103,6 +136,8 @@ public class OrderHistoryActivity extends AppCompatActivity {
             showOrderButton.setText("More Details");
             userPhoneNumber.setVisibility(View.GONE);
             userName.setVisibility(View.GONE);
+            userOrderStatus = itemView.findViewById(R.id.status_order);
+
 
         }
     }

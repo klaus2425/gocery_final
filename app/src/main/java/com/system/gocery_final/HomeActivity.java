@@ -114,6 +114,7 @@ public class HomeActivity extends AppCompatActivity{
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, SearchProductsActivity.class);
                 intent.putExtra("type", type);
+                intent.putExtra("session", session);
                 startActivity(intent);
                 Animatoo.INSTANCE.animateFade(HomeActivity.this);
             }

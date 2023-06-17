@@ -76,9 +76,10 @@ public class SellerNewOrdersActivity extends AppCompatActivity {
            protected void onBindViewHolder(@NonNull AdminOrdersViewHolder holder, @SuppressLint("RecyclerView") int position, @NonNull AdminOrders model) {
                holder.userName.setText("Name: " + model.getName());
                holder.userPhoneNumber.setText("Phone: " + model.getNumber());
-               holder.userTotalPrice.setText("Total Amount: = Php " + model.getTotalAmount());
+               holder.userTotalPrice.setText("Total Amount:  ₱ " + model.getTotalAmount());
                holder.userDateTime.setText("Order at: " + model.getDate() + " " + model.getTime());
                holder.userShippingAddress.setText("Shipping Address: " + model.getAddress());
+               holder.userOrderStatus.setText("Order Status: " + model.getState());
                auth = FirebaseAuth.getInstance();
                user = auth.getCurrentUser();
                holder.showOrderButton.setOnClickListener(new View.OnClickListener() {
@@ -119,10 +120,6 @@ public class SellerNewOrdersActivity extends AppCompatActivity {
                                    orderHistory.updateChildren(ordersMap);
                                    ordersRef.child(model.getOrderid()).updateChildren(ordersMap);
                                }
-                               else
-                               {
-                                   finish();
-                               }
                            }
                        });
                        builder.show();
@@ -149,7 +146,7 @@ public class SellerNewOrdersActivity extends AppCompatActivity {
 
     public static class AdminOrdersViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView userName, userPhoneNumber, userTotalPrice, userDateTime, userShippingAddress;
+        public TextView userName, userPhoneNumber, userTotalPrice, userDateTime, userShippingAddress, userOrderStatus;
         public Button showOrderButton;
         public AdminOrdersViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -160,7 +157,7 @@ public class SellerNewOrdersActivity extends AppCompatActivity {
             userDateTime = itemView.findViewById(R.id.order_date_time);
             userShippingAddress = itemView.findViewById(R.id.order_address_city);
             showOrderButton = itemView.findViewById(R.id.show_all_products);
-
+            userOrderStatus = itemView.findViewById(R.id.status_order);
 
 
         }

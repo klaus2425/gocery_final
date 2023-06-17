@@ -71,13 +71,24 @@
             android:text="Date Time"
             android:textColor="@color/white"
             android:textSize="18sp" />
+        <TextView
+            android:id="@+id/status_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/order_date_time"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="Status"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/show_all_products"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/green"
-            android:layout_below="@id/order_date_time"
+            android:layout_below="@id/status_order"
             android:text="Show Products"
             android:textStyle="bold"
             android:textSize="18sp"

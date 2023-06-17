@@ -75,8 +75,10 @@ public class SearchProductsActivity extends AppCompatActivity {
                             intent.putExtra("pid",model.getPid());
                             startActivity(intent);
                         } else {
+                            String session = getIntent().getStringExtra("session");
                             Intent intent = new Intent(SearchProductsActivity.this, ProductDetailsActivity.class);
                             intent.putExtra("pid", model.getPid());
+                            intent.putExtra("session", session);
                             startActivity(intent);
                         }
                     }
