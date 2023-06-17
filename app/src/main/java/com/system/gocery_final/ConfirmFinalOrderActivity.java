@@ -159,7 +159,8 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                 .child(getIntent().getExtras().get("session").toString());
         HashMap<String, Object> orderStatus = new HashMap<>();
         HashMap<String, Object> ordersMap = new HashMap<>();
-        ordersMap.put("totalAmount", totalAmount);
+        int calc = Integer.parseInt(totalAmount) + 30;
+        ordersMap.put("totalAmount", String.valueOf(calc));
         ordersMap.put("name", nameEditText.getText().toString());
         ordersMap.put("number", numberEditText.getText().toString());
         ordersMap.put("address", addressEditText.getText().toString());
