@@ -92,14 +92,15 @@ public class OrderHistoryActivity extends AppCompatActivity {
                         builder.setItems(option, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                DatabaseReference orderHistory = FirebaseDatabase.getInstance().getReference().child("Order History").child(model.getUid())
-                                        .child(model.getOrderid());
+
+                                DatabaseReference ordersSellerRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(model.getOrderid());
                                 if(which == 0)
                                 {
                                     HashMap<String, Object> ordersMap = new HashMap<>();
                                     ordersMap.put("state", "Delivered");
-                                    orderHistory.updateChildren(ordersMap);
+                                    ordersSellerRef.updateChildren(ordersMap);
                                     ordersRef.child(model.getOrderid()).updateChildren(ordersMap);
+
                                 }
                             }
                         });
