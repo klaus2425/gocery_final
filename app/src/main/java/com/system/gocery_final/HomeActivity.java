@@ -204,6 +204,7 @@ public class HomeActivity extends AppCompatActivity{
             if (id == R.id.nav_categories)
             {
                 Intent intent = new Intent(HomeActivity.this, SelectCategoryActivity.class);
+                intent.putExtra("session", session);
                 startActivity(intent);
             }
             else if (id == R.id.nav_settings)

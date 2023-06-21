@@ -95,11 +95,7 @@ public class SettingsActivity extends AppCompatActivity {
         saveTextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checker.equals("clicked")){
                     userInfoSaved();
-                }else{
-                    updateOnlyUserInfo();
-                }
             }
 
 
@@ -170,6 +166,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         } else if(checker.equals("clicked")){
             uploadImage();
+        } else {
+            updateOnlyUserInfo();
         }
 
     }
@@ -302,14 +300,17 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                if(snapshot.exists()){
-                   if(snapshot.child("image").exists()){
-                       String image = snapshot.child("image").getValue().toString();
+                   if(snapshot.child("firstName").exists()){
+                       String image = null;
+                       if(snapshot.child("image").exists()) {
+                            image = snapshot.child("image").getValue().toString();
+                       }
                        String firsName = snapshot.child("firstName").getValue().toString();
                        String lastName = snapshot.child("lastName").getValue().toString();
                        String phone = snapshot.child("contact").getValue().toString();
                        String address = snapshot.child("address").getValue().toString();
                        String email = snapshot.child("email").getValue().toString();
-                       Picasso.get().load(image).into(profileImageView);
+                       Picasso.get().load(image).placeholder(R.drawable.profile).into(profileImageView);
                        firstNameEditText.setText(firsName);
                        lastNameEditText.setText(lastName);
                        userEmailEditText.setText(email);

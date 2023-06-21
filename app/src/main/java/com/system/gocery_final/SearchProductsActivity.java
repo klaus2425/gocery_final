@@ -59,7 +59,7 @@ public class SearchProductsActivity extends AppCompatActivity {
         super.onStart();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
         FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>().setQuery(reference.orderByChild("pname")
-                .startAt(searchInput.toUpperCase()).endAt(searchInput.toLowerCase() + "\uf8ff"),Products.class).build();
+                .startAt(searchInput).endAt(searchInput+"\uf8ff"),Products.class).build();
 
         FirebaseRecyclerAdapter<Products, ProductViewHolder> adapter = new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
             @Override

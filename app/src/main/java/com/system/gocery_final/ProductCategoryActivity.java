@@ -25,12 +25,12 @@ public class ProductCategoryActivity extends AppCompatActivity {
     TextView selectedCategoryTxt;
     RecyclerView categoryProducts;
     String category;
-
+    private String sessionID = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_category);
-
+        sessionID = getIntent().getExtras().get("session").toString();
         selectedCategoryTxt = findViewById(R.id.selected_category);
         categoryProducts = findViewById(R.id.products_cat_recycler);
         categoryProducts.setLayoutManager(new LinearLayoutManager(ProductCategoryActivity.this));
@@ -59,6 +59,8 @@ public class ProductCategoryActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent intent = new Intent(ProductCategoryActivity.this, ProductDetailsActivity.class);
                         intent.putExtra("pid", model.getPid());
+                        intent.putExtra("session", sessionID);
+                        intent.putExtra("allow", "false");
                         startActivity(intent);
                     }
                 });

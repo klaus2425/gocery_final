@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.system.gocery_final.Seller.SellerAddNewProductActivity;
 import com.system.gocery_final.Seller.SellerCategoryActivity;
@@ -18,14 +19,15 @@ public class SelectCategoryActivity extends AppCompatActivity {
     private ImageView img_beverages, img_frozenGoods, img_fruits, img_vegetables, img_dairy, img_cannedGoods, img_snacks, img_condiments,
             img_toiletries, img_cleaningMaterials;
     private Button goBack;
+    private String sessionID = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_category);
 
         goBack = (Button) findViewById(R.id.select_go_back_btn);
-
-
+        sessionID = getIntent().getExtras().get("session").toString();
+        Toast.makeText(this, sessionID, Toast.LENGTH_SHORT).show();
         img_beverages = (ImageView) findViewById(R.id.select_beverages);
         img_frozenGoods = (ImageView) findViewById(R.id.select_frozengoods);
         img_fruits = (ImageView) findViewById(R.id.select_fruits);
@@ -53,6 +55,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "beverages"); // store category to pass
                 intent.putExtra("category title", "Beverages");
+                intent.putExtra("session", sessionID);
                 startActivity(intent);
                 finish();
 
@@ -65,7 +68,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "frozengoods");
                 intent.putExtra("category title", "Frozen Goods");
-
+                intent.putExtra("session", sessionID);
                 startActivity(intent);
                 finish();
             }
@@ -77,6 +80,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "fruits");
                 intent.putExtra("category title", "Fruits");
+                intent.putExtra("session", sessionID);
                 startActivity(intent);
                 finish();
             }
@@ -88,6 +92,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "cleaningmaterials");
                 intent.putExtra("category title", "Cleaning Materials");
+                intent.putExtra("session", sessionID);
                 startActivity(intent);
                 finish();
 
@@ -100,7 +105,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "vegetables");
                 intent.putExtra("category title", "Vegetables");
-
+                intent.putExtra("session", sessionID);
                 startActivity(intent);
                 finish();
 
@@ -113,7 +118,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "dairy");
                 intent.putExtra("category title", "Dairy");
-
+                intent.putExtra("session", sessionID);
                 startActivity(intent);
                 finish();
 
@@ -126,7 +131,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "cannedgoods");
                 intent.putExtra("category title", "Canned Goods");
-
+                intent.putExtra("session", sessionID);
                 startActivity(intent);
                 finish();
 
@@ -139,7 +144,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "condiments");
                 intent.putExtra("category title", "Condiments");
-
+                intent.putExtra("session", sessionID);
                 startActivity(intent);
                 finish();
 
@@ -152,7 +157,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "snacks");
                 intent.putExtra("category title", "Snacks");
-
+                intent.putExtra("session", sessionID);
                 startActivity(intent);
                 finish();
 
@@ -165,7 +170,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectCategoryActivity.this, ProductCategoryActivity.class);
                 intent.putExtra("category", "toiletries");
                 intent.putExtra("category title", "Toiletries");
-
+                intent.putExtra("session", sessionID);
                 startActivity(intent);
                 finish();
 
