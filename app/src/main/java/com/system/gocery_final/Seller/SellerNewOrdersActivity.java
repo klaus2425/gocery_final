@@ -52,7 +52,7 @@ public class SellerNewOrdersActivity extends AppCompatActivity {
     private FirebaseUser user;
     private Button btnHistory;
     private ImageButton back;
-
+    private boolean active = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +79,7 @@ public class SellerNewOrdersActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+                active = false;
             }
         });
     }
@@ -88,6 +89,7 @@ public class SellerNewOrdersActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+
         FirebaseRecyclerOptions<AdminOrders> options = new
                 FirebaseRecyclerOptions.Builder<AdminOrders>()
                 .setQuery(ordersRef.orderByChild("state").startAt("not shipped").endAt("not shipped"), AdminOrders.class)
@@ -95,6 +97,7 @@ public class SellerNewOrdersActivity extends AppCompatActivity {
         ordersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                active = true;
                 notification();
            }
 
@@ -172,11 +175,17 @@ public class SellerNewOrdersActivity extends AppCompatActivity {
        adapter.startListening();
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        active = false;
+    }
+
     public void notification(){
         String channelID = "CHANNEL_ID_NOTIFICATION";
         NotificationCompat.Builder notifbuilder = new NotificationCompat.Builder(SellerNewOrdersActivity.this, channelID);
         notifbuilder.setContentTitle("New Order")
-            .setContentText("A new order has been placed. Check your pending orders.")
+            .setContentText("Pending orders updated. Check your pending orders.")
             .setSmallIcon(R.drawable.mainlogo)
             .setAutoCancel(true).setPriority(NotificationCompat.PRIORITY_DEFAULT);
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -185,15 +194,15 @@ public class SellerNewOrdersActivity extends AppCompatActivity {
             NotificationChannel notificationChannel = notificationManager.getNotificationChannel(channelID);
             if (notificationChannel == null){
                 int importance = NotificationManager.IMPORTANCE_HIGH;
-                notificationChannel = new NotificationChannel(channelID, "A new order has been placed. Check your pending orders.", importance);
+                notificationChannel = new NotificationChannel(channelID, "Pending orders updated. Check your pending orders.", importance);
                 notificationChannel.setLightColor(Color.GREEN);
                 notificationChannel.enableVibration(true);
                 notificationManager.createNotificationChannel(notificationChannel);
             }
         }
-
         notificationManager.notify(0, notifbuilder.build());
     }
+
 
     public static class AdminOrdersViewHolder extends RecyclerView.ViewHolder{
 
