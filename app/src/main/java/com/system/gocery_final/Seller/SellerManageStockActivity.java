@@ -58,7 +58,7 @@ public class SellerManageStockActivity extends AppCompatActivity {
         firebaseauth = FirebaseAuth.getInstance();
         user= firebaseauth.getCurrentUser();
         pid = getIntent().getStringExtra("pid");
-        productsRef = FirebaseDatabase.getInstance().getReference().child("Products").child(pid).child("quantity");
+        productsRef = FirebaseDatabase.getInstance().getReference().child("Products").child(pid);
         loadProdInfo();
         loadstockInfo();
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -166,7 +166,7 @@ public class SellerManageStockActivity extends AppCompatActivity {
                 productsRef.updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(SellerManageStockActivity.this, "Stock succcessfully updated", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SellerManageStockActivity.this, "Stock successfully updated", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 });
