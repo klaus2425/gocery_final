@@ -60,7 +60,6 @@
                 android:id="@+id/product_peso"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:text="₱ "
                 android:textColor="@color/purple"
                 android:textSize="17sp"
@@ -73,6 +72,20 @@
                     android:text="Product Price"
                     android:textColor="@color/purple"
                     android:textSize="17sp"
+                    />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+                <TextView
+                    android:id="@+id/product_stock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Stock: "
+                    android:layout_marginRight="15dp"
+                    android:textColor="@color/gray"
+                    android:textSize="17sp"
+
                     />
 
             </LinearLayout>
