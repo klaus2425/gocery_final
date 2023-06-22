@@ -73,7 +73,7 @@ public class SellerManageStockActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String currentValue = stockInput.getText().toString();
                 int value = Integer.parseInt(currentValue);
-                value+=1;
+                value++;
                 stockInput.setText(String.valueOf(value));
             }
         });
