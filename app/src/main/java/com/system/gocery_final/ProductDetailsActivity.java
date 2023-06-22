@@ -138,9 +138,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final DatabaseReference addRef = FirebaseDatabase.getInstance().getReference("Products").child(productID);
-
-
-                addRef.addValueEventListener(new ValueEventListener() {
+                addRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         databaseQuantity = Integer.parseInt(snapshot.child("quantity").getValue().toString());
@@ -172,7 +170,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final DatabaseReference addRef = FirebaseDatabase.getInstance().getReference("Products").child(productID);
-                addRef.addValueEventListener(new ValueEventListener() {
+                addRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         databaseQuantity = Integer.parseInt(snapshot.child("quantity").getValue().toString());
