@@ -38,8 +38,8 @@ import java.util.HashMap;
 
 public class SellerMaintainProductsActivity extends AppCompatActivity {
 
-    private Button applyChangesBtn, deleteBtn,checkRv;
-    private EditText name, price, description, quantity;
+    private Button applyChangesBtn, deleteBtn,checkRv,manageStock;
+    private EditText name, price, description;
     private ImageView imageView;
     private String productID ="";
     private DatabaseReference productsRef;
@@ -60,9 +60,9 @@ public class SellerMaintainProductsActivity extends AppCompatActivity {
         name = findViewById(R.id.product_name_maintain);
         price = findViewById(R.id.product_price_maintain);
         description = findViewById(R.id.product_description_maintain);
-        quantity = findViewById(R.id.product_quantity_maintain);
         imageView = findViewById(R.id.product_image_maintain);
         deleteBtn = findViewById(R.id.delete_product_btn);
+        manageStock =findViewById(R.id.product_quantity_maintain_btn);
 
         displaySpecificProductInfo();
 
@@ -74,6 +74,16 @@ public class SellerMaintainProductsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        manageStock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SellerMaintainProductsActivity.this, SellerManageStockActivity.class);
+                intent.putExtra("pid",productID);
+                startActivity(intent);
+            }
+        });
+
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
