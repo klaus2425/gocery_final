@@ -121,7 +121,6 @@ public class SellerMaintainProductsActivity extends AppCompatActivity {
         });
 
 
-
     }
 
     private final androidx.activity.result.ActivityResultLauncher<Intent> ActivityResultLauncher = registerForActivityResult(
@@ -177,7 +176,7 @@ public class SellerMaintainProductsActivity extends AppCompatActivity {
                         String pName = name.getText().toString();
                         String pPrice = price.getText().toString();
                         String pDescription = description.getText().toString();
-                        String pQuantity = quantity.getText().toString();
+//                        String pQuantity = quantity.getText().toString();
                         if(pName.equals("")) Toast.makeText(SellerMaintainProductsActivity.this, "Missing Product Name", Toast.LENGTH_SHORT).show();
                         else if(pPrice.equals("")) Toast.makeText(SellerMaintainProductsActivity.this, "Missing Product Price", Toast.LENGTH_SHORT).show();
                         else if(pDescription.equals("")) Toast.makeText(SellerMaintainProductsActivity.this, "Missing Product Description", Toast.LENGTH_SHORT).show();
@@ -187,7 +186,7 @@ public class SellerMaintainProductsActivity extends AppCompatActivity {
                             productMap.put("description", pDescription);
                             productMap.put("price", pPrice);
                             productMap.put("pname", pName);
-                            productMap.put("quantity", pQuantity);
+//                            productMap.put("quantity", pQuantity);
                             productMap.put("image", myUrl);
                             productsRef.updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -210,7 +209,7 @@ public class SellerMaintainProductsActivity extends AppCompatActivity {
         String pName = name.getText().toString();
         String pPrice = price.getText().toString();
         String pDescription = description.getText().toString();
-        String pQuantity = quantity.getText().toString();
+//        String pQuantity = quantity.getText().toString();
         if(pName.equals("")) Toast.makeText(this, "Missing Product Name", Toast.LENGTH_SHORT).show();
         else if(pPrice.equals("")) Toast.makeText(this, "Missing Product Price", Toast.LENGTH_SHORT).show();
         else if(pDescription.equals("")) Toast.makeText(this, "Missing Product Description", Toast.LENGTH_SHORT).show();
@@ -220,7 +219,7 @@ public class SellerMaintainProductsActivity extends AppCompatActivity {
             productMap.put("description", pDescription);
             productMap.put("price", pPrice);
             productMap.put("pname", pName);
-            productMap.put("quantity", pQuantity);
+//            productMap.put("quantity", pQuantity);
 
             productsRef.updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
@@ -243,12 +242,12 @@ public class SellerMaintainProductsActivity extends AppCompatActivity {
                     String pPrice = snapshot.child("price").getValue().toString();
                     String pDescription = snapshot.child("description").getValue().toString();
                     String pImage = snapshot.child("image").getValue().toString();
-                    String pQuantity = snapshot.child("quantity").getValue().toString();
+//                    String pQuantity = snapshot.child("quantity").getValue().toString();
 
                     name.setText(pName);
                     price.setText(pPrice);
                     description.setText(pDescription);
-                    quantity.setText(pQuantity);
+//                    quantity.setText(pQuantity);
                     Picasso.get().load(pImage).into(imageView);
 
                 }
