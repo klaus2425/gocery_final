@@ -47,6 +47,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private ImageView productImage;
     private TextView productPrice, productDescription, productName, ratingsTv, stock;
     private EditText productQuantity;
+    private int stockint;
     private String productID ="", state = "Normal";
     FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseUser user = auth.getCurrentUser();
@@ -171,8 +172,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final DatabaseReference addRef = FirebaseDatabase.getInstance().getReference("Products").child(productID);
-
-
                 addRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -253,10 +252,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
         saveCurrentDate = currentDate.format(calForDate.getTime());
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
         saveCurrentTime = currentTime.format(calForDate.getTime());
-
+        int numNewQuantity = stockint - Integer.parseInt(productQuantity.getText().toString());
         final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
         final DatabaseReference cartListRef2 = FirebaseDatabase.getInstance().getReference();
         DatabaseReference UserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
+        DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Products").child(productID);
         UserRef.addValueEventListener(new ValueEventListener() {
                                           @Override
                                           public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -272,6 +272,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                                           }
                                       });
+        HashMap<String, Object> prodmap = new HashMap<>();
         HashMap<String, Object> cartmap = new HashMap<>();
         HashMap<String, Object> cartStatus = new HashMap<>();
         cartmap.put("pid", productID);
@@ -282,6 +283,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         cartmap.put("time", saveCurrentTime);
         cartmap.put("quantity", productQuantity.getText().toString());
         cartStatus.put("status", "unconfirmed");
+        prodmap.put("quantity", String.valueOf(numNewQuantity));
         cartListRef2.child("Order History").child(user.getUid()).child(getIntent().getExtras().get("session").toString()).child("products").child(productID)
                         .updateChildren(cartmap);
         cartListRef2.child("Order History").child(user.getUid()).child(getIntent().getExtras().get("session").toString()).updateChildren(cartStatus);
@@ -295,6 +297,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()){
+                                                productsRef.updateChildren(prodmap);
                                                 Toast.makeText(ProductDetailsActivity.this, "Added to Cart!", Toast.LENGTH_SHORT).show();
                                                 finish();
                                             }
@@ -318,6 +321,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     productName.setText(products.getPname());
                     productPrice.setText(products.getPrice());
                     stock.setText("Stock: " + products.getQuantity());
+                    stockint = Integer.parseInt(products.getQuantity().toString());
                     productDescription.setText(products.getDescription());
                     Picasso.get().load(products.getImage()).into(productImage);
 
