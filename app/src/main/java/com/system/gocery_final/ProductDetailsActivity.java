@@ -117,6 +117,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
             }
         });
+
         if(allowReview.equals("true")){
             addToCartBtn2.setVisibility(View.GONE);
         }else addToCartBtn2.setVisibility(View.VISIBLE);
