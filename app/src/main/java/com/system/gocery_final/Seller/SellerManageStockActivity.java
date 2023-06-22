@@ -148,7 +148,7 @@ public class SellerManageStockActivity extends AppCompatActivity {
 
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        ref.child("Products").child(pid).addValueEventListener(new ValueEventListener() {
+        ref.child("Products").child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String addStock = stockInput.getText().toString();
