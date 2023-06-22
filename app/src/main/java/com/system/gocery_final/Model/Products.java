@@ -3,14 +3,14 @@ package com.system.gocery_final.Model;
 
     public class Products
     {
-        private String pname, description, price, image, category, pid, date, time;
+        private String pname, description, price, image, category, pid, date, time, quantity;
 
         public Products()
         {
 
         }
 
-        public Products(String pname, String description, String price, String image, String category, String pid, String date, String time) {
+        public Products(String pname, String description, String price, String image, String category, String pid, String date, String time, String quantity) {
             this.pname = pname;
             this.description = description;
             this.price = price;
@@ -19,8 +19,16 @@ package com.system.gocery_final.Model;
             this.pid = pid;
             this.date = date;
             this.time = time;
+            this.quantity = quantity;
         }
 
+        public String getQuantity() {
+            return quantity;
+        }
+
+        public void setQuantity(String quantity) {
+            this.quantity = quantity;
+        }
 
         public String getPname() {
             return pname;

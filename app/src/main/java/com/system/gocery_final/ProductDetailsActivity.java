@@ -45,7 +45,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private Button addToCartBtn, writeComment, addToCartBtn2;
     private ImageButton plusBtn, minusBtn;
     private ImageView productImage;
-    private TextView productPrice, productDescription, productName, ratingsTv;
+    private TextView productPrice, productDescription, productName, ratingsTv, stock;
     private EditText productQuantity;
     private String productID ="", state = "Normal";
     FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -59,13 +59,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private ArrayList<ModelReview> reviewArrayList;
     private AdapterReview adapterReview;
     private ImageButton back;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
         allowReview = getIntent().getStringExtra("allow");
         reviewsRv = findViewById(R.id.reviewsRv);
+        stock = (TextView) findViewById(R.id.product_stock);
         ratingBar=(RatingBar) findViewById(R.id.ratingBar);
         ratingsTv = (TextView) findViewById(R.id.ratingsTv);
         addToCartBtn2 = (Button) findViewById(R.id.pd_add_product_to_cart_btn2);
@@ -306,16 +306,17 @@ public class ProductDetailsActivity extends AppCompatActivity {
     }
 
 
-    private void getProductDetails(String pruductID) {
+    private void getProductDetails(String productID) {
         DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Products");
 
-        productsRef.child(pruductID).addValueEventListener(new ValueEventListener() {
+        productsRef.child(productID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     Products products = snapshot.getValue(Products.class);
                     productName.setText(products.getPname());
                     productPrice.setText(products.getPrice());
+                    stock.setText("Stock: " + products.getQuantity());
                     productDescription.setText(products.getDescription());
                     Picasso.get().load(products.getImage()).into(productImage);
 

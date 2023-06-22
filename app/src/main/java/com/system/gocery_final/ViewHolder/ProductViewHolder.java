@@ -13,7 +13,7 @@ import com.system.gocery_final.R;
 
 public class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
 {
-    public TextView txtProdName, txtProdDescription, txtProdPrice;
+    public TextView txtProdName, txtProdDescription, txtProdPrice, txtStock;
     public ImageView imageView;
     public ItemClickListener listner;
 
@@ -27,6 +27,7 @@ public class ProductViewHolder extends RecyclerView.ViewHolder implements View.O
         txtProdName = (TextView) itemView.findViewById(R.id.product_name);
         txtProdDescription = (TextView) itemView.findViewById(R.id.product_description);
         txtProdPrice = (TextView) itemView.findViewById(R.id.product_price);
+        txtStock = (TextView) itemView.findViewById(R.id.product_stock);
     }
 
     public void setItemClickListner(ItemClickListener listner)
