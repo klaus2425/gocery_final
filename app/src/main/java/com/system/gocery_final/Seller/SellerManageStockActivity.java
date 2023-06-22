@@ -156,11 +156,11 @@ public class SellerManageStockActivity extends AppCompatActivity {
                 String currentStock = snapshot.child("quantity").getValue().toString();
                 int fbStock = Integer.parseInt(currentStock);
                 int totalStock = newStock + fbStock;
-                Integer.toString(totalStock);
+
 
 
                 HashMap<String, Object> productMap = new HashMap<>();
-                productMap.put("quantity", totalStock);
+                productMap.put("quantity", Integer.toString(totalStock));
 
 
                 productsRef.updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
