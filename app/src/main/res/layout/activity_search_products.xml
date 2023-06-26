@@ -45,13 +45,21 @@
             android:src="@drawable/baseline_search_24"
             android:layout_marginEnd="10dp"
             />
-
-
     </RelativeLayout>
-
+    <Button
+        android:id="@+id/search_cat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/r5"
+        android:drawableLeft="@drawable/baseline_search_24"
+        android:drawableTint="@color/white"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="18dp"
+        android:text="Search by Category"
+        />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_list"
-        android:layout_below="@+id/r5"
+        android:layout_below="@+id/search_cat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />

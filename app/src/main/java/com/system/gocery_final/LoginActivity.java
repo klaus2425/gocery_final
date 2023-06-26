@@ -173,38 +173,5 @@ public class LoginActivity extends AppCompatActivity {
                     });
         }
     }
-    private void allowAccessToAccount(final String email, final String password){
-//
-//
-//        RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//
-//                    if(userData.getEmail().equals(email)){
-//
-//                        if (userData.getPassword().equals(password)) {
-//                            if(parentDbName.equals("Seller")){
-//
-//                            } else if (parentDbName.equals("Users")) {
-//
-//                            }
-//                        } else {
-//                                loadingBar.dismiss();
-//                                Toast.makeText(LoginActivity.this, "Password is incorrect", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                }
-//                else {
-//                    loadingBar.dismiss();
-//                    Toast.makeText(LoginActivity.this, "Account " + email +  " does not exist.", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
 
-    }
 }
